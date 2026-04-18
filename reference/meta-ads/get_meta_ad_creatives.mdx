@@ -1,0 +1,97 @@
+---
+title: "get_meta_ad_creatives"
+sidebarTitle: "get_meta_ad_creatives"
+description: "User wants to see their Meta ad creatives, ad copy, media URLs, or creative performance."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to see their Meta ad creatives, ad copy, media URLs, or creative performance.
+
+Returns ad-level data including full creative content and media URLs alongside performance metrics.
+
+When to use this tool:
+- "Show me my Meta ad creatives"
+- "What ads are running and how are they performing?"
+- "Show me the headlines and images for my ads"
+- "Which ad creatives are performing best?"
+- "What's the creative content for campaign X?"
+- "Show me ad performance with creative details"
+- "Get me the image URLs for my ads"
+- "Export my ad copy"
+- "What images and videos are my ads using?"
+
+Returns per ad — ALWAYS display ALL of these fields when present:
+- Ad copy: headline, primary_text, description, call_to_action_type
+- Media URLs: image_url (direct CDN link to ad image), thumbnail_url, video_url (playable video source), video_id
+- Landing page: landing_page_url
+- Carousel cards: carousel_cards array with per-card image_url, headline, description, landing_page_url
+- Performance: spend, impressions, clicks, CTR, CPC, reach, frequency
+- Video engagement: 25%, 50%, 75%, 100% watched (for video ads)
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="campaign_id" type="string">
+  Filter to specific campaign ID (optional)
+</ParamField>
+
+<ParamField path="ad_set_id" type="string">
+  Filter to specific ad set ID (optional)
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze (7, 14, 30, 60, or 90 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="limit" type="integer" default="20">
+  Maximum number of ads to return per page (default 20, max 50). Use with offset for pagination.
+</ParamField>
+
+<ParamField path="offset" type="integer" default="0">
+  Number of ads to skip for pagination (default 0). Use with limit to page through results.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Meta Ad Creatives for my account.
+```
+
+Your AI client will call the `get_meta_ad_creatives` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

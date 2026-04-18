@@ -1,0 +1,64 @@
+---
+title: "resume_campaign"
+sidebarTitle: "resume_campaign"
+description: "Resume a paused campaign."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Resume a paused campaign.
+
+Resuming a campaign makes ads start showing again.
+Only works on PAUSED campaigns (not REMOVED).
+
+**Parameters:**
+- campaign_id: The campaign ID (REQUIRED - get from list_campaigns)
+- customer_id: Optional (uses connected account if omitted)
+
+**Execution time:** 1-2 seconds
+
+**Returns:**
+- Campaign name
+- Before status (e.g., PAUSED)
+- After status (ENABLED)
+- Confirmation message
+
+**When to use:**
+- User says "resume", "turn it back on", "start it again"
+- User wants to re-enable a paused campaign
+- User finished making changes and wants ads to run
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to resume. Use list_campaigns first to get available campaign IDs.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Resume Campaign for my account.
+```
+
+Your AI client will call the `resume_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

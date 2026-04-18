@@ -1,0 +1,79 @@
+---
+title: "update_ad_content"
+sidebarTitle: "update_ad_content"
+description: "Combined update for ad content (headlines, descriptions, and/or final URLs)."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Combined update for ad content (headlines, descriptions, and/or final URLs).
+
+Use this for efficiency when updating multiple ad elements at once.
+Single API call with combined field mask.
+
+**Parameters:**
+- ad_id: The ad ID to update (REQUIRED)
+- ad_group_id: The ad group ID (REQUIRED)
+- headlines: Optional list of 3-15 headlines (max 30 chars each)
+- descriptions: Optional list of 2-4 descriptions (max 90 chars each)
+- final_urls: Optional list of landing page URLs
+- customer_id: Optional
+
+At least one of headlines, descriptions, or final_urls is required.
+
+**Execution time:** 2-4 seconds
+
+**Example:**
+User: "Update both headlines and descriptions for my ad"
+Agent: Uses update_ad_content with both headlines and descriptions in one call
+
+## Parameters
+
+<ParamField path="ad_id" type="string" required>
+  The ad ID to update. Get from get_campaign_structure.
+</ParamField>
+
+<ParamField path="ad_group_id" type="string" required>
+  The ad group ID the ad belongs to. Get from get_campaign_structure.
+</ParamField>
+
+<ParamField path="headlines" type="array of string">
+  Optional: 3-15 headlines, each max 30 characters.
+</ParamField>
+
+<ParamField path="descriptions" type="array of string">
+  Optional: 2-4 descriptions, each max 90 characters.
+</ParamField>
+
+<ParamField path="final_urls" type="array of string">
+  Optional: Landing page URLs.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Update Ad Content for my account.
+```
+
+Your AI client will call the `update_ad_content` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

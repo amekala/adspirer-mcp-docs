@@ -1,0 +1,65 @@
+---
+title: "discover_meta_assets"
+sidebarTitle: "discover_meta_assets"
+description: "User wants to browse existing images in their Meta Ad Library for reuse in new campaigns."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to browse existing images in their Meta Ad Library for reuse in new campaigns.
+
+This tool retrieves existing images that have been uploaded to Meta's Ad Library, allowing users to reuse them in new campaigns without uploading again.
+
+Returns:
+- List of existing images with their hashes
+- Image dimensions and thumbnails
+- Created timestamps
+- Instructions for using images in campaigns
+
+When to use this tool:
+- "Show me my existing Meta ad images"
+- "What images do I already have in Meta?"
+- "I want to reuse an existing image for my campaign"
+- "List my Facebook ad library images"
+- Before uploading new images - check if they already exist
+
+Parameters:
+- ad_account_id: Required for multi-account users. Get from list_connected_accounts
+- limit: Max images to return (default 50, max 100)
+
+Execution time: 2-5 seconds
+
+## Parameters
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="limit" type="integer" default="50">
+  Maximum number of assets to return (default 50, max 100)
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Discover Meta Assets for my account.
+```
+
+Your AI client will call the `discover_meta_assets` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

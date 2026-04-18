@@ -1,0 +1,81 @@
+---
+title: "suggest_ad_content"
+sidebarTitle: "suggest_ad_content"
+description: "Generate AI-suggested headlines and descriptions based on campaign keywords."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Generate AI-suggested headlines and descriptions based on campaign keywords.
+
+Analyzes campaign keywords and generates optimized ad content following creative guidelines:
+- 15 headlines across 3 categories (What It Is, Benefits, Pain/Proof/CTA)
+- 4 descriptions with value props and CTAs
+- All validated for character limits
+
+**Parameters:**
+- campaign_id: The campaign to analyze (REQUIRED)
+- business_description: Optional context about the business
+- key_benefits: Optional list of benefits (e.g., ["fast setup", "no dashboard"])
+- proof_points: Optional proof points (e.g., [\{"number": "2000+", "metric": "campaigns"\}])
+- pain_points: Optional pain points (e.g., ["manual ads", "complex UI"])
+- customer_id: Optional
+
+**Returns:**
+- suggested_headlines: 15 headlines ready to use
+- suggested_descriptions: 4 descriptions ready to use
+- headline_categories: Headlines organized by category
+- keyword_themes: Top themes from campaign keywords
+
+**Use this when:**
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to analyze for keyword themes. Use list_campaigns first.
+</ParamField>
+
+<ParamField path="business_description" type="string">
+  Optional: Description of what the business does. Helps generate better suggestions.
+</ParamField>
+
+<ParamField path="key_benefits" type="array of string">
+  Optional: List of key benefits (e.g., ['30 second launch', 'no dashboard required']).
+</ParamField>
+
+<ParamField path="proof_points" type="array of object">
+  Optional: Proof points. Each with 'number' and 'metric' (e.g., \{'number': '2000+', 'metric': 'campaigns'\}).
+</ParamField>
+
+<ParamField path="pain_points" type="array of string">
+  Optional: Pain points customers face (e.g., ['manual ads', 'complex UI']).
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Suggest Ad Content for my account.
+```
+
+Your AI client will call the `suggest_ad_content` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

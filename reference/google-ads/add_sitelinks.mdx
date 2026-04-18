@@ -1,0 +1,69 @@
+---
+title: "add_sitelinks"
+sidebarTitle: "add_sitelinks"
+description: "Add sitelink extensions to a campaign."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Add sitelink extensions to a campaign.
+
+Sitelinks are clickable links to specific pages on your website.
+Recommended 4-6 sitelinks per campaign.
+
+**CONSTRAINTS:**
+- link_text max 25 characters
+- description1 max 35 characters (optional)
+- description2 max 35 characters (required if description1 is set)
+
+**EXAMPLE SITELINKS:**
+\{
+    "link_text": "How It Works",
+    "final_url": "https://example.com/how-it-works",
+    "description1": "See the platform in action",
+    "description2": "Step-by-step walkthrough"
+\}
+
+\{
+    "link_text": "Pricing",
+    "final_url": "https://example.com/pricing",
+    "description1": "Affordable plans for all",
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to add sitelinks to. Get from list_campaigns.
+</ParamField>
+
+<ParamField path="sitelinks" type="array of object" required>
+  List of sitelink objects. Each has 'link_text' (max 25 chars), 'final_url', and optional 'description1'/'description2' (max 35 chars each).
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Add Sitelinks for my account.
+```
+
+Your AI client will call the `add_sitelinks` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

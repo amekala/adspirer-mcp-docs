@@ -1,0 +1,77 @@
+---
+title: "explain_performance_anomaly"
+sidebarTitle: "explain_performance_anomaly"
+description: "Explain why a performance metric changed using statistical analysis and historical context."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Explain why a performance metric changed using statistical analysis and historical context.
+
+⚠️ IMPORTANT: This tool retrieves READ-ONLY data. Safe to call multiple times. Uses statistical analysis only (no ML models).
+
+🎯 **What This Tool Does (Performance Agent - Phase 1 Feature 4):**
+- Explains why metrics changed (ROAS, CTR, CPC, conversions, conversion rate)
+- Compares current period to historical averages (30/60/90-day)
+- Identifies contributing factors with severity levels
+- Detects campaign changes (paused, new, budget changes)
+- Finds similar historical periods (seasonality detection)
+- Provides actionable recommendations to address issues
+
+**Returns comprehensive anomaly explanation:**
+- Current metric value vs historical averages
+- Deviation percentages (how much it changed)
+- Contributing factors:
+  - CPC changes (&gt;15% = auction competition shifts)
+  - Conversion rate changes (&gt;10% = landing page/seasonality issues)
+  - Campaign changes (paused high-performers, new campaigns, budget changes)
+  - Day-of-week patterns (weekend vs weekday effects)
+- Similar historical periods for context
+- Assessment (normal variation vs requires action)
+
+## Parameters
+
+<ParamField path="metric" type="string" required>
+  Metric to explain: 'roas' (Return on Ad Spend), 'ctr' (Click-Through Rate), 'cpc' (Cost Per Click), 'conversions', or 'conversion_rate'
+</ParamField>
+
+<ParamField path="period_start" type="string" required>
+  Start date of the anomaly period (ISO format: YYYY-MM-DD, e.g., '2025-01-15')
+</ParamField>
+
+<ParamField path="period_end" type="string" required>
+  End date of the anomaly period (ISO format: YYYY-MM-DD, e.g., '2025-01-21'). Maximum 30 days between start and end.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (no severity labels, suggested bids/budgets, industry benchmarks, or optimization recommendations). Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Explain Performance Anomaly for my account.
+```
+
+Your AI client will call the `explain_performance_anomaly` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

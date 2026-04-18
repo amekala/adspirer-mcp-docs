@@ -1,0 +1,60 @@
+---
+title: "add_pmax_audience_signal"
+sidebarTitle: "add_pmax_audience_signal"
+description: "Add an audience signal to an existing Performance Max campaign."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Add an audience signal to an existing Performance Max campaign.
+
+Audience signals hint Google AI about who your ideal customers are.
+Uses in-market segments (actively researching), affinity segments (long-term interests),
+and custom audiences (remarketing lists, customer match).
+
+Use search_audiences tool first to discover relevant audience segment IDs.
+
+**Parameters:**
+- campaign_id: The PMax campaign ID
+- audience_config: Dict with segment IDs
+
+**Execution time:** 2-5 seconds
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The Google Ads campaign ID (numeric). Example: '21854471508'
+</ParamField>
+
+<ParamField path="audience_config" type="object" required>
+  Audience configuration with segment IDs. CRITICAL: Only use IDs returned by search_audiences tool. NEVER fabricate or guess IDs -- wrong IDs target unrelated audiences. Keys: 'in_market_audience_ids' (List[int]), 'affinity_audience_ids' (List[int]), 'custom_audience_ids' (List[str] customAudiences resource names), 'user_list_ids' (List[str] userLists resource names from search_audiences custom results), 'audience_name' (str). Example: \{'in_market_audience_ids': [80432, 80210], 'user_list_ids': ['customers/123/userLists/456'], 'audience_name': 'SaaS Buyers'\}
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Add PMax Audience Signal for my account.
+```
+
+Your AI client will call the `add_pmax_audience_signal` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

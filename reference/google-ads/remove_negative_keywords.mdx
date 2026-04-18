@@ -1,0 +1,69 @@
+---
+title: "remove_negative_keywords"
+sidebarTitle: "remove_negative_keywords"
+description: "Remove negative keywords from a campaign."
+---
+
+<Badge color="yellow">Write</Badge> <Badge color="red">Destructive</Badge>
+
+Remove negative keywords from a campaign.
+
+⚠️ **WARNING: This is PERMANENT and IRREVERSIBLE.**
+Once removed, the negative keywords cannot be recovered.
+
+**Parameters:**
+- campaign_id: The campaign ID (REQUIRED)
+- keyword_ids: List of negative keyword IDs to remove (REQUIRED)
+- customer_id: Optional
+
+**Get keyword IDs from:**
+Use `get_campaign_structure` to see all campaign negative keywords with their IDs.
+Look for the "Campaign Negative Keywords" section.
+
+**When to use:**
+- Remove accidentally added negative keywords
+- Clean up obsolete negative keywords
+- Fix over-blocking that's limiting traffic
+
+**Execution time:** 2-4 seconds
+
+**Example:**
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to remove negative keywords from.
+</ParamField>
+
+<ParamField path="keyword_ids" type="array of string" required>
+  List of negative keyword IDs to remove. Get IDs from get_campaign_structure (Campaign Negative Keywords section).
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Remove Negative Keywords for my account.
+```
+
+Your AI client will call the `remove_negative_keywords` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | Yes |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

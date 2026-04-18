@@ -1,0 +1,68 @@
+---
+title: "get_meta_campaign_details"
+sidebarTitle: "get_meta_campaign_details"
+description: "User wants to see detailed information about a specific Meta campaign, including its full structure (ad sets, ads, targeting, budgets)."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to see detailed information about a specific Meta campaign, including its full structure (ad sets, ads, targeting, budgets).
+
+This tool retrieves comprehensive details about a single campaign. With `include_hierarchy=true`, it shows the complete campaign tree: Campaign - Ad Sets - Ads.
+
+Returns:
+- Campaign settings (name, status, objective, budget, bid strategy, schedule)
+- Performance summary (impressions, clicks, spend, reach, CTR, CPC)
+- Ads Manager URL
+- When include_hierarchy=true: Full structure with all ad sets and their ads, targeting details, hierarchy stats
+
+When to use this tool:
+- "Show me details for campaign [ID]"
+- "What's the structure of my campaign?"
+- "How many ad sets and ads does this campaign have?"
+- "What targeting is set on my campaign?"
+- "Show me the full campaign hierarchy"
+- After `list_meta_campaigns` when user wants to drill into a specific campaign
+
+Parameters:
+- campaign_id: The Meta Campaign ID (required)
+- include_hierarchy: Include ad sets and ads (default: false, set true for full view)
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The Meta Campaign ID to get details for (required)
+</ParamField>
+
+<ParamField path="include_hierarchy" type="boolean" default="false">
+  Include full hierarchy with ad sets and ads (default: false). Set to true to see the complete campaign structure.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Meta Campaign Details for my account.
+```
+
+Your AI client will call the `get_meta_campaign_details` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

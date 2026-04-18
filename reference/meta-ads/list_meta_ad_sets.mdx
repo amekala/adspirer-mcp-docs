@@ -1,0 +1,73 @@
+---
+title: "list_meta_ad_sets"
+sidebarTitle: "list_meta_ad_sets"
+description: "User wants to see the ad sets within a specific Meta campaign, including their targeting, budgets, and optimization settings."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to see the ad sets within a specific Meta campaign, including their targeting, budgets, and optimization settings.
+
+This tool retrieves ad sets for a given campaign with their status, budget, optimization goal, and billing event.
+
+Returns:
+- Ad set list with name, ID, status, budget, optimization goal, billing event
+- Next step guidance for editing ad sets or viewing ads
+
+When to use this tool:
+- "Show me the ad sets in campaign [ID]"
+- "What ad sets are running in my campaign?"
+- "List the ad groups for this campaign"
+- "Which ad sets are active/paused?"
+- Before using `update_meta_ad_set` when user doesn't know the ad set ID
+
+Parameters:
+- campaign_id: Campaign ID to list ad sets for (required)
+- status: Filter by status (optional)
+- limit: Max ad sets to return (default: 100)
+- ad_account_id: Optional
+
+Execution time: 2-5 seconds
+
+## Parameters
+
+<ParamField path="campaign_id" type="string">
+  Filter ad sets to a specific campaign ID (optional - if not provided, lists all ad sets in the account)
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="status" type="string">
+  Filter by status: comma-separated values like 'ACTIVE,PAUSED'
+</ParamField>
+
+<ParamField path="limit" type="integer" default="100">
+  Maximum number of ad sets to return (default: 100)
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+List Meta Ad Sets for my account.
+```
+
+Your AI client will call the `list_meta_ad_sets` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

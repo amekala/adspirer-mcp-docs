@@ -1,0 +1,58 @@
+---
+title: "get_usage_status"
+sidebarTitle: "get_usage_status"
+description: "Get your current usage status with interactive quota widget."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Get your current usage status with interactive quota widget.
+
+This tool shows your tool call usage for the current billing period and provides upgrade options if needed.
+
+**Returns:**
+- Current usage (calls used / limit)
+- Subscription tier (Free, Plus, Pro, Enterprise)
+- Days until quota reset
+- Upgrade options with pricing
+
+**Use this tool when:**
+- User asks "how many calls do I have left?"
+- User asks about their subscription or quota
+- User wants to check their usage
+- User asks about upgrading their plan
+
+**Widget Display (ChatGPT):**
+In ChatGPT, this tool displays an interactive widget with:
+- Visual progress bar showing usage
+- Upgrade buttons that open Stripe checkout
+- Plan comparison with pricing
+
+## Parameters
+
+_This tool takes no parameters._
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Usage Status for my account.
+```
+
+Your AI client will call the `get_usage_status` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Account Management |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Account Management overview](/reference/account)
+- [All tools](/reference)

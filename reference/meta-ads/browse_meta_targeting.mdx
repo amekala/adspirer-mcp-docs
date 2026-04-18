@@ -1,0 +1,80 @@
+---
+title: "browse_meta_targeting"
+sidebarTitle: "browse_meta_targeting"
+description: "User wants to browse all targeting options in a specific category without a search query."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to browse all targeting options in a specific category without a search query.
+
+This tool retrieves all options in a Meta targeting category for exploration and discovery.
+
+Returns:
+- List of all targeting options in the category
+- IDs, names, and audience sizes
+- Useful for discovering targeting options when user doesn't have a specific query
+
+When to use this tool:
+- "Show me all available behaviors for Meta targeting"
+- "What interest categories are available?"
+- "Browse demographic targeting options"
+- "List all life events I can target"
+- "What income targeting options exist?"
+
+Categories Available:
+- interests: All interest targeting categories
+- behaviors: All behavior targeting options
+- demographics: All demographic targeting options
+- life_events: All life event targeting options
+- industries: Industry targeting options
+
+## Parameters
+
+<ParamField path="category" type="string" required>
+  Category to browse:
+- 'interests': Browse all interest categories
+- 'behaviors': Browse all behavior categories
+- 'demographics': Browse all demographic categories
+- 'life_events': Browse all life event categories
+- 'industries': Browse industry targeting options
+- 'income': Browse income targeting options
+- 'family_statuses': Browse family status targeting options
+</ParamField>
+
+<ParamField path="limit" type="integer" default="100">
+  Maximum number of results to return (1-500). Default is 100.
+</ParamField>
+
+<ParamField path="locale" type="string" default="&quot;en_US&quot;">
+  Locale for results (e.g., 'en_US', 'es_ES'). Default is 'en_US'.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Browse Meta Targeting for my account.
+```
+
+Your AI client will call the `browse_meta_targeting` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

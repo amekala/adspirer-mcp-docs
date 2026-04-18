@@ -1,0 +1,69 @@
+---
+title: "list_campaigns"
+sidebarTitle: "list_campaigns"
+description: "List all Google Ads campaigns for the connected account."
+---
+
+<Badge color="green">Read-only</Badge>
+
+List all Google Ads campaigns for the connected account.
+
+⚠️ CRITICAL: Call this tool BEFORE creating new campaigns to ask the user:
+"Would you like to create a new campaign or update an existing one?"
+
+This tool retrieves READ-ONLY data. Safe to call multiple times.
+
+**Returns:**
+- List of all campaigns with IDs, names, status, type, budget
+- 30-day performance metrics for each campaign (impressions, clicks, cost, conversions)
+- Total campaign count
+
+**Parameters:**
+- status_filter: ENABLED, PAUSED, or ALL (optional, default: ALL)
+- campaign_type: SEARCH, PERFORMANCE_MAX, DISPLAY, SHOPPING, or ALL (optional, default: ALL)
+- customer_id: Optional (uses connected account if omitted)
+
+**Execution time:** 2-5 seconds (direct Google Ads API call)
+
+**Campaign Management Guidelines:**
+
+BEFORE Starting Any Campaign Work:
+
+## Parameters
+
+<ParamField path="status_filter" type="string">
+  Filter by status: ENABLED, PAUSED, or ALL (default: ALL)
+</ParamField>
+
+<ParamField path="campaign_type" type="string">
+  Filter by type: SEARCH, PERFORMANCE_MAX, DISPLAY, SHOPPING, or ALL (default: ALL)
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+List Campaigns for my account.
+```
+
+Your AI client will call the `list_campaigns` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

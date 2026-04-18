@@ -1,0 +1,77 @@
+---
+title: "list_meta_campaigns"
+sidebarTitle: "list_meta_campaigns"
+description: "User wants to see their existing Meta/Facebook/Instagram campaigns, browse campaign structure, or find a campaign ID."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to see their existing Meta/Facebook/Instagram campaigns, browse campaign structure, or find a campaign ID.
+
+This tool retrieves all campaigns in the connected Meta ad account with their status, objective, budget, and creation date.
+
+Returns:
+- Campaign list with name, ID, status, objective, budget
+- Status summary (how many ACTIVE, PAUSED, etc.)
+- Next step guidance for drilling into campaign details
+
+When to use this tool:
+- "Show me my Meta campaigns"
+- "List my Facebook ad campaigns"
+- "What campaigns do I have running?"
+- "Which campaigns are active?"
+- "Find my campaign for [product/brand]"
+- "I need to find a campaign ID"
+- Before using update/pause/resume tools when user doesn't know the campaign ID
+
+Parameters:
+- status: Filter by status (comma-separated: 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED')
+- effective_status: Filter by effective status (includes inherited states like 'CAMPAIGN_PAUSED')
+- objective: Filter by objective (OUTCOME_TRAFFIC, OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_AWARENESS)
+
+## Parameters
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="status" type="string">
+  Filter by status: comma-separated values like 'ACTIVE,PAUSED'. Options: ACTIVE, PAUSED, DELETED, ARCHIVED
+</ParamField>
+
+<ParamField path="effective_status" type="string">
+  Filter by effective status: comma-separated values. Options: ACTIVE, PAUSED, DELETED, ARCHIVED, IN_PROCESS, WITH_ISSUES, CAMPAIGN_PAUSED
+</ParamField>
+
+<ParamField path="objective" type="string">
+  Filter by campaign objective: OUTCOME_TRAFFIC, OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_AWARENESS, OUTCOME_ENGAGEMENT
+</ParamField>
+
+<ParamField path="limit" type="integer" default="100">
+  Maximum number of campaigns to return (default: 100, max: 500)
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+List Meta Campaigns for my account.
+```
+
+Your AI client will call the `list_meta_campaigns` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

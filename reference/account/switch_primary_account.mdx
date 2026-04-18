@@ -1,0 +1,62 @@
+---
+title: "switch_primary_account"
+sidebarTitle: "switch_primary_account"
+description: "Activate one or more ad accounts for a platform."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Activate one or more ad accounts for a platform.
+
+Activated accounts are available for all ad operations. Pass a single account_id
+to activate one account, or pass account_ids (list) to activate multiple accounts
+for multi-account management.
+
+Use this tool when:
+- User wants to switch to a different ad account
+- User says "use my other account" or "activate these accounts"
+- User wants to manage multiple accounts simultaneously
+- User specifies which accounts to work with
+
+Accepts either account_id (single) or account_ids (list of IDs from list_connected_accounts).
+
+IMPORTANT: Returns updated connections list after switching.
+
+## Parameters
+
+<ParamField path="platform" type="string" required>
+  Platform to switch primary account for: google_ads, tiktok_ads, meta_ads, or linkedin_ads
+</ParamField>
+
+<ParamField path="account_id" type="string">
+  Single account ID to activate (e.g., '1234567890' for Google Ads). Use this OR account_ids, not both.
+</ParamField>
+
+<ParamField path="account_ids" type="array of string">
+  List of account IDs to activate. All listed accounts become active, all others become inactive. Use this for multi-account selection. Get account IDs from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Switch Primary Account for my account.
+```
+
+Your AI client will call the `switch_primary_account` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Account Management |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | No |
+
+## Related
+
+- [Account Management overview](/reference/account)
+- [All tools](/reference)

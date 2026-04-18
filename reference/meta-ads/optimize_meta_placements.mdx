@@ -1,0 +1,89 @@
+---
+title: "optimize_meta_placements"
+sidebarTitle: "optimize_meta_placements"
+description: "User asks about Meta/Facebook/Instagram placement performance, which placements work best, Feed vs Stories vs Reels, should they use Audience Network, or…"
+---
+
+<Badge color="green">Read-only</Badge>
+
+User asks about Meta/Facebook/Instagram placement performance, which placements work best, Feed vs Stories vs Reels, should they use Audience Network, or wants placement optimization recommendations.
+
+This tool analyzes placement-level performance (Feed, Stories, Reels, Audience Network, Messenger, etc.) and provides optimization recommendations including budget reallocation suggestions.
+
+Returns:
+- Placement ROAS ranking (sorted by performance)
+- Placements categorized as SCALE/MAINTAIN/REDUCE/EXCLUDE
+- Budget reallocation recommendations between placements
+- Expected ROAS improvement from optimization
+- Optimal placement mix for campaign objective
+- Savings from excluding underperforming placements
+- Actionable recommendations and quick actions
+
+When to use this tool:
+- "Which Meta placements should I use?"
+- "Should I exclude Audience Network?"
+- "Instagram Stories vs Reels - which is better?"
+- "Feed vs Stories performance comparison"
+- "Where should I allocate my Meta ad budget?"
+- "Which placements are wasting money?"
+- "What's the optimal placement mix for conversions?"
+- "Facebook Marketplace performance?"
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze (7, 14, 30, 60, or 90 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="objective" type="string" default="&quot;conversions&quot;">
+  Campaign objective for optimal placement mix recommendations: 'conversions' (default), 'traffic', or 'awareness'.
+</ParamField>
+
+<ParamField path="target_roas" type="number">
+  Optional target ROAS override (e.g., 3.0 for 3.0x ROAS). If not provided, will use account goals or historical average.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Optimize Meta Placements for my account.
+```
+
+Your AI client will call the `optimize_meta_placements` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

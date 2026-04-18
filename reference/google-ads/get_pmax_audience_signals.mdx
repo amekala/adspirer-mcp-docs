@@ -1,0 +1,56 @@
+---
+title: "get_pmax_audience_signals"
+sidebarTitle: "get_pmax_audience_signals"
+description: "Get current audience signals for a Performance Max campaign."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Get current audience signals for a Performance Max campaign.
+
+Returns audience signal resource names and associated audience resource references.
+
+**Use when:**
+- User wants to see what audience signals are on their PMax campaign
+- Before adding new signals
+- To get resource_name for removal
+
+**Parameters:**
+- campaign_id: The PMax campaign ID
+
+**Execution time:** 1-2 seconds
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The Google Ads campaign ID (numeric). Example: '21854471508'
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get PMax Audience Signals for my account.
+```
+
+Your AI client will call the `get_pmax_audience_signals` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

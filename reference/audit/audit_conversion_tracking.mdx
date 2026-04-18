@@ -1,0 +1,54 @@
+---
+title: "audit_conversion_tracking"
+sidebarTitle: "audit_conversion_tracking"
+description: "Review your conversion tracking setup across ad platforms."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Review your conversion tracking setup across ad platforms.
+
+Checks Meta Pixel (event volume, CAPI status, dedup, diagnostics), LinkedIn (conversion rules, CAPI, Insight Tag), and Google Ads (conversion actions, enhanced conversions, attribution). Returns a health score (0-100), grade (A-F), detailed findings, and suggestions with self-validation steps for each platform.
+
+Note: Some checks rely on API data availability and may not capture all configurations. Where findings are inconclusive, the tool provides guidance on how to verify directly in the platform's dashboard.
+
+Parameters:
+- platform (optional): 'google_ads', 'meta_ads', or 'linkedin_ads'. If omitted, reviews all connected platforms.
+- lookback_days (optional): 7, 14, 30, 60, or 90 days (default: 30)
+
+Execution time: ~5-15 seconds (includes live API calls to ad platforms).
+
+## Parameters
+
+<ParamField path="platform" type="string">
+  Ad platform to audit: 'google_ads', 'meta_ads', or 'linkedin_ads'. If omitted, audits all connected platforms.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to look back for trend analysis (7, 14, 30, 60, 90). Default: 30.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Audit Conversion Tracking for my account.
+```
+
+Your AI client will call the `audit_conversion_tracking` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Audit Tools |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Audit Tools overview](/reference/audit)
+- [All tools](/reference)

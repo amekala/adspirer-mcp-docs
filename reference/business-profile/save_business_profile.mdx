@@ -1,0 +1,85 @@
+---
+title: "save_business_profile"
+sidebarTitle: "save_business_profile"
+description: "Save or update the user's business profile with provided details."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Save or update the user's business profile with provided details.
+
+⚠️ IMPORTANT: This tool WRITES data. Use when user confirms their business profile.
+
+🎯 **What This Tool Does (Performance Agent - Phase 1 Feature 5):**
+- Saves user's business profile to database
+- Updates existing profile if one exists
+- Sets profile source as 'user_confirmed' or 'user_mcp'
+- Enables personalized recommendations going forward
+
+**Required Parameters:**
+- **business_vertical**: retail, services, technology, healthcare, finance, education, travel, food_beverage, automotive, real_estate
+- **business_size**: small (&lt;$50K/month), medium ($50K-$500K/month), large (&gt;$500K/month)
+- **primary_goal**: leads, sales, awareness, traffic, engagement, app_installs
+
+**Optional Parameters:**
+- **target_audience**: Free-text description (e.g., "B2B enterprise clients")
+- **geographic_focus**: local, regional, national, international
+- **seasonality**: none, holiday_heavy, summer_peak, winter_peak, q4_heavy, back_to_school
+- **customer_id**: Optional (uses connected account if omitted)
+
+**Use this tool when:**
+
+## Parameters
+
+<ParamField path="business_vertical" type="string" required>
+  Business vertical (e.g., 'retail', 'services', 'technology', 'healthcare', 'finance', 'education', 'travel', 'food_beverage', 'automotive', 'real_estate')
+</ParamField>
+
+<ParamField path="business_size" type="string" required>
+  Business size: 'small' (&lt;$50K/month ad spend), 'medium' ($50K-$500K/month), 'large' (&gt;$500K/month)
+</ParamField>
+
+<ParamField path="primary_goal" type="string" required>
+  Primary advertising goal: 'leads', 'sales', 'awareness', 'traffic', 'engagement', 'app_installs'
+</ParamField>
+
+<ParamField path="target_audience" type="string">
+  Target audience description (e.g., 'B2B enterprise clients', 'young professionals 25-35')
+</ParamField>
+
+<ParamField path="geographic_focus" type="string">
+  Geographic focus: 'local', 'regional', 'national', 'international'
+</ParamField>
+
+<ParamField path="seasonality" type="string">
+  Seasonality pattern: 'none', 'holiday_heavy', 'summer_peak', 'winter_peak', 'q4_heavy', 'back_to_school'
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Save Business Profile for my account.
+```
+
+Your AI client will call the `save_business_profile` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Business Profile |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Business Profile overview](/reference/business-profile)
+- [All tools](/reference)

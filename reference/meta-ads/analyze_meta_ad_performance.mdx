@@ -1,0 +1,97 @@
+---
+title: "analyze_meta_ad_performance"
+sidebarTitle: "analyze_meta_ad_performance"
+description: "User wants detailed analysis of specific Meta ads, creative performance, or wants to identify winning/losing ad variations."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants detailed analysis of specific Meta ads, creative performance, or wants to identify winning/losing ad variations.
+
+This tool provides ad-level and creative-level insights for Meta campaigns.
+
+Returns:
+- Top performing ads by CTR and conversion rate
+- Underperforming ads that need attention
+- Creative fatigue indicators (high frequency, declining CTR)
+- Video completion metrics (25%, 50%, 75%, 100% watched)
+- Creative optimization recommendations
+
+When to use this tool:
+- "Which of my Meta ads are performing best?"
+- "Are any of my Facebook ads fatigued?"
+- "Show me my Instagram video ad performance"
+- "Which creatives should I pause?"
+- "Analyze my ad variations"
+
+Parameters:
+- lookback_days: 7, 14, 30 (default), 60, or 90 days
+- start_date: Optional start date (YYYY-MM-DD). Overrides lookback_days when used with end_date.
+- end_date: Optional end date (YYYY-MM-DD). Overrides lookback_days when used with start_date.
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze (7, 14, 30, 60, or 90 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="campaign_id" type="string">
+  Filter to specific campaign ID (optional - analyzes all campaigns if not provided)
+</ParamField>
+
+<ParamField path="include_video_metrics" type="boolean" default="true">
+  Include video completion metrics (25%, 50%, 75%, 100% watched). Default is true.
+</ParamField>
+
+<ParamField path="limit" type="integer" default="100">
+  Maximum number of ads to return (default 100, max 200). Use with offset for pagination.
+</ParamField>
+
+<ParamField path="offset" type="integer" default="0">
+  Number of ads to skip for pagination (default 0). Use with limit to get next page.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Analyze Meta Ad Performance for my account.
+```
+
+Your AI client will call the `analyze_meta_ad_performance` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

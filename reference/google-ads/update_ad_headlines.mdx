@@ -1,0 +1,73 @@
+---
+title: "update_ad_headlines"
+sidebarTitle: "update_ad_headlines"
+description: "Update headlines for a Responsive Search Ad (RSA)."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Update headlines for a Responsive Search Ad (RSA).
+
+**MANDATORY WORKFLOW:**
+1. Call `get_campaign_structure` to find ad_id and ad_group_id
+2. Review current headlines to understand what's there
+3. Prepare 3-15 new headlines following the category system:
+   - Category A (5): What It Is (product/feature identity)
+   - Category B (6): Benefits/Outcomes
+   - Category C (4): Pain Points, Proof & CTAs
+4. Validate headlines (max 30 chars each, no "!" marks, no unverified superlatives)
+5. Get user approval before updating
+6. Call this tool with ad_id, ad_group_id, and headlines
+
+**Headline Rules (from creative guidelines):**
+- Max 30 characters per headline
+- 3-15 headlines required
+- Headlines should work in ANY combination
+- Avoid exclamation marks (may trigger Google disapproval)
+- Avoid unverified superlatives ("Best", "#1", "Leading", "Top")
+- Any random pair should make logical sense together
+
+**Parameters:**
+
+## Parameters
+
+<ParamField path="ad_id" type="string" required>
+  The ad ID to update. Get from get_campaign_structure (look in ad_groups -&gt; ads section).
+</ParamField>
+
+<ParamField path="ad_group_id" type="string" required>
+  The ad group ID the ad belongs to. Get from get_campaign_structure.
+</ParamField>
+
+<ParamField path="headlines" type="array of string" required>
+  List of 3-15 headlines. Each headline max 30 characters. Headlines should work well in any combination. Avoid exclamation marks and unverified superlatives (Best, #1, etc.).
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Update Ad Headlines for my account.
+```
+
+Your AI client will call the `update_ad_headlines` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

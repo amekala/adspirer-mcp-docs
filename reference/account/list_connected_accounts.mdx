@@ -1,0 +1,57 @@
+---
+title: "list_connected_accounts"
+sidebarTitle: "list_connected_accounts"
+description: "List all connected ad accounts across platforms."
+---
+
+<Badge color="green">Read-only</Badge>
+
+List all connected ad accounts across platforms.
+
+Returns account IDs, names, and platforms for all active accounts. Use this at the start
+of every conversation to know which accounts are available.
+
+CRITICAL for multi-account users (agencies):
+- Always call this first to discover available accounts
+- Use the returned account IDs when calling any platform tool
+- If user mentions a business name, match it to an account from this list
+
+Returns for each account:
+- platform: google_ads, meta_ads, tiktok_ads, linkedin_ads
+- account_id: Platform account ID (pass to tools as customer_id/ad_account_id/advertiser_id/account_id)
+- account_name: Display name
+- account_tier: primary, secondary, or active
+- status: connected, needs_reauth
+
+Zero API calls — reads directly from database.
+
+## Parameters
+
+<ParamField path="platform" type="string">
+  Filter by platform: google_ads, meta_ads, tiktok_ads, or linkedin_ads. If not specified, returns accounts across all platforms.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+List Connected Accounts for my account.
+```
+
+Your AI client will call the `list_connected_accounts` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Account Management |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | No |
+
+## Related
+
+- [Account Management overview](/reference/account)
+- [All tools](/reference)

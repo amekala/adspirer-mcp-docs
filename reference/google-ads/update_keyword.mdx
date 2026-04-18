@@ -1,0 +1,77 @@
+---
+title: "update_keyword"
+sidebarTitle: "update_keyword"
+description: "Update keyword bid or status."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Update keyword bid or status.
+
+**Parameters:**
+- keyword_id: The keyword to update (REQUIRED - get from get_campaign_structure)
+- ad_group_id: The ad group containing the keyword (REQUIRED)
+- cpc_bid_micros: New bid in micros (1 USD = 1,000,000). Example: 2500000 = $2.50
+- status: ENABLED or PAUSED
+- customer_id: Optional
+
+**Can update:**
+- Bid amount (cpc_bid_micros)
+- Status (ENABLED/PAUSED)
+
+**CANNOT update (immutable):**
+- Keyword text
+- Match type
+
+**Execution time:** 2-3 seconds
+
+**Example:**
+User: "Increase the bid on 'running shoes' to $3"
+Agent:
+
+## Parameters
+
+<ParamField path="keyword_id" type="string" required>
+  The keyword ID to update. Use get_campaign_structure to find this.
+</ParamField>
+
+<ParamField path="ad_group_id" type="string" required>
+  The ad group ID the keyword belongs to.
+</ParamField>
+
+<ParamField path="cpc_bid_micros" type="integer">
+  New bid in micros (1 USD = 1,000,000 micros). Example: 2500000 for $2.50
+</ParamField>
+
+<ParamField path="status" type="string">
+  New status: ENABLED or PAUSED
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Update Keyword for my account.
+```
+
+Your AI client will call the `update_keyword` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

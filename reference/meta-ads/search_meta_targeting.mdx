@@ -1,0 +1,95 @@
+---
+title: "search_meta_targeting"
+sidebarTitle: "search_meta_targeting"
+description: "User wants to find targeting options for their Meta (Facebook/Instagram) ad campaigns."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to find targeting options for their Meta (Facebook/Instagram) ad campaigns.
+
+This tool searches the Meta Marketing API to find targeting options including interests, behaviors, demographics, locations, and more.
+
+Returns:
+- List of targeting options with IDs, names, and audience sizes
+- Category/path information for interests and behaviors
+- Location details including country, region for geo-targeting
+
+When to use this tool:
+- "Find interests related to fitness"
+- "What targeting options are available for travel?"
+- "Search for locations in California"
+- "Find behaviors for online shoppers"
+- "What demographics can I target?"
+- "Find job titles for marketing professionals"
+- "Search for schools like Harvard"
+
+Search Types Available:
+- interest: Topics and activities (e.g., 'fitness', 'cooking', 'travel')
+- behavior: User behaviors (e.g., 'frequent travelers', 'online shoppers')
+- demographic: Demographics (e.g., 'new parents', 'college educated')
+
+## Parameters
+
+<ParamField path="search_type" type="string" required>
+  Type of targeting to search for:
+- 'interest': Find interests for targeting (e.g., 'fitness', 'cooking', 'travel')
+- 'behavior': Find behaviors for targeting (e.g., 'frequent travelers', 'online shoppers')
+- 'demographic': Find demographic targeting options (e.g., 'new parents', 'college educated')
+- 'life_event': Find life event targeting (e.g., 'recently moved', 'newly engaged')
+- 'location': Find locations for geo-targeting (e.g., 'New York', 'California', '90210')
+- 'locale': Find language targeting options (e.g., 'Spanish', 'French')
+- 'employer': Find employer targeting (e.g., 'Google', 'Microsoft')
+- 'job_title': Find job title targeting (e.g., 'Software Engineer', 'Marketing Manager')
+- 'school': Find education school targeting (e.g., 'Harvard', 'Stanford')
+- 'major': Find education major targeting (e.g., 'Computer Science', 'Business')
+</ParamField>
+
+<ParamField path="query" type="string" required>
+  Search query string (e.g., 'fitness' for interests, 'New York' for locations)
+</ParamField>
+
+<ParamField path="limit" type="integer" default="50">
+  Maximum number of results to return (1-100). Default is 50.
+</ParamField>
+
+<ParamField path="locale" type="string" default="&quot;en_US&quot;">
+  Locale for results (e.g., 'en_US', 'es_ES', 'fr_FR'). Default is 'en_US'.
+</ParamField>
+
+<ParamField path="location_types" type="array of string">
+  For location search only: filter by location types. Options: 'country', 'region', 'city', 'zip', 'geo_market', 'place'. Example: ['city', 'region']
+</ParamField>
+
+<ParamField path="country_code" type="string">
+  For location search only: filter results to a specific country (e.g., 'US', 'GB', 'CA')
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Search Meta Targeting for my account.
+```
+
+Your AI client will call the `search_meta_targeting` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

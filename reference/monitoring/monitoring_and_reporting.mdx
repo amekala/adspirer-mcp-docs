@@ -1,0 +1,68 @@
+---
+title: "monitoring_and_reporting"
+sidebarTitle: "monitoring_and_reporting"
+description: "Access monitoring, scheduled reporting, and research tools."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Access monitoring, scheduled reporting, and research tools.
+
+**Use action="list_tools" first** to see available operations and their parameters.
+Then use action="execute" with the specific tool_name and arguments.
+
+**Available capabilities:**
+- **Scheduled Briefs**: Set up daily/weekly performance reports delivered by email
+- **Campaign Monitors**: Create 24/7 alerts for metric thresholds (ROAS, CPA, spend, CTR)
+- **Research Jobs**: Launch async AI-powered research (competitor analysis, keyword research, market landscape)
+- **Report Generation**: Generate on-demand performance reports across all ad platforms
+- **Task Management**: List, manage, and review scheduled tasks, monitors, and pending actions
+
+**When to use this tool:**
+- "Set up a daily performance brief"
+- "Alert me when ROAS drops below 2x"
+- "Research my competitors' ad strategies"
+- "Show me my scheduled tasks"
+- "Generate a report for last week"
+
+**Example — list tools:**
+action: "list_tools"
+
+## Parameters
+
+<ParamField path="action" type="string" required>
+  Action to perform. 'list_tools': discover available monitoring tools and their parameters. 'execute': run a specific tool by name.
+</ParamField>
+
+<ParamField path="tool_name" type="string">
+  Name of the monitoring tool to execute (required when action='execute').
+</ParamField>
+
+<ParamField path="arguments" type="object">
+  Arguments to pass to the tool (required when action='execute').
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Monitoring & Reporting for my account.
+```
+
+Your AI client will call the `monitoring_and_reporting` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Monitoring & Reporting (Router) |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Monitoring & Reporting (Router) overview](/reference/monitoring)
+- [All tools](/reference)

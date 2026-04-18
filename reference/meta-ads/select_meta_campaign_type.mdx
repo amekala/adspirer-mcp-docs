@@ -1,0 +1,60 @@
+---
+title: "select_meta_campaign_type"
+sidebarTitle: "select_meta_campaign_type"
+description: "User wants to create a Meta (Facebook/Instagram) ad campaign but hasn't specified the campaign type (image, video, or carousel)."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to create a Meta (Facebook/Instagram) ad campaign but hasn't specified the campaign type (image, video, or carousel).
+
+IMPORTANT: This tool should be called BEFORE any asset discovery or campaign creation when the user says things like:
+- "Create a Meta campaign"
+- "Create a Facebook ad"
+- "I want to run Instagram ads"
+- "Set up a Meta advertising campaign"
+- "Help me create ads on Facebook"
+
+This tool asks the user what TYPE of campaign they want to create, then provides guidance on the next steps.
+
+Campaign Types Available:
+1. image - Single image ad (most common, good for static visuals)
+2. video - Video ad including Reels (good for engagement, storytelling)
+3. carousel - 2-10 swipeable cards (good for showcasing multiple products)
+
+Do NOT use this tool if:
+- User specifically asks for "image campaign" - use create_meta_image_campaign
+- User specifically asks for "video campaign" or "Reels" - use create_meta_video_campaign
+- User specifically asks for "carousel campaign" - use create_meta_carousel_campaign
+- User is asking about performance/analytics - use performance analysis tools
+
+## Parameters
+
+<ParamField path="campaign_type" type="string" required>
+  Type of Meta campaign to create. Options: 'image' (single image ad), 'video' (video/Reels ad), 'carousel' (2-10 swipeable cards)
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Select Meta Campaign Type for my account.
+```
+
+Your AI client will call the `select_meta_campaign_type` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

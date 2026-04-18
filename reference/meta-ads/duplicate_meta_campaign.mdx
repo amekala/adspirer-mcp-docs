@@ -1,0 +1,72 @@
+---
+title: "duplicate_meta_campaign"
+sidebarTitle: "duplicate_meta_campaign"
+description: "User wants to duplicate/copy an existing Meta campaign with all its ad sets, ads, and settings."
+---
+
+<Badge color="yellow">Write</Badge>
+
+User wants to duplicate/copy an existing Meta campaign with all its ad sets, ads, and settings.
+
+IMPORTANT: This creates a NEW real campaign in Meta Ads. The duplicate starts in PAUSED status by default for review.
+
+This tool copies the entire campaign structure including:
+- Campaign settings (objective, budget strategy)
+- All ad sets (targeting, budgets, schedules)
+- All ads (creatives, text, CTAs)
+
+Returns:
+- Original and new campaign IDs
+- New campaign status
+- Ads Manager URL for the new campaign
+- Next steps for review and activation
+
+When to use this tool:
+- "Duplicate my campaign"
+- "Copy campaign [ID]"
+- "Create a copy of this campaign"
+- "I want to A/B test with a copy of my campaign"
+- "Clone my campaign with different targeting"
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The Meta Campaign ID to duplicate (required)
+</ParamField>
+
+<ParamField path="new_name" type="string">
+  Name for the new campaign (optional - defaults to original name + ' - Copy')
+</ParamField>
+
+<ParamField path="status" type="string" default="&quot;PAUSED&quot;">
+  Status for the new campaign: 'PAUSED' (default, recommended for review) or 'ACTIVE'
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Duplicate Meta Campaign for my account.
+```
+
+Your AI client will call the `duplicate_meta_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

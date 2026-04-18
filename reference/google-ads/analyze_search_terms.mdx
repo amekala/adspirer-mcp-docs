@@ -1,0 +1,109 @@
+---
+title: "analyze_search_terms"
+sidebarTitle: "analyze_search_terms"
+description: "Discover keyword opportunities and optimize match types by analyzing actual search terms."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Discover keyword opportunities and optimize match types by analyzing actual search terms.
+
+⚠️ IMPORTANT: This tool retrieves READ-ONLY data. Safe to call multiple times. Google Ads only - NOT available for TikTok.
+
+🎯 **What This Tool Does (Performance Agent - Phase 1 Feature 3):**
+- Identifies OPPORTUNITY keywords: Converting search terms NOT in your keyword list
+- Identifies NEGATIVE keywords: Expensive terms with zero conversions
+- Analyzes MATCH TYPE performance: Exact vs Phrase vs Broad efficiency
+- Provides specific recommendations with suggested bids and match types
+- Ranks opportunities by profit potential (not just ROAS)
+
+**Returns comprehensive keyword intelligence:**
+- Top 20 opportunity keywords with suggested bids and match types
+- Top 20 negative keyword candidates with wasted cost breakdown
+- Match type performance comparison (Exact/Phrase/Broad)
+- Broad→Exact conversion recommendations
+- Total opportunity value and wasted spend amounts
+- Actionable recommendations for immediate implementation
+
+🔍 **What Search Term Mining Reveals:**
+
+**Opportunity Keywords (Money Left on Table):**
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze search term data (7, 30, 60, 90, or 120 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="analysis_type" type="string" default="&quot;all&quot;">
+  Type of analysis: 'opportunities', 'negatives', 'match_types', 'all', or 'raw_report'. Use 'raw_report' to see all actual search terms with metrics (what Vijay wants). Default is 'all'.
+</ParamField>
+
+<ParamField path="force_refresh" type="boolean" default="false">
+  If true, triggers immediate API collection from Google Ads (not yet implemented - currently uses cached data). Default is false.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="campaign_id" type="string">
+  Optional campaign ID to filter search terms to a specific campaign. Get from list_campaigns.
+</ParamField>
+
+<ParamField path="page" type="integer" default="1">
+  Page number for raw_report (1-based). Default: 1
+</ParamField>
+
+<ParamField path="page_size" type="integer" default="50">
+  Results per page for raw_report (1-100). Default: 50
+</ParamField>
+
+<ParamField path="sort_by" type="string" default="&quot;cost&quot;">
+  Sort field for raw_report: 'cost' (default), 'clicks', 'impressions', 'conversions'
+</ParamField>
+
+<ParamField path="min_clicks" type="integer" default="0">
+  Minimum clicks filter for raw_report. Default: 0 (show all)
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Analyze Search Terms & Find Keyword Opportunities for my account.
+```
+
+Your AI client will call the `analyze_search_terms` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

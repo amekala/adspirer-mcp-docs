@@ -1,0 +1,68 @@
+---
+title: "get_meta_lead_form_submissions"
+sidebarTitle: "get_meta_lead_form_submissions"
+description: "User wants to see lead submissions, lead data, or leads collected from a Meta lead form."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to see lead submissions, lead data, or leads collected from a Meta lead form.
+
+Retrieves individual lead submissions for a specific lead form, including contact details and associated ad/campaign information.
+
+When to use this tool:
+- "Show me the leads from form X"
+- "Get my lead form submissions"
+- "Download my Meta leads"
+- "Show lead data from my campaign"
+- "How many leads did I get?"
+
+Returns per lead:
+- Submission timestamp
+- Field data (name, email, phone, etc. — varies by form)
+- Source: organic or paid (with campaign name and ad name)
+- Lead ID
+
+Parameters:
+- form_id: Lead form ID (required — get from list_meta_lead_forms)
+- ad_account_id: Required for multi-account users. Get from list_connected_accounts
+- limit: Maximum leads to return (default: 100)
+
+## Parameters
+
+<ParamField path="form_id" type="string" required>
+  Lead form ID (required). Get available form IDs from list_meta_lead_forms tool.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="limit" type="integer" default="100">
+  Maximum number of lead submissions to return (default: 100)
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Meta Lead Form Submissions for my account.
+```
+
+Your AI client will call the `get_meta_lead_form_submissions` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

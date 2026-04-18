@@ -1,0 +1,128 @@
+---
+title: "create_youtube_campaign"
+sidebarTitle: "create_youtube_campaign"
+description: "🔄 LONG-RUNNING TOOL: Creates a YouTube Video campaign using Google Ads Demand Gen format with YouTube-only placements."
+---
+
+<Badge color="yellow">Write</Badge>
+
+🔄 LONG-RUNNING TOOL: Creates a YouTube Video campaign using Google Ads Demand Gen format with YouTube-only placements.
+
+Emits MCP progress updates during authentication and campaign creation (typically 10-20 seconds). Progress stages: validate → commit.
+
+⚠️ CRITICAL WARNING ⚠️
+- Call this tool ONLY ONCE per campaign
+- Creates REAL campaigns that cost REAL money
+- Do NOT retry automatically if errors occur
+- Report errors to user instead of retrying
+
+⚠️ CRITICAL PREREQUISITE:
+- MUST validate the YouTube video first using validate_video tool
+- Video must be public or unlisted on YouTube (NOT private)
+
+🎬 **YouTube Campaign Placements:**
+✅ YouTube In-Feed (appears in search results & related videos)
+✅ YouTube In-Stream (plays before/during/after videos)
+✅ YouTube Shorts (appears in Shorts feed)
+❌ Gmail (disabled for YouTube campaigns)
+❌ Discover (disabled for YouTube campaigns)
+❌ Display (disabled for YouTube campaigns)
+
+## Parameters
+
+<ParamField path="campaign_name" type="string" required>
+  Campaign name (e.g., 'YouTube Summer Promo 2025')
+</ParamField>
+
+<ParamField path="budget_daily" type="number" required>
+  Daily budget in the account's native currency. IMPORTANT: Do NOT convert currencies — pass the user's amount as-is. Example: if user says '₹1000/day', pass 1000 (not a USD conversion). The Google Ads API interprets this in the account's currency automatically. Google recommends minimum ~$20/day USD equivalent for YouTube/Demand Gen campaigns.
+</ParamField>
+
+<ParamField path="youtube_video_id" type="string" required>
+  Primary YouTube video ID (exactly 11 characters). Must be validated first using validate_video tool. Example: 'dQw4w9WgXcQ'
+</ParamField>
+
+<ParamField path="final_url" type="string" required>
+  Landing page URL (must match verified domain). Example: 'https://example.com/product'
+</ParamField>
+
+<ParamField path="business_name" type="string" required>
+  Business name, max 25 characters. Example: 'Luxury Watch Co'
+</ParamField>
+
+<ParamField path="headlines" type="array of string" required>
+  MUST BE JSON ARRAY: 1-5 headlines, each EXACTLY 40 characters maximum. Commas ARE allowed within headlines. Example: ["Shop Premium Watches Today", "Free Shipping"]. COUNT CHARACTERS! ANY over 40 will be REJECTED!
+</ParamField>
+
+<ParamField path="descriptions" type="array of string" required>
+  MUST BE JSON ARRAY: 1-5 descriptions, each EXACTLY 90 characters maximum. Commas ARE allowed within descriptions. Example: ["Shop authentic luxury timepieces with expert curation and free shipping."]. COUNT CHARACTERS BEFORE CALLING - ANY over 90 will be REJECTED!
+</ParamField>
+
+<ParamField path="long_headlines" type="array of string">
+  MUST BE JSON ARRAY: Optional 1-5 long headlines, each EXACTLY 90 characters maximum. Falls back to regular headlines if not provided. Example: ["Premium Swiss Watches - Certified Authentic, Free Worldwide Shipping"]. COUNT CHARACTERS! ANY over 90 will be REJECTED!
+</ParamField>
+
+<ParamField path="call_to_action" type="string" default="&quot;LEARN_MORE&quot;">
+  Call-to-action button label. Options: LEARN_MORE (default), SHOP_NOW, SIGN_UP, SUBSCRIBE, DOWNLOAD, BOOK_NOW, CONTACT_US, GET_QUOTE, APPLY_NOW, WATCH_NOW, ORDER_NOW, BUY_NOW, SEE_MORE, START_NOW, VISIT_SITE, REGISTER
+</ParamField>
+
+<ParamField path="target_locations" type="array of string">
+  Optional: Geographic targets -- supports countries, states, cities, and regions globally. Examples: ['India'], ['Bangalore, India'], ['Karnataka'], ['New York, NY'], ['United States', 'Canada']. Defaults to United States.
+</ParamField>
+
+<ParamField path="target_languages" type="array of string">
+  Optional: Language targets as ISO codes (e.g., ['en', 'es']). Defaults to English.
+</ParamField>
+
+<ParamField path="additional_video_ids" type="array of string">
+  Optional: Up to 4 additional YouTube video IDs (max 5 total including primary). Each must be exactly 11 characters. Example: ['abc123xyz00', 'def456uvw00']
+</ParamField>
+
+<ParamField path="bidding_strategy" type="string" default="&quot;MAXIMIZE_CLICKS&quot;">
+  Bidding strategy: MAXIMIZE_CLICKS (default, works without conversion tracking), MAXIMIZE_CONVERSIONS (requires conversion tracking), or TARGET_CPA (requires target_cpa). TARGET_CPA requires target_cpa parameter.
+</ParamField>
+
+<ParamField path="target_cpa" type="number">
+  Target CPA in USD (only required when bidding_strategy='TARGET_CPA'). Example: 25.0 means target $25 per conversion.
+</ParamField>
+
+<ParamField path="logo_asset_id" type="string">
+  Logo image asset ID (1:1 square aspect ratio) from discover_existing_assets. Either this OR asset_bundle_id is required. Example: '123456789'
+</ParamField>
+
+<ParamField path="asset_bundle_id" type="string">
+  Asset bundle ID (UUID) from validate_and_prepare_assets. Use this when the account has no existing logo images. The bundle must contain a square logo (logos_square). Either this OR logo_asset_id is required. Example: '7df76fef-9d1f-4218-8bfb-3173f6de9622'
+</ParamField>
+
+<ParamField path="audience_segments" type="object">
+  Optional: Audience targeting for the campaign. CRITICAL: Only use segment IDs returned by search_audiences tool. NEVER fabricate or guess IDs -- wrong IDs target unrelated audiences and waste budget. If search_audiences returns no results, skip audience_segments entirely. Keys: 'in_market_audience_ids' (List[int] -- people actively researching), 'affinity_audience_ids' (List[int] -- people with long-term interests), 'custom_audience_ids' (List[str] -- custom audience resource names from search_audiences), 'user_list_ids' (List[str] -- remarketing/customer match resource names). Example: \{'in_market_audience_ids': [80463, 80520], 'affinity_audience_ids': [92913]\}
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Create YouTube Video Campaign for my account.
+```
+
+Your AI client will call the `create_youtube_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

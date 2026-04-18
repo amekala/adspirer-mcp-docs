@@ -1,0 +1,77 @@
+---
+title: "update_bid_strategy"
+sidebarTitle: "update_bid_strategy"
+description: "Change campaign bidding strategy."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Change campaign bidding strategy.
+
+**Available Strategies:**
+- MAXIMIZE_CLICKS: Get as many clicks as possible within budget
+- MAXIMIZE_CONVERSIONS: Get as many conversions as possible
+- TARGET_CPA: Set a target cost per acquisition (requires target_cpa)
+- TARGET_ROAS: Set a target return on ad spend (requires target_roas)
+
+**Parameters:**
+- campaign_id: The campaign ID (REQUIRED)
+- strategy: MAXIMIZE_CLICKS, MAXIMIZE_CONVERSIONS, TARGET_CPA, or TARGET_ROAS (REQUIRED)
+- target_cpa: Required if strategy is TARGET_CPA. In dollars, e.g., 25.00 for $25 CPA
+- target_roas: Required if strategy is TARGET_ROAS. Multiplier, e.g., 4.0 for 400% ROAS
+- customer_id: Optional (uses connected account if omitted)
+
+**IMPORTANT:**
+- TARGET_CPA requires conversion tracking to be set up
+- TARGET_ROAS requires conversion value tracking
+- Changing strategy may take 1-2 weeks to stabilize performance
+- Confirm with user before changing
+
+**Execution time:** 2-4 seconds
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to update. Use list_campaigns first to get available campaign IDs.
+</ParamField>
+
+<ParamField path="strategy" type="string" required>
+  Bidding strategy: MAXIMIZE_CLICKS, MAXIMIZE_CONVERSIONS, MAXIMIZE_CONVERSION_VALUE, TARGET_CPA, or TARGET_ROAS
+</ParamField>
+
+<ParamField path="target_cpa" type="number">
+  Target CPA in dollars (required if strategy is TARGET_CPA). Example: 25.00 for $25 CPA
+</ParamField>
+
+<ParamField path="target_roas" type="number">
+  Target ROAS multiplier (required if strategy is TARGET_ROAS). Example: 4.0 for 400% ROAS
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Update Bid Strategy for my account.
+```
+
+Your AI client will call the `update_bid_strategy` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

@@ -1,0 +1,69 @@
+---
+title: "pause_ad"
+sidebarTitle: "pause_ad"
+description: "Pause an ad to stop it from showing."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Pause an ad to stop it from showing.
+
+This is REVERSIBLE using resume_ad.
+
+**Parameters:**
+- ad_id: The ad ID to pause (REQUIRED)
+- ad_group_id: The ad group ID (REQUIRED)
+- customer_id: Optional
+
+**Execution time:** 1-2 seconds
+
+**When to use:**
+- User says "pause this ad", "stop this ad"
+- User wants to A/B test by pausing one ad
+- Ad is underperforming and needs a break
+- Making changes before re-enabling
+
+**Example:**
+User: "Pause my underperforming ad"
+Agent:
+1. Uses get_campaign_structure to find ad_id and ad_group_id
+2. Uses pause_ad to stop the ad
+
+## Parameters
+
+<ParamField path="ad_id" type="string" required>
+  The ad ID to pause. Get from get_campaign_structure.
+</ParamField>
+
+<ParamField path="ad_group_id" type="string" required>
+  The ad group ID the ad belongs to. Get from get_campaign_structure.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Pause Ad for my account.
+```
+
+Your AI client will call the `pause_ad` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

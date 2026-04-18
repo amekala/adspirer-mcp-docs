@@ -1,0 +1,80 @@
+---
+title: "get_campaign_performance"
+sidebarTitle: "get_campaign_performance"
+description: "Analyze Google Ads campaign performance with comprehensive insights and recommendations."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Analyze Google Ads campaign performance with comprehensive insights and recommendations.
+
+⚠️ IMPORTANT: This tool retrieves READ-ONLY data. Safe to call multiple times.
+
+**Returns detailed analysis:**
+- Campaign structure and ad group organization
+- Keyword performance with quality scores and match types
+- Ad group performance breakdown
+- Performance metrics (CTR, conversions, CPC, cost, ROAS)
+- Optimization recommendations with actionable insights
+- Performance trends (last 7 days)
+
+**Parameters:**
+- lookback_days: 7, 30, 60, 90, or 120 days (default: 30)
+- start_date: Optional start date (YYYY-MM-DD). Overrides lookback_days when used with end_date.
+- end_date: Optional end date (YYYY-MM-DD). Overrides lookback_days when used with start_date.
+⚠️ DATE CLARIFICATION: If the user's date request is vague or ambiguous (e.g., "March to June" without a year, "last quarter", "recently", "a few months ago"), ask the user to specify exact dates before calling this tool. Do not assume or guess dates.
+- customer_id: Optional (uses connected account if omitted)
+
+**Execution time:** 2-5 seconds (direct backend API call)
+**Data source:** Cached database (updated nightly via metrics collection)
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze (7, 30, 60, or 90 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Campaign Performance for my account.
+```
+
+Your AI client will call the `get_campaign_performance` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

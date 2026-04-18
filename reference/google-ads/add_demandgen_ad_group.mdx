@@ -1,0 +1,145 @@
+---
+title: "add_demandgen_ad_group"
+sidebarTitle: "add_demandgen_ad_group"
+description: "Add a new ad group with targeting and ads to an EXISTING Demand Gen campaign."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Add a new ad group with targeting and ads to an EXISTING Demand Gen campaign.
+
+Use this after create_demandgen_campaign to add additional ad groups. Each ad group can have:
+- **Different location targeting** (e.g., US cities vs India cities vs UAE cities)
+- **Different audience targeting** (e.g., marketing pros vs tech founders vs agency owners)
+- **Same or different ad creative** (headlines, descriptions, images, videos)
+
+**Reuse Existing Audiences:**
+To attach an existing audience (from Google Ads UI or a previous campaign), pass:
+- audience_segments.existing_audience_id: numeric audience ID
+- audience_segments.existing_audience_resource_name: full resource name
+
+**Create New Audiences:**
+To create a new audience from interest segments:
+- audience_segments.in_market_audience_ids: [80517, 80520]
+- audience_segments.affinity_audience_ids: [92948]
+Use search_audiences to find segment IDs.
+
+**Parameters:**
+- campaign_id: Demand Gen campaign ID (from create_demandgen_campaign or list_campaigns)
+- ad_group_name: Descriptive name
+- Same creative fields as create_demandgen_campaign (headlines, descriptions, images, etc.)
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The Demand Gen campaign ID to add the ad group to. Get from list_campaigns or get_campaign_structure.
+</ParamField>
+
+<ParamField path="ad_group_name" type="string" required>
+  Name for the new ad group (e.g., 'US Metro - Marketing Pros')
+</ParamField>
+
+<ParamField path="ad_format" type="string" default="&quot;multi_asset&quot;">
+  Ad format: 'multi_asset' (image ads, default), 'video_responsive' (video ads).
+</ParamField>
+
+<ParamField path="final_url" type="string" required>
+  Landing page URL. Example: 'https://example.com/product'
+</ParamField>
+
+<ParamField path="business_name" type="string" required>
+  Business name, max 25 characters.
+</ParamField>
+
+<ParamField path="headlines" type="array of string" required>
+  MUST BE JSON ARRAY: 1-5 headlines, each max 40 characters.
+</ParamField>
+
+<ParamField path="descriptions" type="array of string" required>
+  MUST BE JSON ARRAY: 1-5 descriptions, each max 90 characters.
+</ParamField>
+
+<ParamField path="long_headlines" type="array of string">
+  Optional 1-5 long headlines, max 90 chars each. For video_responsive format.
+</ParamField>
+
+<ParamField path="call_to_action" type="string">
+  CTA label: LEARN_MORE, SHOP_NOW, SIGN_UP, SUBSCRIBE, DOWNLOAD, BOOK_NOW, etc.
+</ParamField>
+
+<ParamField path="target_locations" type="array of string">
+  Geographic targets for THIS ad group (e.g., ['New York', 'Bangalore']). Each ad group can target different locations.
+</ParamField>
+
+<ParamField path="target_languages" type="array of string">
+  Language targets as ISO codes (e.g., ['en']). Defaults to English.
+</ParamField>
+
+<ParamField path="channels" type="object">
+  Optional channel controls for this ad group.
+</ParamField>
+
+<ParamField path="marketing_images" type="array of object">
+  Landscape images (1.91:1) as [\{"url": "...", "name": "img1"\}].
+</ParamField>
+
+<ParamField path="square_marketing_images" type="array of object">
+  Square images (1:1) as [\{"url": "...", "name": "img1"\}].
+</ParamField>
+
+<ParamField path="portrait_marketing_images" type="array of object">
+  Portrait images (4:5) as [\{"url": "...", "name": "img1"\}].
+</ParamField>
+
+<ParamField path="existing_images" type="object">
+  Existing image asset resource names to reuse. Keys: marketing_images_landscape, marketing_images_square, marketing_images_portrait, logos_square.
+</ParamField>
+
+<ParamField path="youtube_video_ids" type="array of string">
+  YouTube video IDs for video_responsive format. 1-5 videos.
+</ParamField>
+
+<ParamField path="logo_asset_id" type="string">
+  Logo image asset ID from discover_existing_assets.
+</ParamField>
+
+<ParamField path="logo_images" type="array of object">
+  New logo images as [\{"url": "...", "name": "logo1"\}].
+</ParamField>
+
+<ParamField path="asset_bundle_id" type="string">
+  Asset bundle ID from validate_and_prepare_assets.
+</ParamField>
+
+<ParamField path="audience_segments" type="object">
+  Audience targeting for THIS ad group. CRITICAL: Only use segment IDs returned by search_audiences tool. NEVER fabricate or guess IDs -- wrong IDs target unrelated audiences and waste budget. If search_audiences returns no results, skip audience_segments entirely. To REUSE an existing audience: \{'existing_audience_id': 12345\} or \{'existing_audience_resource_name': 'customers/123/audiences/456'\}. To CREATE new: \{'in_market_audience_ids': [80463], 'affinity_audience_ids': [92913], 'custom_audience_ids': ['customers/123/customAudiences/456']\}. Use search_audiences to find segment IDs.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Add Ad Group to Demand Gen Campaign for my account.
+```
+
+Your AI client will call the `add_demandgen_ad_group` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

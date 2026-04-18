@@ -1,0 +1,101 @@
+---
+title: "create_search_campaign"
+sidebarTitle: "create_search_campaign"
+description: "🔄 LONG-RUNNING TOOL: Creates a Google Ads Search campaign with full structure."
+---
+
+<Badge color="yellow">Write</Badge>
+
+🔄 LONG-RUNNING TOOL: Creates a Google Ads Search campaign with full structure.
+
+Emits MCP progress updates during authentication and campaign creation (typically 5-10 seconds).
+Progress stages: validate → commit.
+
+⚠️ CRITICAL WARNING ⚠️
+- Call this tool ONLY ONCE per campaign
+- Creates REAL campaigns that cost REAL money
+- Do NOT retry automatically if errors occur
+- Report errors to user instead of retrying
+
+⚠️ GOOGLE ADS POLICY NOTE:
+Avoid keywords related to health conditions, medical treatments, financial hardship, or political topics. These may trigger policy violations. Use general service terms instead.
+Example: Use "senior care services" not "nursing care", "home services" not "medical services"
+
+YOUR ROLE: Expert Google Ads Campaign Strategist
+
+BEFORE calling this tool, YOU MUST:
+1. **Research the business thoroughly:**
+   - Understand products/services, target audience, value propositions
+   - Analyze competitive landscape and market positioning
+   - Review website messaging and offers
+
+## Parameters
+
+<ParamField path="campaign_name" type="string" required>
+  Campaign name (e.g., 'Luxury Watches Q4 2025')
+</ParamField>
+
+<ParamField path="business_description" type="string" required>
+  What does your business sell? (e.g., 'Luxury watch retailer specializing in Rolex')
+</ParamField>
+
+<ParamField path="website_url" type="string" required>
+  Your business website URL (landing page for ads)
+</ParamField>
+
+<ParamField path="budget_daily" type="number" required>
+  Daily budget in the account's native currency. IMPORTANT: Do NOT convert currencies — pass the user's amount as-is. Example: if user says '₹1000/day', pass 1000 (not a USD conversion). The Google Ads API interprets this in the account's currency automatically. Google recommends minimum ~$10/day USD equivalent for Search campaigns.
+</ParamField>
+
+<ParamField path="target_locations" type="array of string" required>
+  Geographic targets — supports countries, states, cities, and regions globally. Examples: ['India'], ['Mumbai, India'], ['New York, NY'], ['United States', 'Canada']
+</ParamField>
+
+<ParamField path="ad_groups" type="array of AdGroupInput" required>
+  1-4 themed ad groups, each with keywords, headlines, and descriptions. Each ad group represents a theme/audience segment.
+</ParamField>
+
+<ParamField path="negative_keywords" type="array of string">
+  Campaign-level negative keywords (optional, e.g., ['free', 'cheap', 'used'])
+</ParamField>
+
+<ParamField path="bidding_strategy" type="string" default="&quot;MAXIMIZE_CONVERSIONS&quot;">
+  Bidding strategy for the campaign. Options: 'MAXIMIZE_CONVERSIONS' (default) - Get the most conversions within budget. 'MAXIMIZE_CONVERSION_VALUE' - Optimize for highest value conversions (requires target_roas). Recommended: MAXIMIZE_CONVERSIONS for new campaigns.
+</ParamField>
+
+<ParamField path="objective" type="string" default="&quot;CONVERSIONS&quot;">
+  Campaign objective/goal. Options: 'CONVERSIONS' (default) - Track and optimize for sales, leads, or sign-ups. 'CLICKS' - Maximize website traffic. Recommended: CONVERSIONS for performance-focused campaigns.
+</ParamField>
+
+<ParamField path="target_roas" type="number">
+  Target ROAS (Return on Ad Spend) for MAXIMIZE_CONVERSION_VALUE bidding. Example: 3.0 means you want $3 revenue for every $1 spent. Only required when bidding_strategy='MAXIMIZE_CONVERSION_VALUE'.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Create Search Campaign for my account.
+```
+
+Your AI client will call the `create_search_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

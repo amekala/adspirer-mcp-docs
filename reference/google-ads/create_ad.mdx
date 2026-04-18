@@ -1,0 +1,85 @@
+---
+title: "create_ad"
+sidebarTitle: "create_ad"
+description: "Create a new Responsive Search Ad (RSA) in an existing ad group."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Create a new Responsive Search Ad (RSA) in an existing ad group.
+
+Useful for A/B testing different ad copy or adding variation to an ad group.
+
+**Parameters:**
+- ad_group_id: The ad group to add the ad to (REQUIRED)
+- headlines: 3-15 headlines (REQUIRED, max 30 chars each)
+- descriptions: 2-4 descriptions (REQUIRED, max 90 chars each)
+- final_urls: Landing page URLs (REQUIRED, at least one)
+- path1: Optional display path 1 (max 15 chars)
+- path2: Optional display path 2 (max 15 chars)
+- customer_id: Optional
+
+**Execution time:** 3-5 seconds
+
+**New ad goes through Google's review process.**
+
+**Example:**
+User: "Create a new ad to test different messaging"
+Agent:
+1. Gets ad_group_id from get_campaign_structure
+2. Prepares headlines and descriptions
+
+## Parameters
+
+<ParamField path="ad_group_id" type="string" required>
+  The ad group ID to add the ad to. Get from get_campaign_structure.
+</ParamField>
+
+<ParamField path="headlines" type="array of string" required>
+  List of 3-15 headlines. Each max 30 characters. Include mix of: product identity, benefits, and CTAs.
+</ParamField>
+
+<ParamField path="descriptions" type="array of string" required>
+  List of 2-4 descriptions. Each max 90 characters.
+</ParamField>
+
+<ParamField path="final_urls" type="array of string" required>
+  Landing page URLs. At least one required.
+</ParamField>
+
+<ParamField path="path1" type="string">
+  Optional display path 1 (max 15 chars). Shows in ad URL.
+</ParamField>
+
+<ParamField path="path2" type="string">
+  Optional display path 2 (max 15 chars). Shows after path1.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Create Ad for my account.
+```
+
+Your AI client will call the `create_ad` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

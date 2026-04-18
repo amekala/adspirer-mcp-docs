@@ -1,0 +1,157 @@
+---
+title: "create_demandgen_campaign"
+sidebarTitle: "create_demandgen_campaign"
+description: "🔄 LONG-RUNNING TOOL: Creates a Demand Gen campaign across ALL Google channels — YouTube, Discover, Gmail, Display, and Maps."
+---
+
+<Badge color="yellow">Write</Badge>
+
+🔄 LONG-RUNNING TOOL: Creates a Demand Gen campaign across ALL Google channels — YouTube, Discover, Gmail, Display, and Maps.
+
+Emits MCP progress updates during creation (typically 10-20 seconds).
+
+⚠️ CRITICAL WARNING ⚠️
+- Call this tool ONLY ONCE per campaign
+- Creates REAL campaigns that cost REAL money
+- Do NOT retry automatically if errors occur
+- Report errors to user instead of retrying
+
+🌐 **Demand Gen Campaign Channels (ALL enabled by default):**
+✅ YouTube In-Feed (search results & related videos)
+✅ YouTube In-Stream (before/during/after videos)
+✅ YouTube Shorts (Shorts feed)
+✅ Gmail (Promotions & Social tabs)
+✅ Discover (Google Discover feed)
+✅ Display (Google Display Network)
+❌ Maps (opt-in, disabled by default)
+
+📋 **YOUR CRITICAL ROLE: Campaign Strategist & Text Creator**
+
+**STEP 1: Collect Campaign Details from User**
+
+## Parameters
+
+<ParamField path="campaign_name" type="string" required>
+  Campaign name (e.g., 'DemandGen Summer Promo 2026')
+</ParamField>
+
+<ParamField path="budget_daily" type="number" required>
+  Daily budget in the account's native currency. IMPORTANT: Do NOT convert currencies — pass the user's amount as-is. Example: if user says '₹1000/day', pass 1000 (not a USD conversion). Google recommends minimum ~$20/day USD equivalent for Demand Gen campaigns.
+</ParamField>
+
+<ParamField path="ad_format" type="string" default="&quot;multi_asset&quot;">
+  Ad format: 'multi_asset' (image ads, default), 'video_responsive' (video ads). multi_asset requires marketing images. video_responsive requires YouTube video IDs.
+</ParamField>
+
+<ParamField path="final_url" type="string" required>
+  Landing page URL (must match verified domain). Example: 'https://example.com/product'
+</ParamField>
+
+<ParamField path="business_name" type="string" required>
+  Business name, max 25 characters. Example: 'Adspirer'
+</ParamField>
+
+<ParamField path="headlines" type="array of string" required>
+  MUST BE JSON ARRAY: 1-5 headlines, each EXACTLY 40 characters maximum. Example: ["AI Ad Management", "Skip the Dashboard"]. COUNT CHARACTERS! ANY over 40 will be REJECTED!
+</ParamField>
+
+<ParamField path="descriptions" type="array of string" required>
+  MUST BE JSON ARRAY: 1-5 descriptions, each EXACTLY 90 characters maximum. Example: ["Manage ads with AI - no dashboard needed."]. COUNT CHARACTERS BEFORE CALLING!
+</ParamField>
+
+<ParamField path="long_headlines" type="array of string">
+  MUST BE JSON ARRAY: Optional 1-5 long headlines, max 90 characters each. Required for video_responsive format. Falls back to headlines if not provided.
+</ParamField>
+
+<ParamField path="call_to_action" type="string">
+  Call-to-action label. Options: LEARN_MORE, SHOP_NOW, SIGN_UP, SUBSCRIBE, DOWNLOAD, BOOK_NOW, CONTACT_US, GET_QUOTE, APPLY_NOW
+</ParamField>
+
+<ParamField path="target_locations" type="array of string">
+  Geographic targets globally (e.g., ['India', 'United States', 'London']). Supports countries, states, cities worldwide. Defaults to United States.
+</ParamField>
+
+<ParamField path="target_languages" type="array of string">
+  Language targets as ISO codes (e.g., ['en', 'es']). Defaults to English.
+</ParamField>
+
+<ParamField path="bidding_strategy" type="string" default="&quot;MAXIMIZE_CLICKS&quot;">
+  Bidding strategy: MAXIMIZE_CLICKS (default), MAXIMIZE_CONVERSIONS, TARGET_CPA, MAXIMIZE_CONVERSION_VALUE, TARGET_ROAS. Your explicit choice is honored — the engine is advisory only.
+</ParamField>
+
+<ParamField path="target_cpa" type="number">
+  Target CPA in account's native currency (only for TARGET_CPA bidding). Example: 25.0
+</ParamField>
+
+<ParamField path="target_roas" type="number">
+  Target ROAS multiplier (only for TARGET_ROAS bidding). Example: 3.5 means 350% return on ad spend.
+</ParamField>
+
+<ParamField path="channels" type="object">
+  Optional channel controls. Keys: youtube_in_feed, youtube_in_stream, youtube_shorts, gmail, discover, display. All default to true (full reach). Example: \{"gmail": false, "display": false\} to exclude those channels.
+</ParamField>
+
+<ParamField path="marketing_images" type="array of object">
+  Landscape images (1.91:1) as [\{"url": "https://...", "name": "img1"\}]. At least landscape OR square images required for multi_asset.
+</ParamField>
+
+<ParamField path="square_marketing_images" type="array of object">
+  Square images (1:1) as [\{"url": "https://...", "name": "img1"\}].
+</ParamField>
+
+<ParamField path="portrait_marketing_images" type="array of object">
+  Portrait images (4:5) as [\{"url": "https://...", "name": "img1"\}]. Optional.
+</ParamField>
+
+<ParamField path="existing_images" type="object">
+  Existing image asset resource names to reuse (from discover_existing_assets). Keys: marketing_images_landscape, marketing_images_square, marketing_images_portrait, logos_square. Example: \{"marketing_images_landscape": ["customers/123/assets/456"]\}
+</ParamField>
+
+<ParamField path="youtube_video_ids" type="array of string">
+  YouTube video IDs (each 11 chars) for video_responsive format. 1-5 videos. Must be validated first using validate_video tool.
+</ParamField>
+
+<ParamField path="logo_asset_id" type="string">
+  Logo image asset ID from discover_existing_assets.
+</ParamField>
+
+<ParamField path="logo_images" type="array of object">
+  New logo images as [\{"url": "https://...", "name": "logo1"\}].
+</ParamField>
+
+<ParamField path="asset_bundle_id" type="string">
+  Asset bundle ID (UUID) from validate_and_prepare_assets.
+</ParamField>
+
+<ParamField path="audience_segments" type="object">
+  Optional: Audience targeting for the campaign. CRITICAL: Only use segment IDs returned by search_audiences tool. NEVER fabricate or guess IDs -- wrong IDs target unrelated audiences and waste budget. If search_audiences returns no results, skip audience_segments entirely. Keys: 'in_market_audience_ids' (List[int] -- people actively researching), 'affinity_audience_ids' (List[int] -- people with long-term interests), 'custom_audience_ids' (List[str] -- custom audience resource names from search_audiences), 'user_list_ids' (List[str] -- remarketing/customer match resource names). Example: \{'in_market_audience_ids': [80463, 80520], 'affinity_audience_ids': [92913]\}
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Create Demand Gen Campaign (All Channels) for my account.
+```
+
+Your AI client will call the `create_demandgen_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

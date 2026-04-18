@@ -1,0 +1,69 @@
+---
+title: "validate_and_prepare_meta_assets"
+sidebarTitle: "validate_and_prepare_meta_assets"
+description: "User wants to upload NEW images for Meta campaigns."
+---
+
+<Badge color="yellow">Write</Badge>
+
+User wants to upload NEW images for Meta campaigns.
+
+This tool validates images and uploads them to Meta to get image hashes.
+
+This tool validates image URLs against Meta's specifications and uploads them to get image hashes needed for campaign creation. It stores validated assets in a temporary bundle (60-minute TTL).
+
+Returns:
+- Validation results (pass/fail per image)
+- Image hashes for successfully uploaded images
+- Asset bundle ID for use in campaign creation
+- Placement compatibility information
+
+When to use this tool:
+- "Upload this image for my Meta campaign"
+- "Validate my product images for Facebook ads"
+- "Prepare images for Instagram ads"
+- User provides image URLs and wants to create a campaign
+
+Parameters:
+- image_urls: List of public URLs to validate and upload (1-10 images)
+- placement: Target placement - 'feed' (default), 'stories_reels', or 'carousel'
+- ad_account_id: Required for multi-account users. Get from list_connected_accounts
+
+## Parameters
+
+<ParamField path="image_urls" type="array of string" required>
+  List of public image URLs to validate and upload (max 10). Images will be validated and uploaded to Meta to get image hashes.
+</ParamField>
+
+<ParamField path="placement" type="string" default="&quot;feed&quot;">
+  Target placement: 'feed' (default), 'stories_reels', or 'carousel'
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID (optional)
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Validate & Upload Meta Assets for my account.
+```
+
+Your AI client will call the `validate_and_prepare_meta_assets` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

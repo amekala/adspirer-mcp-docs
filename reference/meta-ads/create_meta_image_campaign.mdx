@@ -1,0 +1,233 @@
+---
+title: "create_meta_image_campaign"
+sidebarTitle: "create_meta_image_campaign"
+description: "User wants to create a Meta (Facebook/Instagram) single-image ad campaign."
+---
+
+<Badge color="yellow">Write</Badge>
+
+User wants to create a Meta (Facebook/Instagram) single-image ad campaign.
+
+REQUIRED: You MUST call `select_meta_campaign_type` first and complete ALL phases it describes (audience targeting research via `search_meta_targeting`/`browse_meta_targeting`, asset discovery via `discover_meta_assets`, and user approval) BEFORE calling this tool.
+
+IMPORTANT: This tool creates REAL campaigns that will spend money once activated. Campaign is created in PAUSED status for review.
+
+DO NOT USE for video ads - use `create_meta_video_campaign` instead.
+DO NOT USE for carousel/multi-image - use `create_meta_carousel_campaign` instead.
+
+This tool creates a complete Meta campaign with:
+1. Campaign (objective, budget)
+2. Ad Set (targeting, placements, schedule)
+3. Ad Creative (image, text, CTA)
+4. Ad (linking creative to ad set)
+
+When to use this tool:
+- "Create a Facebook ad campaign"
+- "Launch an Instagram image ad"
+- "Set up a Meta traffic campaign"
+- "Create an ad with this image"
+
+Required Parameters:
+
+## Parameters
+
+<ParamField path="campaign_name" type="string" required>
+  Campaign name (will be automatically suffixed with timestamp for uniqueness)
+</ParamField>
+
+<ParamField path="objective" type="string" default="&quot;OUTCOME_TRAFFIC&quot;">
+  Campaign objective. Options: 'OUTCOME_TRAFFIC' (website clicks), 'OUTCOME_SALES' (conversions), 'OUTCOME_LEADS' (lead forms), 'OUTCOME_AWARENESS' (reach), 'OUTCOME_ENGAGEMENT'. Default: OUTCOME_TRAFFIC
+</ParamField>
+
+<ParamField path="budget_daily" type="number">
+  Daily budget in account currency (minimum $1/day, recommended $5-20/day for testing). Mutually exclusive with budget_lifetime — provide exactly one.
+</ParamField>
+
+<ParamField path="budget_lifetime" type="number">
+  Lifetime budget in account currency (total spend over campaign duration). REQUIRES end_time to be set. Mutually exclusive with budget_daily — provide exactly one.
+</ParamField>
+
+<ParamField path="end_time" type="string">
+  Campaign/ad set end date in ISO format (e.g. '2026-04-30T23:59:59'). REQUIRED when using budget_lifetime. Optional with budget_daily.
+</ParamField>
+
+<ParamField path="asset_bundle_id" type="string">
+  Asset bundle ID from validate_and_prepare_meta_assets tool. Use this for NEW image uploads. Mutually exclusive with existing_image_hash and image_url.
+</ParamField>
+
+<ParamField path="existing_image_hash" type="string">
+  Existing Meta image hash from discover_meta_assets tool. Use this to REUSE images from Meta Ad Library. Mutually exclusive with asset_bundle_id and image_url.
+</ParamField>
+
+<ParamField path="image_url" type="string">
+  Public image URL to upload (will be uploaded during campaign creation). Use validate_and_prepare_meta_assets for better error handling. Mutually exclusive with asset_bundle_id and existing_image_hash.
+</ParamField>
+
+<ParamField path="facebook_page_id" type="string">
+  Facebook Page ID for the ad. Usually auto-detected from your connected account. Only provide if you have multiple pages and want to use a specific one.
+</ParamField>
+
+<ParamField path="primary_text" type="string" required>
+  Primary ad text (max 2200 characters, recommended 125 or less for optimal display). Supports emojis, line breaks (\n), and bullet points (e.g. '🔥 Limited Offer!\n\n✅ Free Shipping\n✅ 30-Day Returns'). This is the main message that appears above the image.
+</ParamField>
+
+<ParamField path="headline" type="string" required>
+  Headline text (max 255 characters, recommended 40). Appears below the image as clickable text.
+</ParamField>
+
+<ParamField path="landing_page_url" type="string" required>
+  Landing page URL where users will be directed when clicking the ad. Must be HTTPS.
+</ParamField>
+
+<ParamField path="call_to_action" type="string" default="&quot;LEARN_MORE&quot;">
+  Call-to-action button. Options: 'LEARN_MORE', 'SHOP_NOW', 'SIGN_UP', 'DOWNLOAD', 'BOOK_TRAVEL', 'CONTACT_US', 'GET_QUOTE', 'SUBSCRIBE', 'WATCH_MORE'. Default: LEARN_MORE
+</ParamField>
+
+<ParamField path="description" type="string">
+  Optional description text (max 255 characters, recommended 30). Appears under the headline on some placements.
+</ParamField>
+
+<ParamField path="story_image_url" type="string">
+  Optional image URL for Stories/Reels placements (9:16 ratio, recommended 1080x1920px). If provided, the main image is used for Feed and this image for Stories/Reels. Meta's asset_feed_spec will be used instead of object_story_spec.
+</ParamField>
+
+<ParamField path="right_column_image_url" type="string">
+  Optional image URL for Right Column placement (1.91:1 ratio, recommended 1200x628px). If provided, Meta's asset_feed_spec will be used instead of object_story_spec.
+</ParamField>
+
+<ParamField path="instagram_account_id" type="string">
+  Instagram account ID for Instagram placements. If not provided, ad will run on Facebook only.
+</ParamField>
+
+<ParamField path="pixel_id" type="string">
+  Meta Pixel ID for conversion tracking. Required for OUTCOME_SALES campaigns. Use list_meta_pixels to find available pixels for your ad account.
+</ParamField>
+
+<ParamField path="pixel_event_name" type="string">
+  Conversion event to optimize for when pixel_id is provided. Options: PURCHASE, LEAD, COMPLETE_REGISTRATION, ADD_TO_CART, INITIATE_CHECKOUT, ADD_PAYMENT_INFO, SEARCH, VIEW_CONTENT, OTHER. Use OTHER with custom_conversion_id for custom pixel events. Default: PURCHASE
+</ParamField>
+
+<ParamField path="custom_conversion_id" type="string">
+  Custom conversion ID for optimizing towards a specific custom conversion. When provided, pixel_event_name is ignored — Meta infers the event type from the custom conversion. Get available custom conversions from your Meta Events Manager.
+</ParamField>
+
+<ParamField path="destination_type" type="string">
+  Override the ad set destination type. By default, OUTCOME_LEADS uses ON_AD (Meta lead forms) and OUTCOME_TRAFFIC uses WEBSITE. Set to 'WEBSITE' for OUTCOME_LEADS campaigns that track conversions on your website via Meta Pixel instead of using Meta's built-in lead form. Options: WEBSITE, ON_AD, WEBSITE_AND_ON_AD. Only provide when overriding the default.
+</ParamField>
+
+<ParamField path="campaign_budget_optimization" type="boolean" default="false">
+  Enable Advantage Campaign Budget (CBO). When true, the daily budget is set at the campaign level and Meta automatically distributes it across ad sets. When false (default), each ad set manages its own budget.
+</ParamField>
+
+<ParamField path="daily_min_spend_target" type="number">
+  CBO only: minimum daily spend for this ad set in account currency. Meta will try to spend at least this amount on this ad set each day.
+</ParamField>
+
+<ParamField path="daily_spend_cap" type="number">
+  CBO only: maximum daily spend cap for this ad set in account currency. Meta will not spend more than this on this ad set each day.
+</ParamField>
+
+<ParamField path="locations" type="array of any">
+  Location targeting. Accepts country codes (['US', 'CA']) OR location objects from search_meta_targeting ([\{'key': '2421836', 'type': 'city', 'radius': 25, 'distance_unit': 'mile'\}]). For city/region targeting, first call search_meta_targeting with search_type='location'. Default: ['US']
+</ParamField>
+
+<ParamField path="age_min" type="integer" default="18">
+  Minimum age (18-65). Default: 18
+</ParamField>
+
+<ParamField path="age_max" type="integer" default="65">
+  Maximum age (18-65). Default: 65
+</ParamField>
+
+<ParamField path="genders" type="array of string">
+  Gender targeting: ['male'], ['female'], or None for all genders
+</ParamField>
+
+<ParamField path="interests" type="array of object">
+  List of interest targeting objects from search_meta_targeting. Format: [\{'id': '6003139266461', 'name': 'Fitness'\}]. Use search_meta_targeting with search_type='interests' to find valid IDs.
+</ParamField>
+
+<ParamField path="behaviors" type="array of object">
+  List of behavior targeting objects from search_meta_targeting. Format: [\{'id': '6002714895372', 'name': 'Small business owners'\}]. Use search_meta_targeting with search_type='behaviors' to find valid IDs.
+</ParamField>
+
+<ParamField path="job_titles" type="array of object">
+  List of job title targeting objects for B2B campaigns. Format: [\{'id': '123456', 'name': 'Chief Marketing Officer'\}]. Use search_meta_targeting with search_type='job_titles' to find valid IDs.
+</ParamField>
+
+<ParamField path="work_employers" type="array of object">
+  List of employer targeting objects for B2B campaigns. Format: [\{'id': '123456', 'name': 'Google'\}]. Use search_meta_targeting with search_type='work_employers' to find valid IDs.
+</ParamField>
+
+<ParamField path="life_events" type="array of object">
+  List of life event targeting objects. Format: [\{'id': '123456', 'name': 'Recently engaged'\}]. Use search_meta_targeting with search_type='life_events' to find valid IDs.
+</ParamField>
+
+<ParamField path="education_schools" type="array of object">
+  List of education school targeting objects. Format: [\{'id': '123456', 'name': 'Harvard University'\}]. Use search_meta_targeting with search_type='education_schools' to find valid IDs.
+</ParamField>
+
+<ParamField path="education_majors" type="array of object">
+  List of education major targeting objects. Format: [\{'id': '123456', 'name': 'Computer Science'\}]. Use search_meta_targeting with search_type='education_majors' to find valid IDs.
+</ParamField>
+
+<ParamField path="custom_audiences" type="array of string">
+  List of Custom Audience IDs to include in targeting. These are audiences created in Meta Ads Manager (website visitors, customer lists, etc.)
+</ParamField>
+
+<ParamField path="excluded_custom_audiences" type="array of string">
+  List of Custom Audience IDs to exclude from targeting.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="special_ad_categories" type="array of string">
+  Special ad categories for housing, credit, employment, or social issues. Options: 'HOUSING', 'CREDIT', 'EMPLOYMENT', 'ISSUES_ELECTIONS_POLITICS'. Leave empty for standard ads.
+</ParamField>
+
+<ParamField path="lead_form_id" type="string">
+  Lead form ID to attach when objective is OUTCOME_LEADS. Get available forms using list_meta_lead_forms tool. Only used with OUTCOME_LEADS objective.
+</ParamField>
+
+<ParamField path="multi_advertiser" type="boolean">
+  Allow ad to appear in multi-advertiser ad format (multiple ads shown together). Set to false to opt out. Default: Meta's default (enabled). Brands that want exclusive placement should set this to false.
+</ParamField>
+
+<ParamField path="publisher_platforms" type="array of string">
+  Platforms to show ads on. Options: 'facebook', 'instagram', 'audience_network', 'messenger'. Default: automatic (all). To exclude Audience Network/Apps, use ['facebook', 'instagram'].
+</ParamField>
+
+<ParamField path="facebook_positions" type="array of string">
+  Facebook placement positions. Options: 'feed', 'right_hand_column', 'marketplace', 'video_feeds', 'story', 'search', 'instream_video', 'facebook_reels'. Only include positions you WANT — omitted positions are excluded.
+</ParamField>
+
+<ParamField path="instagram_positions" type="array of string">
+  Instagram placement positions. Options: 'stream' (feed), 'story', 'reels', 'explore', 'explore_home', 'ig_search', 'profile_feed'. Only include positions you WANT — omitted positions are excluded.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Create Meta Image Campaign for my account.
+```
+
+Your AI client will call the `create_meta_image_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

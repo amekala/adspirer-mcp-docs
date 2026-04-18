@@ -1,0 +1,97 @@
+---
+title: "optimize_budget_allocation"
+sidebarTitle: "optimize_budget_allocation"
+description: "Optimize budget allocation across campaigns using linear programming to maximize conversions."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Optimize budget allocation across campaigns using linear programming to maximize conversions.
+
+⚠️ IMPORTANT: This tool retrieves READ-ONLY optimization recommendations. Safe to call multiple times. Does NOT automatically change budgets.
+
+🎯 **What This Tool Does (Performance Agent - Phase 1):**
+- Uses linear programming to optimize budget distribution
+- Maximizes total conversions while respecting constraints
+- Provides current vs optimized allocation comparison
+- Categorizes campaigns into actions: PAUSE/SCALE/REDUCE/MAINTAIN
+- Shows expected conversion lift from optimization
+- Generates specific recommendations with budget amounts
+
+**Returns detailed optimization plan:**
+- Current allocation (what you have now)
+- Optimized allocation (what you should have)
+- Expected conversion lift (absolute and percentage)
+- Campaign-by-campaign actions with reasoning
+- Budget change amounts and percentages
+- Specific implementation recommendations
+
+**Optimization Algorithm:**
+Uses scipy linear programming with constraints:
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="total_budget" type="number" required>
+  Total monthly budget to allocate across campaigns (e.g., 15000.00 for $15K/month)
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze for historical performance (7, 30, 60, 90, or 120 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="target_roas" type="number">
+  Optional target ROAS override (e.g., 3.0 for 3.0x ROAS). If not provided, will use account goals or historical average.
+</ParamField>
+
+<ParamField path="max_change_percentage" type="number" default="0.5">
+  Maximum budget change per campaign as a percentage (0.0-1.0). Default 0.5 = ±50%. Use 0.3 for conservative, 0.7 for aggressive.
+</ParamField>
+
+<ParamField path="min_daily_budget" type="number" default="5">
+  Minimum daily budget per campaign in dollars. Default is $5.00. Set to 0.0 to allow complete pausing of underperformers.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Optimize Budget Allocation for my account.
+```
+
+Your AI client will call the `optimize_budget_allocation` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

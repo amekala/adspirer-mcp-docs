@@ -1,0 +1,65 @@
+---
+title: "validate_video"
+sidebarTitle: "validate_video"
+description: "Validate video for ad campaigns (unified tool for all platforms)."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Validate video for ad campaigns (unified tool for all platforms).
+
+⚠️ IMPORTANT: This is a READ-ONLY validation tool. Safe to call multiple times.
+
+🎯 **What This Tool Does:**
+- Validates videos for Google Ads PMAX or TikTok campaigns
+- For PMAX: Validates YouTube video (privacy, duration, embeddable)
+- For TikTok: Validates public video URL is accessible
+- Returns metadata (title, duration, privacy, thumbnail)
+
+**DOES NOT upload videos** - user must already have video uploaded:
+- PMAX: Video must be on YouTube (public or unlisted)
+- TikTok: Video must be on public hosting (Google Drive, Vimeo, etc.)
+
+**Parameters:**
+- video_url_or_id (required): YouTube URL/ID (PMAX) or public video URL (TikTok)
+- platform (required): 'pmax' or 'tiktok'
+
+**For PMAX:**
+Accepts YouTube formats:
+- Full URL: https://youtube.com/watch?v=dQw4w9WgXcQ
+- Short URL: https://youtu.be/dQw4w9WgXcQ
+
+## Parameters
+
+<ParamField path="video_url_or_id" type="string" required>
+  YouTube video URL/ID (for PMAX) OR public video file URL (for TikTok). Examples: 'dQw4w9WgXcQ' (YouTube ID), 'https://youtube.com/watch?v=dQw4w9WgXcQ' (YouTube URL), 'https://youtu.be/dQw4w9WgXcQ' (YouTube short URL), 'https://drive.google.com/file/d/ABC123/view' (Google Drive video), 'https://vimeo.com/video/123456' (Vimeo video)
+</ParamField>
+
+<ParamField path="platform" type="string" required>
+  Target platform: 'pmax' or 'tiktok'. Determines validation rules and requirements. 'pmax' = Google Ads Performance Max (requires YouTube video). 'tiktok' = TikTok Ads (requires public video URL).
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Validate Video for my account.
+```
+
+Your AI client will call the `validate_video` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

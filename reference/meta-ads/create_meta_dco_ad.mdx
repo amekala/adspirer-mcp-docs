@@ -1,0 +1,117 @@
+---
+title: "create_meta_dco_ad"
+sidebarTitle: "create_meta_dco_ad"
+description: "User wants Meta to automatically TEST MULTIPLE IMAGES and find the best combination."
+---
+
+<Badge color="yellow">Write</Badge>
+
+User wants Meta to automatically TEST MULTIPLE IMAGES and find the best combination.
+
+This is Dynamic Creative Optimization (DCO). Meta tests all combinations of images × headlines × primary texts and optimizes delivery automatically.
+
+USE THIS TOOL when the user says ANY of these:
+- "test these images" / "test multiple images"
+- "let Meta find the winner" / "let Meta optimize"
+- "Dynamic Creative" / "DCO"
+- "which image performs best"
+- Provides multiple images and wants Meta to choose the best
+- "test combinations" / "mix and match"
+- "10 images × 5 headlines"
+
+DO NOT USE add_meta_ad multiple times for this — that creates separate ads (A/B test).
+DCO is ONE ad with multiple assets that Meta mixes and optimizes.
+
+Prerequisites:
+1. You need an ad_set_id with is_dynamic_creative=true
+2. If the user doesn't have one, first call `add_meta_ad_set` with `is_dynamic_creative=true`
+3. Then call this tool with the image_urls and text variations
+
+Asset limits (from Meta):
+
+## Parameters
+
+<ParamField path="ad_set_id" type="string" required>
+  The Meta Ad Set ID. The ad set must have is_dynamic_creative=true (create one with add_meta_ad_set using is_dynamic_creative=true).
+</ParamField>
+
+<ParamField path="image_urls" type="array of string" required>
+  List of 2-10 image URLs for Meta to test. Meta will try all combinations.
+</ParamField>
+
+<ParamField path="primary_text" type="string" required>
+  Default primary text (used if primary_texts is not provided).
+</ParamField>
+
+<ParamField path="landing_page_url" type="string" required>
+  Landing page URL (HTTPS)
+</ParamField>
+
+<ParamField path="call_to_action" type="string" default="&quot;LEARN_MORE&quot;">
+  CTA button
+</ParamField>
+
+<ParamField path="headlines" type="array of string">
+  List of headline variations (up to 5) for Meta to test.
+</ParamField>
+
+<ParamField path="headline" type="string">
+  Single headline (used if headlines is not provided).
+</ParamField>
+
+<ParamField path="primary_texts" type="array of string">
+  List of primary text variations (up to 5) for Meta to test.
+</ParamField>
+
+<ParamField path="descriptions" type="array of string">
+  List of description variations (up to 5) for Meta to test.
+</ParamField>
+
+<ParamField path="description" type="string">
+  Single description (used if descriptions is not provided).
+</ParamField>
+
+<ParamField path="lead_form_id" type="string">
+  Lead form ID for OUTCOME_LEADS campaigns.
+</ParamField>
+
+<ParamField path="facebook_page_id" type="string">
+  Facebook Page ID
+</ParamField>
+
+<ParamField path="instagram_account_id" type="string">
+  Instagram account ID
+</ParamField>
+
+<ParamField path="ad_name" type="string">
+  Custom name for the DCO ad
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta ad account ID
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Create Meta DCO Ad for my account.
+```
+
+Your AI client will call the `create_meta_dco_ad` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

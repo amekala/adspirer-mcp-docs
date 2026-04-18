@@ -1,0 +1,65 @@
+---
+title: "get_campaign_targeting"
+sidebarTitle: "get_campaign_targeting"
+description: "Get location/geo targeting for a Google Ads campaign."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Get location/geo targeting for a Google Ads campaign.
+
+This tool retrieves READ-ONLY data. Safe to call multiple times.
+
+**Returns location targeting details:**
+- Targeted locations (cities, states, countries, metros the campaign targets)
+- Excluded locations (negative geo targets)
+- Bid modifiers per location (if set)
+- Location type (Country, State, City, Metro, etc.)
+- Summary counts (targeted, excluded, total)
+
+**Parameters:**
+- campaign_id: The campaign ID (REQUIRED - get from list_campaigns)
+- customer_id: Optional (uses connected account if omitted)
+
+**Execution time:** 1-3 seconds (single API query)
+
+**Use this tool when:**
+- User asks "where is this campaign targeting?" or "what locations?"
+- User wants to see geo targeting for a campaign
+- User asks "what countries/cities/states does my campaign target?"
+- Before recommending location targeting changes
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to get location targeting for. Use list_campaigns first.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Campaign Location Targeting for my account.
+```
+
+Your AI client will call the `get_campaign_targeting` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

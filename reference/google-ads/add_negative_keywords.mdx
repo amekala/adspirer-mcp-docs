@@ -1,0 +1,68 @@
+---
+title: "add_negative_keywords"
+sidebarTitle: "add_negative_keywords"
+description: "Add negative keywords to a campaign."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Add negative keywords to a campaign.
+
+Negative keywords prevent your ads from showing for certain searches.
+They help save budget by avoiding irrelevant clicks.
+
+**Parameters:**
+- campaign_id: The campaign ID (REQUIRED - get from list_campaigns)
+- keywords: List of negative keywords to add
+- customer_id: Optional
+
+**Each keyword needs:**
+- text: The keyword phrase (e.g., "free", "cheap", "diy")
+- match_type: EXACT, PHRASE, or BROAD (default: BROAD)
+
+**Campaign-level vs Ad Group-level:**
+This adds negative keywords at CAMPAIGN level, affecting ALL ad groups.
+
+**Common negative keywords:**
+- "free", "cheap", "discount" (for premium brands)
+- "jobs", "salary", "careers" (for product companies)
+- "diy", "how to", "tutorial" (for service providers)
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to add negative keywords to. Use list_campaigns first.
+</ParamField>
+
+<ParamField path="keywords" type="array of object" required>
+  List of negative keywords. Each: \{text, match_type (EXACT/PHRASE/BROAD)\}. These prevent ads from showing for unwanted searches.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Add Negative Keywords for my account.
+```
+
+Your AI client will call the `add_negative_keywords` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

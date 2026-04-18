@@ -1,0 +1,69 @@
+---
+title: "add_structured_snippets"
+sidebarTitle: "add_structured_snippets"
+description: "Add structured snippet extensions to a campaign."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Add structured snippet extensions to a campaign.
+
+Structured snippets highlight specific aspects of your products/services.
+
+**VALID HEADERS:**
+- AMENITIES, BRANDS, COURSES, DEGREE_PROGRAMS, DESTINATIONS
+- FEATURED_HOTELS, INSURANCE_COVERAGE, MODELS, NEIGHBORHOODS
+- SERVICE_CATALOG, SHOWS, STYLES, TYPES
+
+**RULES:**
+- Header must be from predefined list
+- 3-10 values required per snippet
+- Each value max 25 characters
+
+**EXAMPLES:**
+For SaaS/Platform:
+    Header: "Types"
+    Values: ["Google Ads", "Meta Ads", "LinkedIn Ads", "TikTok Ads"]
+
+For Services:
+    Header: "Services" (maps to SERVICE_CATALOG)
+    Values: ["Campaign Launch", "Analytics", "Optimization", "Reporting"]
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to add snippets to. Get from list_campaigns.
+</ParamField>
+
+<ParamField path="snippets" type="array of object" required>
+  List of snippet objects. Each has 'header' (from valid list) and 'values' (3-10 strings, each max 25 chars). Example: [\{'header': 'Types', 'values': ['Google Ads', 'Meta Ads', 'LinkedIn Ads']\}]
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Add Structured Snippets for my account.
+```
+
+Your AI client will call the `add_structured_snippets` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

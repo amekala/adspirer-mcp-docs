@@ -1,0 +1,77 @@
+---
+title: "validate_and_prepare_assets"
+sidebarTitle: "validate_and_prepare_assets"
+description: "🔄 LONG-RUNNING TOOL: Validates multiple images from URLs for Performance Max campaigns."
+---
+
+<Badge color="yellow">Write</Badge>
+
+🔄 LONG-RUNNING TOOL: Validates multiple images from URLs for Performance Max campaigns.
+
+Emits MCP progress updates while downloading and validating 5-10 images (typically 5-15 seconds). Progress stages: download → validate → commit.
+
+⚠️ CRITICAL: This tool accepts IMAGE URLS (from postimages.org), NOT base64 or file paths!
+
+📋 **YOUR CRITICAL ROLE: URL Validator & Categorizer**
+
+**STEP 1: Call help_user_upload First**
+
+Before anything else:
+- Call help_user_upload() to show upload instructions
+- User will upload to postimages.org and paste Direct links
+- User provides links like: https://i.postimg.cc/ABC123/image.jpg
+
+**STEP 2: Categorize URLs by Examining Images**
+
+When user pastes URLs, YOU MUST:
+1. **Request to view each image** (you can see images from URLs)
+2. **Calculate aspect ratio** for each: width / height
+3. **Categorize based on ratio**:
+   - Landscape (1.8-2.0): ~1.91:1 like 1200×628px
+
+## Parameters
+
+<ParamField path="marketing_images_landscape" type="array of string" required>
+  Landscape image URLs (1.91:1 ratio, min 600×314px). Direct HTTPS links from postimages.org ending in .jpg/.png/.webp. Minimum 1 required.
+</ParamField>
+
+<ParamField path="marketing_images_square" type="array of string" required>
+  Square image URLs (1:1 ratio, min 300×300px). Direct HTTPS links ending in .jpg/.png/.webp. Minimum 1 required.
+</ParamField>
+
+<ParamField path="marketing_images_portrait" type="array of string">
+  Portrait image URLs (4:5 ratio = 0.8:1, min 400×600px). Direct HTTPS links. Optional.
+</ParamField>
+
+<ParamField path="logos_square" type="array of string" required>
+  Square logo URLs (1:1 ratio, min 128×128px). Direct HTTPS links. Minimum 1 required.
+</ParamField>
+
+<ParamField path="logos_landscape" type="array of string">
+  Landscape logo URLs (4:1 ratio, min 512×128px). Direct HTTPS links. Optional.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Validate and Prepare Assets for my account.
+```
+
+Your AI client will call the `validate_and_prepare_assets` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

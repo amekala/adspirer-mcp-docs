@@ -1,0 +1,93 @@
+---
+title: "analyze_meta_wasted_spend"
+sidebarTitle: "analyze_meta_wasted_spend"
+description: "User asks about Meta/Facebook/Instagram ad spend efficiency, wasted money, underperforming campaigns, placement optimization, or creative fatigue."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User asks about Meta/Facebook/Instagram ad spend efficiency, wasted money, underperforming campaigns, placement optimization, or creative fatigue.
+
+This tool identifies Meta Ads campaigns and placements that are wasting money by performing below target ROAS or below breakeven (ROAS &lt; 1.0). It extends the base wasted spend detector with Meta-specific features:
+
+Returns:
+- Campaign-level wasted spend analysis (ROAS &lt; 1.0 = actual losses)
+- Underperforming spend analysis (1.0 &lt;= ROAS &lt; target = opportunity cost)
+- Placement-level breakdown (which placements are wasting money: Feed, Stories, Reels, etc.)
+- Creative fatigue detection (high frequency + declining CTR)
+- Actionable recommendations for campaigns, placements, and creatives
+- Quick action items
+
+When to use this tool:
+- "Where am I wasting money on Meta/Facebook ads?"
+- "Which Meta placements should I exclude?"
+- "Are any of my Facebook creatives fatigued?"
+- "How can I reduce wasted ad spend on Instagram?"
+- "Which Meta campaigns are losing money?"
+- "What's my Meta ROAS by placement?"
+
+Parameters:
+- lookback_days: 7, 30 (default), 60, 90, or 120 days
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze (7, 30, 60, 90, or 120 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="target_roas" type="number">
+  Optional target ROAS override (e.g., 3.0 for 3.0x ROAS). If not provided, will use account goals or historical average.
+</ParamField>
+
+<ParamField path="include_placements" type="boolean" default="true">
+  Include placement-level analysis (Feed, Stories, Reels, etc.). Default is true.
+</ParamField>
+
+<ParamField path="include_fatigue" type="boolean" default="true">
+  Include creative fatigue analysis. Default is true.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Analyze Meta Wasted Spend for my account.
+```
+
+Your AI client will call the `analyze_meta_wasted_spend` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

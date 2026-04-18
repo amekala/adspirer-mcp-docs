@@ -1,0 +1,65 @@
+---
+title: "get_benchmark_context"
+sidebarTitle: "get_benchmark_context"
+description: "Get industry benchmark context for AI-powered recommendations."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Get industry benchmark context for AI-powered recommendations.
+
+⚠️ IMPORTANT: This tool retrieves READ-ONLY data. Safe to call multiple times.
+
+🎯 **What This Tool Does (Performance Agent - Phase 1 Feature 5):**
+- Generates contextual benchmark data for the user's business
+- Combines business profile with industry benchmarks
+- Provides recommended ROAS targets based on vertical
+- Returns formatted context for AI prompts
+
+**Returns benchmark context:**
+- Business vertical and size context
+- Industry-specific ROAS benchmarks (typical, good, excellent)
+- CTR benchmarks by industry
+- CPC expectations for the vertical
+- Seasonality considerations
+- Custom recommendations based on profile
+
+**Industry Benchmarks Included:**
+| Vertical | Typical ROAS | Good ROAS | Excellent ROAS |
+|----------|--------------|-----------|----------------|
+| Retail | 4.0x | 6.0x | 8.0x |
+
+## Parameters
+
+<ParamField path="include_recommendations" type="boolean" default="true">
+  Include performance recommendations based on benchmarks (default: true)
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Benchmark Context for my account.
+```
+
+Your AI client will call the `get_benchmark_context` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Audit Tools |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Audit Tools overview](/reference/audit)
+- [All tools](/reference)

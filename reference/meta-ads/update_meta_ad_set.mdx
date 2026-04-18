@@ -1,0 +1,117 @@
+---
+title: "update_meta_ad_set"
+sidebarTitle: "update_meta_ad_set"
+description: "User wants to edit an existing Meta ad set's targeting, budget, bid, placements, schedule, or optimization settings."
+---
+
+<Badge color="yellow">Write</Badge>
+
+User wants to edit an existing Meta ad set's targeting, budget, bid, placements, schedule, or optimization settings.
+
+IMPORTANT: This tool modifies REAL ad sets in Meta Ads Manager. Changes take effect immediately.
+
+This is the primary tool for:
+- Changing audience targeting (age, gender, interests, locations)
+- Excluding placements (e.g., remove Audience Network)
+- Adjusting budgets at the ad set level
+- Changing bid amounts
+- Pausing/resuming specific ad sets
+- Modifying optimization goals
+
+Returns:
+- Confirmation of updates applied
+- Summary of all changes made
+- Ads Manager URL for the ad set
+
+When to use this tool:
+- "Change the targeting on my ad set"
+- "Exclude Audience Network from placements"
+- "Update the budget on this ad set to $50/day"
+- "Pause this ad set"
+
+## Parameters
+
+<ParamField path="ad_set_id" type="string" required>
+  The Meta Ad Set ID to update (required)
+</ParamField>
+
+<ParamField path="status" type="string">
+  New status: 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'
+</ParamField>
+
+<ParamField path="name" type="string">
+  New ad set name
+</ParamField>
+
+<ParamField path="daily_budget" type="number">
+  New daily budget in USD (minimum $1). Will be converted to cents for Meta API.
+</ParamField>
+
+<ParamField path="lifetime_budget" type="number">
+  New lifetime budget in USD. Will be converted to cents for Meta API.
+</ParamField>
+
+<ParamField path="bid_amount" type="number">
+  New bid amount in USD. Will be converted to cents for Meta API.
+</ParamField>
+
+<ParamField path="targeting" type="object">
+  New targeting specification as a JSON object. Use this for placement exclusions, audience exclusions, age/gender changes, interest targeting updates, and location targeting changes.
+</ParamField>
+
+<ParamField path="start_time" type="string">
+  New start time in ISO format YYYY-MM-DDTHH:MM:SS
+</ParamField>
+
+<ParamField path="end_time" type="string">
+  New end time in ISO format YYYY-MM-DDTHH:MM:SS
+</ParamField>
+
+<ParamField path="optimization_goal" type="string">
+  New optimization goal: REACH, IMPRESSIONS, LINK_CLICKS, LANDING_PAGE_VIEWS, OFFSITE_CONVERSIONS, VALUE, etc.
+</ParamField>
+
+<ParamField path="daily_min_spend_target" type="number">
+  Minimum daily spend target in account currency for CBO campaigns. Use this instead of daily_budget when the campaign uses Advantage Campaign Budget. Set to 0 to remove the minimum.
+</ParamField>
+
+<ParamField path="daily_spend_cap" type="number">
+  Maximum daily spend cap in account currency for CBO campaigns. Use this instead of daily_budget when the campaign uses Advantage Campaign Budget. Set to 0 to remove the cap.
+</ParamField>
+
+<ParamField path="lifetime_min_spend_target" type="number">
+  Minimum lifetime spend target in account currency for CBO campaigns with lifetime budget.
+</ParamField>
+
+<ParamField path="lifetime_spend_cap" type="number">
+  Maximum lifetime spend cap in account currency for CBO campaigns with lifetime budget.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Update Meta Ad Set for my account.
+```
+
+Your AI client will call the `update_meta_ad_set` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

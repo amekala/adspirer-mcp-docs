@@ -1,0 +1,63 @@
+---
+title: "resume_meta_campaign"
+sidebarTitle: "resume_meta_campaign"
+description: "User wants to resume a paused Meta campaign."
+---
+
+<Badge color="yellow">Write</Badge>
+
+User wants to resume a paused Meta campaign.
+
+IMPORTANT: Resuming a campaign restarts ad delivery. Budget will start being spent again.
+
+Returns:
+- Confirmation that campaign is active
+- Campaign details
+- Ads Manager URL
+
+When to use this tool:
+- "Resume my Meta campaign"
+- "Turn on my Facebook ads"
+- "Reactivate campaign 123456"
+- "Start my paused Instagram campaign"
+
+Parameters:
+- campaign_id: The Meta Campaign ID to resume (required)
+
+Execution time: 2-5 seconds
+Effect: Campaign status changes to ACTIVE immediately
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The Meta Campaign ID to resume (required)
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Resume Meta Campaign for my account.
+```
+
+Your AI client will call the `resume_meta_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

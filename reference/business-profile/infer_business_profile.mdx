@@ -1,0 +1,65 @@
+---
+title: "infer_business_profile"
+sidebarTitle: "infer_business_profile"
+description: "Automatically infer business profile from campaign data using AI analysis."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Automatically infer business profile from campaign data using AI analysis.
+
+⚠️ IMPORTANT: This tool ANALYZES data but may SAVE a profile if confidence is high.
+
+🎯 **What This Tool Does (Performance Agent - Phase 1 Feature 5):**
+- Analyzes campaign names, keywords, and ad copy
+- Uses Claude AI to classify business type
+- Infers business vertical, size, goals, and audience
+- Returns confidence level (high, medium, low)
+- Auto-saves if confidence is HIGH, asks confirmation for LOW
+
+**Inference Process:**
+1. Collects campaign names and keywords from Google Ads
+2. Analyzes patterns (B2B vs B2C, product vs service)
+3. Uses AI to classify business vertical
+4. Estimates business size from ad spend
+5. Identifies primary goals from campaign types
+
+**Confidence Levels:**
+- **HIGH** (≥0.8): Auto-saves profile, high certainty
+- **MEDIUM** (0.5-0.8): Saves profile, reasonable certainty
+- **LOW** (&lt;0.5): Returns suggestion, asks user to confirm
+
+## Parameters
+
+<ParamField path="force_save" type="boolean" default="false">
+  If true, save the profile even if confidence is low. Default is false (requires user confirmation for low-confidence profiles).
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Infer Business Profile for my account.
+```
+
+Your AI client will call the `infer_business_profile` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Business Profile |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Business Profile overview](/reference/business-profile)
+- [All tools](/reference)

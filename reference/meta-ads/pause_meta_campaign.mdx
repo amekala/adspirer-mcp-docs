@@ -1,0 +1,63 @@
+---
+title: "pause_meta_campaign"
+sidebarTitle: "pause_meta_campaign"
+description: "User wants to pause a running Meta campaign."
+---
+
+<Badge color="yellow">Write</Badge>
+
+User wants to pause a running Meta campaign.
+
+IMPORTANT: Pausing a campaign stops all ad delivery immediately. No more budget will be spent until resumed.
+
+Returns:
+- Confirmation that campaign is paused
+- Campaign details
+- Ads Manager URL
+
+When to use this tool:
+- "Pause my Meta campaign"
+- "Stop my Facebook ads"
+- "Pause campaign 123456"
+- "Turn off my Instagram campaign"
+
+Parameters:
+- campaign_id: The Meta Campaign ID to pause (required)
+
+Execution time: 2-5 seconds
+Effect: Campaign status changes to PAUSED immediately
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The Meta Campaign ID to pause (required)
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Pause Meta Campaign for my account.
+```
+
+Your AI client will call the `pause_meta_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

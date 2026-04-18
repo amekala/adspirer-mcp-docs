@@ -1,0 +1,101 @@
+---
+title: "optimize_meta_budget"
+sidebarTitle: "optimize_meta_budget"
+description: "User asks about Meta/Facebook/Instagram budget optimization, reallocating ad spend, maximizing conversions with their budget, or wants data-driven budget…"
+---
+
+<Badge color="green">Read-only</Badge>
+
+User asks about Meta/Facebook/Instagram budget optimization, reallocating ad spend, maximizing conversions with their budget, or wants data-driven budget recommendations.
+
+This tool uses linear programming (scipy.optimize) to find the optimal budget allocation across Meta Ads campaigns or ad sets to maximize conversions while respecting constraints.
+
+Returns:
+- Optimal budget allocation for each campaign/ad set
+- Expected conversion lift from reallocation
+- Campaigns to scale up (high ROAS performers)
+- Campaigns to reduce (below target ROAS)
+- Campaigns to consider pausing (ROAS &lt; 1.0)
+- Actionable recommendations
+- CBO (Campaign Budget Optimization) notes
+
+When to use this tool:
+- "How should I allocate my Meta budget?"
+- "Optimize my Facebook ad spend for conversions"
+- "Which Instagram campaigns should I increase budget?"
+- "Reallocate my $5000 Meta budget"
+- "Maximize conversions with my current spend"
+- "What's the optimal budget split across campaigns?"
+
+Parameters:
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="total_budget" type="number" required>
+  Total monthly budget to allocate across campaigns (in dollars). Required.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze for historical performance (7, 30, 60, 90, or 120 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="target_roas" type="number">
+  Optional target ROAS override (e.g., 2.0 for 2.0x ROAS). If not provided, will use account goals or historical average.
+</ParamField>
+
+<ParamField path="max_change_percentage" type="number" default="0.5">
+  Maximum allowed budget change per campaign as decimal (0.3 for ±30%, 0.5 for ±50%, 0.7 for ±70%). Default is 0.5.
+</ParamField>
+
+<ParamField path="min_daily_budget" type="number" default="5">
+  Minimum daily budget per campaign in dollars. Default is $5.00.
+</ParamField>
+
+<ParamField path="optimization_level" type="string" default="&quot;campaign&quot;">
+  Level of optimization: 'campaign' (default) or 'ad_set'. Note: Ad set optimization may not apply to CBO-enabled campaigns.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Optimize Meta Budget Allocation for my account.
+```
+
+Your AI client will call the `optimize_meta_budget` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

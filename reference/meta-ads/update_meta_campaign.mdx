@@ -1,0 +1,89 @@
+---
+title: "update_meta_campaign"
+sidebarTitle: "update_meta_campaign"
+description: "User wants to update an existing Meta campaign's status, budget, name, or schedule."
+---
+
+<Badge color="yellow">Write</Badge>
+
+User wants to update an existing Meta campaign's status, budget, name, or schedule.
+
+IMPORTANT: This tool modifies REAL campaigns in Meta Ads Manager. Changes take effect immediately.
+
+Returns:
+- Confirmation of updates applied
+- Updated campaign details
+- Ads Manager URL
+
+When to use this tool:
+- "Update my Meta campaign budget"
+- "Change my Facebook campaign name"
+- "Pause my Instagram campaign"
+- "Resume my paused campaign"
+- "Set a new budget for campaign X"
+- "Change the end date for my campaign"
+
+Parameters:
+- campaign_id: The Meta Campaign ID to update (required)
+- status: New status - 'ACTIVE', 'PAUSED' (optional)
+- name: New campaign name (optional)
+- daily_budget: New daily budget in USD (optional)
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The Meta Campaign ID to update (required)
+</ParamField>
+
+<ParamField path="status" type="string">
+  New status: 'ACTIVE', 'PAUSED' (optional)
+</ParamField>
+
+<ParamField path="name" type="string">
+  New campaign name (optional)
+</ParamField>
+
+<ParamField path="daily_budget" type="number">
+  New daily budget in USD (optional, minimum $1)
+</ParamField>
+
+<ParamField path="lifetime_budget" type="number">
+  New lifetime budget in USD (optional)
+</ParamField>
+
+<ParamField path="start_time" type="string">
+  New start time in ISO format YYYY-MM-DDTHH:MM:SS (optional)
+</ParamField>
+
+<ParamField path="stop_time" type="string">
+  New stop time in ISO format YYYY-MM-DDTHH:MM:SS (optional)
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Update Meta Campaign for my account.
+```
+
+Your AI client will call the `update_meta_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

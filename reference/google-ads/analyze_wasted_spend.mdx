@@ -1,0 +1,85 @@
+---
+title: "analyze_wasted_spend"
+sidebarTitle: "analyze_wasted_spend"
+description: "Analyze wasted ad spend and identify campaigns losing money or underperforming."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Analyze wasted ad spend and identify campaigns losing money or underperforming.
+
+⚠️ IMPORTANT: This tool retrieves READ-ONLY data. Safe to call multiple times.
+
+🎯 **What This Tool Does (Performance Agent - Phase 1):**
+- Identifies campaigns LOSING money (ROAS &lt; 1.0x)
+- Identifies campaigns UNDERPERFORMING (1.0x ≤ ROAS &lt; target)
+- Separates true waste from opportunity cost
+- Provides severity-based classification (CRITICAL/HIGH/MEDIUM)
+- Generates actionable recommendations with expected impact
+- Shows top performing campaigns for budget reallocation
+
+**Returns detailed analysis:**
+- Total wasted spend (campaigns with ROAS &lt; 1.0)
+- Total underperforming spend (profitable but below target)
+- Campaign-by-campaign breakdown with severity levels
+- Specific recommendations (PAUSE/REDUCE/OPTIMIZE)
+- Quick actions for immediate implementation
+- Budget reallocation suggestions
+
+**Target ROAS Resolution (3-tier priority):**
+1. Account goals table (user-set or API-pulled)
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze (7, 30, 60, 90, or 120 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="target_roas" type="number">
+  Optional target ROAS override (e.g., 3.0 for 3.0x ROAS). If not provided, will use account goals or historical average.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Analyze Wasted Spend for my account.
+```
+
+Your AI client will call the `analyze_wasted_spend` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

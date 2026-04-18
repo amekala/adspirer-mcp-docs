@@ -1,0 +1,59 @@
+---
+title: "Tool Reference"
+sidebarTitle: "Overview"
+description: "Structured reference for every tool exposed by the Adspirer MCP server. 95 tools across Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads, and platform utilities."
+icon: "book-open"
+---
+
+The Adspirer MCP server exposes **95 tools** to AI assistants via the Model Context Protocol. Each tool has its own reference page with parameters, metadata, and an example prompt. This reference is auto-generated from the live server's `tools/list` endpoint.
+
+<Info>
+Tools are grouped by advertising platform and function. LinkedIn Ads and TikTok Ads expose their capabilities via a single router meta-tool (see their pages).
+</Info>
+
+## Platforms
+
+<CardGroup cols={2}>
+<Card title="Google Ads" icon="google" href="/reference/google-ads">
+  45 tools
+</Card>
+<Card title="Meta Ads" icon="facebook" href="/reference/meta-ads">
+  36 tools
+</Card>
+<Card title="LinkedIn Ads (Router)" icon="linkedin" href="/reference/linkedin-ads">
+  1 tool
+</Card>
+<Card title="TikTok Ads (Router)" icon="tiktok" href="/reference/tiktok-ads">
+  1 tool
+</Card>
+</CardGroup>
+
+## Platform utilities
+
+<CardGroup cols={2}>
+<Card title="Account Management" icon="user-gear" href="/reference/account">
+  4 tools
+</Card>
+<Card title="Business Profile" icon="id-card" href="/reference/business-profile">
+  3 tools
+</Card>
+<Card title="Audit Tools" icon="clipboard-check" href="/reference/audit">
+  2 tools
+</Card>
+<Card title="Monitoring & Reporting (Router)" icon="gauge-high" href="/reference/monitoring">
+  1 tool
+</Card>
+<Card title="Utility" icon="wrench" href="/reference/utility">
+  2 tools
+</Card>
+</CardGroup>
+
+## How this reference is built
+
+Every page below is generated from the actual JSON schema the live Adspirer MCP server returns at `https://mcp.adspirer.com/mcp/tools/list`. Parameters, types, defaults, and annotations all come directly from the server. If the server changes, we regenerate.
+
+## See also
+
+- [Main Adspirer docs](https://www.adspirer.com/docs) — connection guides, AI-client setup, platform workflows
+- [MCP Server Comparison](https://www.adspirer.com/docs/knowledge-base/mcp-server-comparison) — how Adspirer compares to other ad MCPs
+- [Safety and capabilities](https://www.adspirer.com/docs/knowledge-base/capabilities) — what Adspirer can and cannot do

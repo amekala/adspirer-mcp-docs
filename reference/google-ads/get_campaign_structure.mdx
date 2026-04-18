@@ -1,0 +1,81 @@
+---
+title: "get_campaign_structure"
+sidebarTitle: "get_campaign_structure"
+description: "Get campaign structure with ad groups, keywords, ads, and extensions."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Get campaign structure with ad groups, keywords, ads, and extensions.
+
+Supports pagination for large campaigns.
+
+This tool retrieves READ-ONLY data. Safe to call multiple times.
+
+**Returns campaign hierarchy (paginated by ad groups):**
+- Campaign details (name, status, budget, bidding strategy)
+- Ad groups with their settings (paginated — default 5 per page)
+- Keywords per ad group (including match types, bids, status)
+- Ads per ad group (including RSA headlines/descriptions, ad strength)
+- Negative keywords per ad group
+- Campaign-level extensions and negative keywords (on page 1 only)
+- Pagination metadata (page, total_pages, has_more)
+- Summary counts (total ad groups, keywords, ads across ALL pages)
+
+**Parameters:**
+- campaign_id: The campaign ID (REQUIRED - get from list_campaigns)
+- customer_id: Optional (uses connected account if omitted)
+- page: Page number, 1-based (default: 1)
+- page_size: Ad groups per page, 1-50 (default: 5)
+- ad_group_id: Optional — fetch only this single ad group (bypasses pagination)
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to get structure for. Use list_campaigns first to get available campaign IDs.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="page" type="integer" default="1">
+  Page number (1-based). Use to paginate through large campaigns. Default: 1
+</ParamField>
+
+<ParamField path="page_size" type="integer" default="5">
+  Number of ad groups per page (1-50). Default: 5
+</ParamField>
+
+<ParamField path="ad_group_id" type="string">
+  Optional: Fetch only this specific ad group's details (bypasses pagination)
+</ParamField>
+
+<ParamField path="include" type="string" default="&quot;all&quot;">
+  What to include per ad group: 'all' (default), 'summary' (counts only, no nested data), 'keywords' (keywords only), 'ads' (ads only)
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Campaign Structure for my account.
+```
+
+Your AI client will call the `get_campaign_structure` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

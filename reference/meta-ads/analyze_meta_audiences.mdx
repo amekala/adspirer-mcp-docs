@@ -1,0 +1,93 @@
+---
+title: "analyze_meta_audiences"
+sidebarTitle: "analyze_meta_audiences"
+description: "User asks about Meta/Facebook/Instagram audience performance by demographics, age group or gender targeting optimization, audience saturation, or which…"
+---
+
+<Badge color="green">Read-only</Badge>
+
+User asks about Meta/Facebook/Instagram audience performance by demographics, age group or gender targeting optimization, audience saturation, or which demographic segments to target or exclude.
+
+This tool provides deep analysis of audience segment performance and detects audience saturation to optimize demographic targeting for Meta Ads.
+
+Returns:
+- Age group performance breakdown (18-24, 25-34, 35-44, 45-54, 55-64, 65+)
+- Gender performance breakdown (male, female, unknown)
+- Age + Gender combination analysis
+- Segments categorized as SCALE/MAINTAIN/REDUCE/EXCLUDE based on ROAS
+- Audience saturation score (0-100) with contributing factors
+- Best performing segments to scale
+- Underperforming segments to reduce/exclude
+- Targeting optimization recommendations
+- Quick actionable items
+
+When to use this tool:
+- "Which age groups perform best for my Meta ads?"
+- "Should I target men or women on Facebook?"
+- "Is my Meta audience saturated?"
+- "Which demographics should I exclude?"
+- "Analyze my Instagram audience performance"
+- "Best demographic targeting for my Facebook campaigns"
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze (7, 14, 30, 60, or 90 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="breakdown_type" type="string" default="&quot;all&quot;">
+  Type of audience breakdown: 'age' (age groups), 'gender', 'age_gender' (combined), or 'all' (default).
+</ParamField>
+
+<ParamField path="include_saturation" type="boolean" default="true">
+  Include audience saturation analysis for lookalike and custom audiences (default: True).
+</ParamField>
+
+<ParamField path="target_roas" type="number">
+  Optional target ROAS override (e.g., 3.0 for 3.0x ROAS). If not provided, will use account goals or historical average.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Analyze Meta Audience Performance for my account.
+```
+
+Your AI client will call the `analyze_meta_audiences` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

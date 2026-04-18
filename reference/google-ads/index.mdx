@@ -1,0 +1,203 @@
+---
+title: "Google Ads"
+sidebarTitle: "Google Ads"
+description: "Google Ads tools exposed by the Adspirer MCP server. 45 tools total."
+icon: "google"
+---
+
+The Adspirer MCP server exposes **45** Google Ads tools to AI assistants via the Model Context Protocol. This page lists every tool with links to its dedicated reference.
+
+## Read-only tools
+
+| Tool | Description |
+|------|-------------|
+| [`analyze_search_terms`](/reference/google-ads/analyze_search_terms) | Discover keyword opportunities and optimize match types by analyzing actual search terms. |
+| [`analyze_wasted_spend`](/reference/google-ads/analyze_wasted_spend) | Analyze wasted ad spend and identify campaigns losing money or underperforming. |
+| [`discover_existing_assets`](/reference/google-ads/discover_existing_assets) | 🔍 Discover existing assets in the Google Ads account (images, sitelinks, callouts, structured snippets). |
+| [`explain_performance_anomaly`](/reference/google-ads/explain_performance_anomaly) | Explain why a performance metric changed using statistical analysis and historical context. |
+| [`get_campaign_performance`](/reference/google-ads/get_campaign_performance) | Analyze Google Ads campaign performance with comprehensive insights and recommendations. |
+| [`get_campaign_structure`](/reference/google-ads/get_campaign_structure) | Get campaign structure with ad groups, keywords, ads, and extensions. |
+| [`get_campaign_targeting`](/reference/google-ads/get_campaign_targeting) | Get location/geo targeting for a Google Ads campaign. |
+| [`get_pmax_audience_signals`](/reference/google-ads/get_pmax_audience_signals) | Get current audience signals for a Performance Max campaign. |
+| [`get_pmax_search_themes`](/reference/google-ads/get_pmax_search_themes) | Get current search themes for a Performance Max campaign. |
+| [`list_campaign_extensions`](/reference/google-ads/list_campaign_extensions) | List all extensions (sitelinks, callouts, structured snippets) for a campaign. |
+| [`list_campaigns`](/reference/google-ads/list_campaigns) | List all Google Ads campaigns for the connected account. |
+| [`optimize_budget_allocation`](/reference/google-ads/optimize_budget_allocation) | Optimize budget allocation across campaigns using linear programming to maximize conversions. |
+| [`research_keywords`](/reference/google-ads/research_keywords) | Research high-intent keywords using Google Keyword Planner API. |
+| [`search_audiences`](/reference/google-ads/search_audiences) | Search for available audience segments (in-market, affinity, custom). |
+| [`select_google_campaign_type`](/reference/google-ads/select_google_campaign_type) | USE THIS TOOL FIRST WHEN: User wants to create a Google Ads campaign but hasn't specified the campaign type… |
+| [`suggest_ad_content`](/reference/google-ads/suggest_ad_content) | Generate AI-suggested headlines and descriptions based on campaign keywords. |
+| [`validate_video`](/reference/google-ads/validate_video) | Validate video for ad campaigns (unified tool for all platforms). |
+
+## Write tools
+
+| Tool | Description |
+|------|-------------|
+| [`add_callout_extensions`](/reference/google-ads/add_callout_extensions) | Add callout extensions to a campaign. |
+| [`add_demandgen_ad_group`](/reference/google-ads/add_demandgen_ad_group) | Add a new ad group with targeting and ads to an EXISTING Demand Gen campaign. |
+| [`add_keywords`](/reference/google-ads/add_keywords) | Add keywords to an existing ad group. |
+| [`add_negative_keywords`](/reference/google-ads/add_negative_keywords) | Add negative keywords to a campaign. |
+| [`add_pmax_audience_signal`](/reference/google-ads/add_pmax_audience_signal) | Add an audience signal to an existing Performance Max campaign. |
+| [`add_pmax_search_themes`](/reference/google-ads/add_pmax_search_themes) | Add search themes to an existing Performance Max campaign. |
+| [`add_sitelinks`](/reference/google-ads/add_sitelinks) | Add sitelink extensions to a campaign. |
+| [`add_structured_snippets`](/reference/google-ads/add_structured_snippets) | Add structured snippet extensions to a campaign. |
+| [`create_ad`](/reference/google-ads/create_ad) | Create a new Responsive Search Ad (RSA) in an existing ad group. |
+| [`create_demandgen_campaign`](/reference/google-ads/create_demandgen_campaign) | 🔄 LONG-RUNNING TOOL: Creates a Demand Gen campaign across ALL Google channels — YouTube, Discover, Gmail,… |
+| [`create_pmax_campaign`](/reference/google-ads/create_pmax_campaign) | 🔄 LONG-RUNNING TOOL: Creates a Google Performance Max campaign with validated images. |
+| [`create_search_campaign`](/reference/google-ads/create_search_campaign) | 🔄 LONG-RUNNING TOOL: Creates a Google Ads Search campaign with full structure. |
+| [`create_youtube_campaign`](/reference/google-ads/create_youtube_campaign) | 🔄 LONG-RUNNING TOOL: Creates a YouTube Video campaign using Google Ads Demand Gen format with YouTube-only… |
+| [`pause_ad`](/reference/google-ads/pause_ad) | Pause an ad to stop it from showing. |
+| [`pause_campaign`](/reference/google-ads/pause_campaign) | Quickly pause a running campaign. |
+| [`remove_keywords`](/reference/google-ads/remove_keywords) | Remove keywords from an ad group. <Badge color="red">destructive</Badge> |
+| [`remove_negative_keywords`](/reference/google-ads/remove_negative_keywords) | Remove negative keywords from a campaign. <Badge color="red">destructive</Badge> |
+| [`remove_pmax_audience_signal`](/reference/google-ads/remove_pmax_audience_signal) | Remove a specific audience signal from a Performance Max campaign. <Badge color="red">destructive</Badge> |
+| [`remove_pmax_search_themes`](/reference/google-ads/remove_pmax_search_themes) | Remove specific search themes from a Performance Max campaign. <Badge color="red">destructive</Badge> |
+| [`resume_ad`](/reference/google-ads/resume_ad) | Resume a paused ad to start showing it again. |
+| [`resume_campaign`](/reference/google-ads/resume_campaign) | Resume a paused campaign. |
+| [`update_ad_content`](/reference/google-ads/update_ad_content) | Combined update for ad content (headlines, descriptions, and/or final URLs). |
+| [`update_ad_descriptions`](/reference/google-ads/update_ad_descriptions) | Update descriptions for a Responsive Search Ad (RSA). |
+| [`update_ad_headlines`](/reference/google-ads/update_ad_headlines) | Update headlines for a Responsive Search Ad (RSA). |
+| [`update_bid_strategy`](/reference/google-ads/update_bid_strategy) | Change campaign bidding strategy. |
+| [`update_campaign`](/reference/google-ads/update_campaign) | Update an existing campaign's settings. |
+| [`update_keyword`](/reference/google-ads/update_keyword) | Update keyword bid or status. |
+| [`validate_and_prepare_assets`](/reference/google-ads/validate_and_prepare_assets) | 🔄 LONG-RUNNING TOOL: Validates multiple images from URLs for Performance Max campaigns. |
+
+## All tools
+
+<CardGroup cols={2}>
+<Card title="add_callout_extensions" href="/reference/google-ads/add_callout_extensions">
+  Add callout extensions to a campaign.
+</Card>
+<Card title="add_demandgen_ad_group" href="/reference/google-ads/add_demandgen_ad_group">
+  Add a new ad group with targeting and ads to an EXISTING Demand Gen campaign.
+</Card>
+<Card title="add_keywords" href="/reference/google-ads/add_keywords">
+  Add keywords to an existing ad group.
+</Card>
+<Card title="add_negative_keywords" href="/reference/google-ads/add_negative_keywords">
+  Add negative keywords to a campaign.
+</Card>
+<Card title="add_pmax_audience_signal" href="/reference/google-ads/add_pmax_audience_signal">
+  Add an audience signal to an existing Performance Max campaign.
+</Card>
+<Card title="add_pmax_search_themes" href="/reference/google-ads/add_pmax_search_themes">
+  Add search themes to an existing Performance Max campaign.
+</Card>
+<Card title="add_sitelinks" href="/reference/google-ads/add_sitelinks">
+  Add sitelink extensions to a campaign.
+</Card>
+<Card title="add_structured_snippets" href="/reference/google-ads/add_structured_snippets">
+  Add structured snippet extensions to a campaign.
+</Card>
+<Card title="analyze_search_terms" href="/reference/google-ads/analyze_search_terms">
+  Discover keyword opportunities and optimize match types by analyzing actual search terms.
+</Card>
+<Card title="analyze_wasted_spend" href="/reference/google-ads/analyze_wasted_spend">
+  Analyze wasted ad spend and identify campaigns losing money or underperforming.
+</Card>
+<Card title="create_ad" href="/reference/google-ads/create_ad">
+  Create a new Responsive Search Ad (RSA) in an existing ad group.
+</Card>
+<Card title="create_demandgen_campaign" href="/reference/google-ads/create_demandgen_campaign">
+  🔄 LONG-RUNNING TOOL: Creates a Demand Gen campaign across ALL Google channels — YouTube, Discover, Gmail, Display,…
+</Card>
+<Card title="create_pmax_campaign" href="/reference/google-ads/create_pmax_campaign">
+  🔄 LONG-RUNNING TOOL: Creates a Google Performance Max campaign with validated images.
+</Card>
+<Card title="create_search_campaign" href="/reference/google-ads/create_search_campaign">
+  🔄 LONG-RUNNING TOOL: Creates a Google Ads Search campaign with full structure.
+</Card>
+<Card title="create_youtube_campaign" href="/reference/google-ads/create_youtube_campaign">
+  🔄 LONG-RUNNING TOOL: Creates a YouTube Video campaign using Google Ads Demand Gen format with YouTube-only placements.
+</Card>
+<Card title="discover_existing_assets" href="/reference/google-ads/discover_existing_assets">
+  🔍 Discover existing assets in the Google Ads account (images, sitelinks, callouts, structured snippets).
+</Card>
+<Card title="explain_performance_anomaly" href="/reference/google-ads/explain_performance_anomaly">
+  Explain why a performance metric changed using statistical analysis and historical context.
+</Card>
+<Card title="get_campaign_performance" href="/reference/google-ads/get_campaign_performance">
+  Analyze Google Ads campaign performance with comprehensive insights and recommendations.
+</Card>
+<Card title="get_campaign_structure" href="/reference/google-ads/get_campaign_structure">
+  Get campaign structure with ad groups, keywords, ads, and extensions.
+</Card>
+<Card title="get_campaign_targeting" href="/reference/google-ads/get_campaign_targeting">
+  Get location/geo targeting for a Google Ads campaign.
+</Card>
+<Card title="get_pmax_audience_signals" href="/reference/google-ads/get_pmax_audience_signals">
+  Get current audience signals for a Performance Max campaign.
+</Card>
+<Card title="get_pmax_search_themes" href="/reference/google-ads/get_pmax_search_themes">
+  Get current search themes for a Performance Max campaign.
+</Card>
+<Card title="list_campaign_extensions" href="/reference/google-ads/list_campaign_extensions">
+  List all extensions (sitelinks, callouts, structured snippets) for a campaign.
+</Card>
+<Card title="list_campaigns" href="/reference/google-ads/list_campaigns">
+  List all Google Ads campaigns for the connected account.
+</Card>
+<Card title="optimize_budget_allocation" href="/reference/google-ads/optimize_budget_allocation">
+  Optimize budget allocation across campaigns using linear programming to maximize conversions.
+</Card>
+<Card title="pause_ad" href="/reference/google-ads/pause_ad">
+  Pause an ad to stop it from showing.
+</Card>
+<Card title="pause_campaign" href="/reference/google-ads/pause_campaign">
+  Quickly pause a running campaign.
+</Card>
+<Card title="remove_keywords" href="/reference/google-ads/remove_keywords">
+  Remove keywords from an ad group.
+</Card>
+<Card title="remove_negative_keywords" href="/reference/google-ads/remove_negative_keywords">
+  Remove negative keywords from a campaign.
+</Card>
+<Card title="remove_pmax_audience_signal" href="/reference/google-ads/remove_pmax_audience_signal">
+  Remove a specific audience signal from a Performance Max campaign.
+</Card>
+<Card title="remove_pmax_search_themes" href="/reference/google-ads/remove_pmax_search_themes">
+  Remove specific search themes from a Performance Max campaign.
+</Card>
+<Card title="research_keywords" href="/reference/google-ads/research_keywords">
+  Research high-intent keywords using Google Keyword Planner API.
+</Card>
+<Card title="resume_ad" href="/reference/google-ads/resume_ad">
+  Resume a paused ad to start showing it again.
+</Card>
+<Card title="resume_campaign" href="/reference/google-ads/resume_campaign">
+  Resume a paused campaign.
+</Card>
+<Card title="search_audiences" href="/reference/google-ads/search_audiences">
+  Search for available audience segments (in-market, affinity, custom).
+</Card>
+<Card title="select_google_campaign_type" href="/reference/google-ads/select_google_campaign_type">
+  USE THIS TOOL FIRST WHEN: User wants to create a Google Ads campaign but hasn't specified the campaign type (Search,…
+</Card>
+<Card title="suggest_ad_content" href="/reference/google-ads/suggest_ad_content">
+  Generate AI-suggested headlines and descriptions based on campaign keywords.
+</Card>
+<Card title="update_ad_content" href="/reference/google-ads/update_ad_content">
+  Combined update for ad content (headlines, descriptions, and/or final URLs).
+</Card>
+<Card title="update_ad_descriptions" href="/reference/google-ads/update_ad_descriptions">
+  Update descriptions for a Responsive Search Ad (RSA).
+</Card>
+<Card title="update_ad_headlines" href="/reference/google-ads/update_ad_headlines">
+  Update headlines for a Responsive Search Ad (RSA).
+</Card>
+<Card title="update_bid_strategy" href="/reference/google-ads/update_bid_strategy">
+  Change campaign bidding strategy.
+</Card>
+<Card title="update_campaign" href="/reference/google-ads/update_campaign">
+  Update an existing campaign's settings.
+</Card>
+<Card title="update_keyword" href="/reference/google-ads/update_keyword">
+  Update keyword bid or status.
+</Card>
+<Card title="validate_and_prepare_assets" href="/reference/google-ads/validate_and_prepare_assets">
+  🔄 LONG-RUNNING TOOL: Validates multiple images from URLs for Performance Max campaigns.
+</Card>
+<Card title="validate_video" href="/reference/google-ads/validate_video">
+  Validate video for ad campaigns (unified tool for all platforms).
+</Card>
+</CardGroup>

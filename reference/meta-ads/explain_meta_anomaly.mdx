@@ -1,0 +1,77 @@
+---
+title: "explain_meta_anomaly"
+sidebarTitle: "explain_meta_anomaly"
+description: "User asks why Meta/Facebook/Instagram performance dropped or changed, what happened to their ROAS/CTR/CPM, or wants to understand why a metric changed…"
+---
+
+<Badge color="green">Read-only</Badge>
+
+User asks why Meta/Facebook/Instagram performance dropped or changed, what happened to their ROAS/CTR/CPM, or wants to understand why a metric changed during a specific period.
+
+This tool analyzes why a specific metric changed during a specified period by comparing it to historical baselines and identifying contributing factors. It detects Meta-specific causes including creative fatigue, audience saturation, placement mix shifts, and auction competition.
+
+Returns:
+- Current metric value vs historical averages (30/60/90-day)
+- Deviation percentages from baselines
+- Contributing factors ranked by estimated impact
+- Factor explanations with details
+- Similar historical periods with comparable changes
+- Assessment of anomaly severity (CRITICAL/WARNING/MINOR/NORMAL)
+- Specific recommendations based on detected factors
+- Quick actionable items
+
+When to use this tool:
+- "Why did my Meta ROAS drop?"
+- "What happened to my Facebook CTR this week?"
+- "Why is my Instagram CPM so high?"
+- "Explain my Meta performance change"
+- "My conversions dropped last week - why?"
+- "Why did my frequency spike?"
+- "What caused my ROAS to decline 40%?"
+
+## Parameters
+
+<ParamField path="metric" type="string" default="&quot;ctr&quot;">
+  Metric to analyze: 'roas', 'ctr', 'cpc', 'cpm', 'conversions', 'conversion_rate', 'frequency', or 'reach'. Default: 'ctr'
+</ParamField>
+
+<ParamField path="period_start" type="string">
+  Start date of anomaly period (ISO format: YYYY-MM-DD). Defaults to 7 days ago.
+</ParamField>
+
+<ParamField path="period_end" type="string">
+  End date of anomaly period (ISO format: YYYY-MM-DD). Defaults to yesterday. Period must be ≤30 days.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (no severity labels, suggested bids/budgets, industry benchmarks, or optimization recommendations). Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Explain Meta Performance Anomaly for my account.
+```
+
+Your AI client will call the `explain_meta_anomaly` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

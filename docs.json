@@ -1,68 +1,244 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
+  "theme": "maple",
+  "name": "Adspirer MCP Server",
+  "description": "Documentation and complete tool reference for the Adspirer MCP server. 95+ tools across Google Ads, Meta Ads, LinkedIn Ads, and TikTok Ads, exposed to AI assistants via the Model Context Protocol.",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#2563EB",
+    "light": "#F8FAFC",
+    "dark": "#0F172A"
   },
   "favicon": "/favicon.svg",
+  "logo": {
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png",
+    "href": "https://www.adspirer.com?utm_source=mcp-docs&utm_medium=logo&utm_content=home"
+  },
+  "appearance": {
+    "default": "dark",
+    "strict": false
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs",
+    "codeblocks": {
+      "theme": {
+        "light": "github-light",
+        "dark": "github-dark"
+      }
+    }
+  },
+  "metadata": {
+    "timestamp": true
+  },
+  "banner": {
+    "content": "Looking for product documentation? Visit the [Adspirer Docs →](https://www.adspirer.com/docs)",
+    "dismissible": true
+  },
+  "search": {
+    "prompt": "Search MCP tools and docs..."
+  },
+  "background": {
+    "decoration": "gradient"
+  },
+  "errors": {
+    "404": {
+      "redirect": false,
+      "title": "Page Not Found",
+      "description": "This page doesn't exist or may have moved. **[Go to MCP docs home →](/introduction)**"
+    }
+  },
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
+        "icon": "book-open",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
-              "index",
+              "introduction",
               "quickstart",
-              "development"
+              "how-mcp-works"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Connect Your AI Client",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "connect/claude",
+              "connect/chatgpt",
+              "connect/claude-code",
+              "connect/cursor",
+              "connect/codex",
+              "connect/openclaw",
+              "connect/windsurf"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Ad Platform Tools",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "platforms/google-ads",
+              "platforms/meta-ads",
+              "platforms/linkedin-ads",
+              "platforms/tiktok-ads"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Tool Reference",
+        "icon": "code",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Overview",
             "pages": [
-              "api-reference/introduction"
+              "reference/index"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Google Ads",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "reference/google-ads/index",
+              "reference/google-ads/add_callout_extensions",
+              "reference/google-ads/add_demandgen_ad_group",
+              "reference/google-ads/add_keywords",
+              "reference/google-ads/add_negative_keywords",
+              "reference/google-ads/add_pmax_audience_signal",
+              "reference/google-ads/add_pmax_search_themes",
+              "reference/google-ads/add_sitelinks",
+              "reference/google-ads/add_structured_snippets",
+              "reference/google-ads/analyze_search_terms",
+              "reference/google-ads/analyze_wasted_spend",
+              "reference/google-ads/create_ad",
+              "reference/google-ads/create_demandgen_campaign",
+              "reference/google-ads/create_pmax_campaign",
+              "reference/google-ads/create_search_campaign",
+              "reference/google-ads/create_youtube_campaign",
+              "reference/google-ads/discover_existing_assets",
+              "reference/google-ads/explain_performance_anomaly",
+              "reference/google-ads/get_campaign_performance",
+              "reference/google-ads/get_campaign_structure",
+              "reference/google-ads/get_campaign_targeting",
+              "reference/google-ads/get_pmax_audience_signals",
+              "reference/google-ads/get_pmax_search_themes",
+              "reference/google-ads/list_campaign_extensions",
+              "reference/google-ads/list_campaigns",
+              "reference/google-ads/optimize_budget_allocation",
+              "reference/google-ads/pause_ad",
+              "reference/google-ads/pause_campaign",
+              "reference/google-ads/remove_keywords",
+              "reference/google-ads/remove_negative_keywords",
+              "reference/google-ads/remove_pmax_audience_signal",
+              "reference/google-ads/remove_pmax_search_themes",
+              "reference/google-ads/research_keywords",
+              "reference/google-ads/resume_ad",
+              "reference/google-ads/resume_campaign",
+              "reference/google-ads/search_audiences",
+              "reference/google-ads/select_google_campaign_type",
+              "reference/google-ads/suggest_ad_content",
+              "reference/google-ads/update_ad_content",
+              "reference/google-ads/update_ad_descriptions",
+              "reference/google-ads/update_ad_headlines",
+              "reference/google-ads/update_bid_strategy",
+              "reference/google-ads/update_campaign",
+              "reference/google-ads/update_keyword",
+              "reference/google-ads/validate_and_prepare_assets",
+              "reference/google-ads/validate_video"
+            ]
+          },
+          {
+            "group": "Meta Ads",
+            "pages": [
+              "reference/meta-ads/index",
+              "reference/meta-ads/add_meta_ad",
+              "reference/meta-ads/add_meta_ad_set",
+              "reference/meta-ads/analyze_meta_ad_performance",
+              "reference/meta-ads/analyze_meta_audiences",
+              "reference/meta-ads/analyze_meta_wasted_spend",
+              "reference/meta-ads/browse_meta_targeting",
+              "reference/meta-ads/create_meta_carousel_campaign",
+              "reference/meta-ads/create_meta_dco_ad",
+              "reference/meta-ads/create_meta_image_campaign",
+              "reference/meta-ads/create_meta_video_campaign",
+              "reference/meta-ads/detect_meta_creative_fatigue",
+              "reference/meta-ads/discover_meta_assets",
+              "reference/meta-ads/duplicate_meta_campaign",
+              "reference/meta-ads/explain_meta_anomaly",
+              "reference/meta-ads/get_meta_ad_creatives",
+              "reference/meta-ads/get_meta_audience_insights",
+              "reference/meta-ads/get_meta_campaign_details",
+              "reference/meta-ads/get_meta_campaign_performance",
+              "reference/meta-ads/get_meta_lead_form_submissions",
+              "reference/meta-ads/list_meta_ad_sets",
+              "reference/meta-ads/list_meta_ads",
+              "reference/meta-ads/list_meta_campaigns",
+              "reference/meta-ads/list_meta_custom_audiences",
+              "reference/meta-ads/list_meta_instagram_accounts",
+              "reference/meta-ads/optimize_meta_budget",
+              "reference/meta-ads/optimize_meta_placements",
+              "reference/meta-ads/pause_meta_campaign",
+              "reference/meta-ads/resume_meta_campaign",
+              "reference/meta-ads/search_meta_targeting",
+              "reference/meta-ads/select_meta_campaign_type",
+              "reference/meta-ads/update_meta_ad",
+              "reference/meta-ads/update_meta_ad_set",
+              "reference/meta-ads/update_meta_campaign",
+              "reference/meta-ads/validate_and_prepare_meta_assets"
+            ]
+          },
+          {
+            "group": "LinkedIn Ads",
+            "pages": [
+              "reference/linkedin-ads/index",
+              "reference/linkedin-ads/linkedin_ads"
+            ]
+          },
+          {
+            "group": "TikTok Ads",
+            "pages": [
+              "reference/tiktok-ads/index",
+              "reference/tiktok-ads/tiktok_ads"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "reference/account/index",
+              "reference/account/get_connections_status",
+              "reference/account/get_usage_status",
+              "reference/account/list_connected_accounts",
+              "reference/account/switch_primary_account"
+            ]
+          },
+          {
+            "group": "Business Profile",
+            "pages": [
+              "reference/business-profile/index",
+              "reference/business-profile/get_business_profile",
+              "reference/business-profile/infer_business_profile",
+              "reference/business-profile/save_business_profile"
+            ]
+          },
+          {
+            "group": "Audit",
+            "pages": [
+              "reference/audit/index",
+              "reference/audit/audit_conversion_tracking",
+              "reference/audit/get_benchmark_context"
+            ]
+          },
+          {
+            "group": "Monitoring",
+            "pages": [
+              "reference/monitoring/index",
+              "reference/monitoring/monitoring_and_reporting"
+            ]
+          },
+          {
+            "group": "Utility",
+            "pages": [
+              "reference/utility/index",
+              "reference/utility/echo_test",
+              "reference/utility/help_user_upload"
             ]
           }
         ]
@@ -71,52 +247,107 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Product Docs",
+          "href": "https://www.adspirer.com/docs",
+          "icon": "book"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "MCP Server",
+          "href": "https://mcp.adspirer.com",
+          "icon": "server"
+        },
+        {
+          "anchor": "GitHub",
+          "href": "https://github.com/amekala/ads-mcp",
+          "icon": "github"
+        },
+        {
+          "anchor": "Get Started Free",
+          "href": "https://adspirer.ai?utm_source=mcp-docs&utm_medium=sidebar&utm_content=get-started",
+          "icon": "rocket"
         }
       ]
     }
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Product Docs",
+        "href": "https://www.adspirer.com/docs"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Get Started Free",
+      "href": "https://adspirer.ai?utm_source=mcp-docs&utm_medium=nav&utm_content=get-started"
+    }
+  },
+  "integrations": {
+    "ga4": {
+      "measurementId": "G-ZX09MFTP89"
     }
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "add-mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "seo": {
+    "metatags": {
+      "og:site_name": "Adspirer MCP Server Documentation",
+      "og:locale": "en_US",
+      "twitter:card": "summary_large_image",
+      "twitter:site": "@abhilashreddi",
+      "robots": "index, follow",
+      "author": "Adspirer",
+      "category": "Technology",
+      "language": "en"
+    },
+    "indexing": "all"
   },
   "footer": {
+    "links": [
+      {
+        "header": "Product",
+        "items": [
+          { "label": "Adspirer.com", "href": "https://www.adspirer.com?utm_source=mcp-docs&utm_medium=footer" },
+          { "label": "Product Docs", "href": "https://www.adspirer.com/docs" },
+          { "label": "Pricing", "href": "https://www.adspirer.com/pricing?utm_source=mcp-docs&utm_medium=footer" },
+          { "label": "Book a Demo", "href": "https://www.adspirer.com/book-demo?utm_source=mcp-docs&utm_medium=footer" }
+        ]
+      },
+      {
+        "header": "MCP Server",
+        "items": [
+          { "label": "Quick Start", "href": "/quickstart" },
+          { "label": "Tool Reference", "href": "/reference" },
+          { "label": "How MCP Works", "href": "/how-mcp-works" },
+          { "label": "GitHub", "href": "https://github.com/amekala/ads-mcp" }
+        ]
+      },
+      {
+        "header": "Connect",
+        "items": [
+          { "label": "GitHub", "href": "https://github.com/amekala/ads-mcp" },
+          { "label": "Twitter", "href": "https://x.com/abhilashreddi" },
+          { "label": "LinkedIn", "href": "https://www.linkedin.com/company/adspirer" },
+          { "label": "YouTube", "href": "https://www.youtube.com/@Adspirer" }
+        ]
+      }
+    ],
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/abhilashreddi",
+      "github": "https://github.com/amekala/ads-mcp",
+      "linkedin": "https://www.linkedin.com/company/adspirer",
+      "youtube": "https://www.youtube.com/@Adspirer"
     }
   }
 }

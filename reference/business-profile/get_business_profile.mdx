@@ -1,0 +1,61 @@
+---
+title: "get_business_profile"
+sidebarTitle: "get_business_profile"
+description: "Get the user's business profile for contextual recommendations."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Get the user's business profile for contextual recommendations.
+
+⚠️ IMPORTANT: This tool retrieves READ-ONLY data. Safe to call multiple times.
+
+🎯 **What This Tool Does (Performance Agent - Phase 1 Feature 5):**
+- Retrieves the user's saved business profile
+- Returns business vertical, size, goals, target audience
+- Provides context for more relevant recommendations
+- Shows profile source (user-set, inferred, or none)
+
+**Returns business context:**
+- Business vertical (retail, services, technology, etc.)
+- Business size (small, medium, large)
+- Primary goal (leads, sales, awareness, traffic)
+- Target audience description
+- Geographic focus (local, regional, national, international)
+- Seasonality patterns
+- Profile confidence level
+
+**Use this tool when:**
+- You need business context for recommendations
+- Before providing industry-specific advice
+
+## Parameters
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Business Profile for my account.
+```
+
+Your AI client will call the `get_business_profile` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Business Profile |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Business Profile overview](/reference/business-profile)
+- [All tools](/reference)

@@ -1,0 +1,53 @@
+---
+title: "list_meta_instagram_accounts"
+sidebarTitle: "list_meta_instagram_accounts"
+description: "User wants to run ads on Instagram, asks about Instagram accounts, or you need to find the instagram_account_id before campaign creation."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to run ads on Instagram, asks about Instagram accounts, or you need to find the instagram_account_id before campaign creation.
+
+Returns Instagram accounts that are:
+1. Authorized for ads on the ad account (from Business Manager)
+2. Linked to Facebook Pages (from Page settings)
+
+Workflow:
+1. Call this tool to discover available Instagram accounts
+2. Use the Instagram account ID with campaign creation tools via `instagram_account_id` parameter
+
+When to use:
+- Before any campaign creation to enable Instagram placements
+- When user asks "which Instagram accounts can I use?"
+- When an Instagram association fails and user needs to find the right account
+
+## Parameters
+
+<ParamField path="ad_account_id" type="string">
+  Meta ad account ID (e.g., 'act_123456'). If not provided, uses the connected account.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+List Meta Instagram Accounts for my account.
+```
+
+Your AI client will call the `list_meta_instagram_accounts` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

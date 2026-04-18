@@ -1,0 +1,52 @@
+---
+title: "list_meta_custom_audiences"
+sidebarTitle: "list_meta_custom_audiences"
+description: "User wants to browse, list, or select Custom Audiences for targeting — DB lists, lookalike audiences, remarketing segments, website visitors, engagement…"
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to browse, list, or select Custom Audiences for targeting — DB lists, lookalike audiences, remarketing segments, website visitors, engagement audiences.
+
+Returns all Custom Audiences for the ad account with ID, name, type (subtype), approximate size, and delivery status.
+
+Workflow:
+1. Call this tool to discover available custom audiences
+2. Use audience IDs with campaign creation tools via `custom_audiences` parameter
+3. Optionally use `excluded_custom_audiences` to exclude specific audiences
+
+When to use:
+- Before creating campaigns that need custom audience targeting
+- When user asks "which audiences do I have?" or "show me my lookalike audiences"
+- When setting up remarketing or DB-list campaigns
+
+## Parameters
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+List Meta Custom Audiences for my account.
+```
+
+Your AI client will call the `list_meta_custom_audiences` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

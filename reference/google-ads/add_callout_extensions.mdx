@@ -1,0 +1,69 @@
+---
+title: "add_callout_extensions"
+sidebarTitle: "add_callout_extensions"
+description: "Add callout extensions to a campaign."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Add callout extensions to a campaign.
+
+Callouts are short, non-clickable highlights that appear below your ad.
+They communicate quick trust signals and differentiators.
+
+**IMPORTANT RULES (from google-ads-creative-guidelines.md):**
+- Max 25 characters each
+- 4-8 callouts recommended
+- Should NOT be CTAs (no "click", "buy", "order", "call")
+- Should NOT end with periods
+
+**GOOD EXAMPLES:**
+- "Free Shipping"
+- "24/7 Support"
+- "No Code Required"
+- "30 Second Setup"
+- "Award Winning"
+
+**BAD EXAMPLES (will be rejected):**
+- "Click Now" (CTA word)
+- "Buy Today" (CTA word)
+- "Free Shipping." (ends with period)
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to add callouts to. Get from list_campaigns.
+</ParamField>
+
+<ParamField path="callouts" type="array of string" required>
+  List of callout text strings. Each max 25 characters. Example: ['Free Shipping', '24/7 Support', 'No Code Required']
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Add Callout Extensions for my account.
+```
+
+Your AI client will call the `add_callout_extensions` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

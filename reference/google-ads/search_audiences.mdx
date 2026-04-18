@@ -1,0 +1,58 @@
+---
+title: "search_audiences"
+sidebarTitle: "search_audiences"
+description: "Search for available audience segments (in-market, affinity, custom)."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Search for available audience segments (in-market, affinity, custom).
+
+Use this tool to discover audience segment IDs for:
+- **PMax campaigns:** Use IDs with `add_pmax_audience_signal` (audience signals/hints)
+- **Demand Gen / YouTube campaigns:** Pass IDs via `audience_segments` parameter in `create_demandgen_campaign` or `create_youtube_campaign` (direct targeting)
+
+**Audience types:**
+- **In-market:** Users actively researching products/services (e.g., "Business Software")
+- **Affinity:** Users with long-term interests (e.g., "Technology Enthusiasts")
+- **Custom:** Your account's existing remarketing/customer match lists
+
+**Parameters:**
+- query: Search term (e.g., "advertising services", "SaaS tools")
+
+**Execution time:** 2-5 seconds
+
+## Parameters
+
+<ParamField path="query" type="string" required>
+  Search query for discovering audiences. Example: 'business software', 'advertising services', 'technology'
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Search Audiences for my account.
+```
+
+Your AI client will call the `search_audiences` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

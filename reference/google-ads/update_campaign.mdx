@@ -1,0 +1,77 @@
+---
+title: "update_campaign"
+sidebarTitle: "update_campaign"
+description: "Update an existing campaign's settings."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Update an existing campaign's settings.
+
+**Can update:**
+- name: Campaign name
+- status: ENABLED or PAUSED
+- budget_amount: Daily budget in dollars
+
+**IMPORTANT:**
+- Confirm with user BEFORE making changes
+- Use list_campaigns first to get campaign_id
+- At least one field (name, status, or budget_amount) is required
+
+**Parameters:**
+- campaign_id: The campaign ID (REQUIRED - get from list_campaigns)
+- name: New campaign name (optional)
+- status: ENABLED or PAUSED (optional)
+- budget_amount: Daily budget in dollars, e.g., 50.00 for $50/day (optional)
+- customer_id: Optional (uses connected account if omitted)
+
+**Execution time:** 2-4 seconds
+
+**Example:**
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to update. Use list_campaigns first to get available campaign IDs.
+</ParamField>
+
+<ParamField path="name" type="string">
+  New campaign name (optional)
+</ParamField>
+
+<ParamField path="status" type="string">
+  New status: ENABLED or PAUSED (optional)
+</ParamField>
+
+<ParamField path="budget_amount" type="number">
+  New daily budget in dollars, e.g., 50.00 for $50/day (optional)
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Update Campaign for my account.
+```
+
+Your AI client will call the `update_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

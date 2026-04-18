@@ -1,0 +1,129 @@
+---
+title: "create_pmax_campaign"
+sidebarTitle: "create_pmax_campaign"
+description: "🔄 LONG-RUNNING TOOL: Creates a Google Performance Max campaign with validated images."
+---
+
+<Badge color="yellow">Write</Badge>
+
+🔄 LONG-RUNNING TOOL: Creates a Google Performance Max campaign with validated images.
+
+Emits MCP progress updates during authentication, asset upload, and campaign creation (typically 15-30 seconds). Progress stages: validate → commit.
+
+⚠️ CRITICAL PREREQUISITES:
+1. MUST have valid asset_bundle_id from validate_and_prepare_assets tool OR existing_image_ids from discover_existing_assets
+2. MUST have all campaign text details from user
+3. Creates REAL campaigns that cost REAL money
+4. Call ONLY ONCE per campaign - do NOT retry automatically
+
+🎥 **VIDEOS ARE OPTIONAL BUT RECOMMENDED:**
+- Videos significantly improve PMAX performance (higher CTR, better engagement)
+- **Always ask the user**: "Would you like to add YouTube videos to this campaign?"
+- If yes: validate with `validate_video` tool, then include `youtube_video_ids` parameter
+- If no: proceed without videos (campaigns work fine either way)
+- See STEP 3.5 below for complete video guidance
+
+⚠️ GOOGLE ADS POLICY NOTE:
+Avoid keywords related to health conditions, medical treatments, financial hardship, or political topics. These may trigger policy violations. Use general service terms instead.
+Example: Use "senior care services" not "nursing care", "home services" not "medical services"
+
+📋 **YOUR CRITICAL ROLE: Campaign Strategist & Text Creator**
+
+## Parameters
+
+<ParamField path="asset_bundle_id" type="string">
+  Asset bundle ID from validate_and_prepare_assets tool (UUID format). Optional if existing_image_ids provided.
+</ParamField>
+
+<ParamField path="existing_image_ids" type="object">
+  Resource names of existing images to reuse (from discover_existing_assets). Optional if asset_bundle_id provided. ⚠️ MUST include 'logos_square' — Google Ads REQUIRES a logo for every PMax asset group. If discover_existing_assets found no logos, use hybrid mode: upload a logo via validate_and_prepare_assets (asset_bundle_id) + pass existing_image_ids for other images. Example: \{'marketing_images_landscape': ['customers/123/assets/456'], 'marketing_images_square': ['customers/123/assets/789'], 'logos_square': ['customers/123/assets/101']\}
+</ParamField>
+
+<ParamField path="campaign_name" type="string" required>
+  Campaign name (e.g., 'Premium Watches Summer 2025')
+</ParamField>
+
+<ParamField path="budget_daily" type="number" required>
+  Daily budget in the account's native currency. IMPORTANT: Do NOT convert currencies — pass the user's amount as-is. Example: if user says '₹5000/day', pass 5000 (not a USD conversion). The Google Ads API interprets this in the account's currency automatically. Google recommends minimum ~$50/day USD equivalent for Performance Max campaigns.
+</ParamField>
+
+<ParamField path="headlines" type="array of string">
+  MUST BE JSON ARRAY: 3-15 headlines, each EXACTLY 30 characters maximum. REQUIRED for single-group mode. Omit if using asset_groups array. Commas ARE allowed within headlines. Example: ["Luxury Watches", "Swiss Made"]. COUNT CHARACTERS! ANY over 30 will be REJECTED!
+</ParamField>
+
+<ParamField path="descriptions" type="array of string">
+  MUST BE JSON ARRAY: 2-4 descriptions, each EXACTLY 80 characters maximum (STRICT!). REQUIRED for single-group mode. Omit if using asset_groups array. Commas ARE allowed within descriptions. Example: ["Shop authentic luxury timepieces with expert curation."] (63 chars). COUNT CHARACTERS BEFORE CALLING - ANY over 80 will be REJECTED!
+</ParamField>
+
+<ParamField path="business_name" type="string">
+  Business name, max 25 characters. REQUIRED for single-group mode. Omit if using asset_groups array. Commas ARE allowed.
+</ParamField>
+
+<ParamField path="final_url" type="string">
+  Landing page URL. REQUIRED for single-group mode. Omit if using asset_groups array.
+</ParamField>
+
+<ParamField path="long_headlines" type="array of string">
+  MUST BE JSON ARRAY: REQUIRED 1-5 long headlines, each EXACTLY 90 characters maximum. REQUIRED for single-group mode. Omit if using asset_groups array. Google Ads REQUIRES at least 1 long headline for Performance Max campaigns. Commas ARE allowed. Example: ["Premium Swiss Watches - Certified Authentic, Free Shipping"]. COUNT CHARACTERS! ANY over 90 will be REJECTED!
+</ParamField>
+
+<ParamField path="target_locations" type="array of string">
+  Optional: Geographic targets -- supports countries, states, cities, and regions globally. Examples: ['India'], ['Bangalore, India'], ['Karnataka'], ['New York, NY'], ['United States', 'Canada']. Defaults to United States.
+</ParamField>
+
+<ParamField path="target_languages" type="array of string">
+  Optional: Language targets (e.g., ['English', 'Spanish']). Defaults to English.
+</ParamField>
+
+<ParamField path="youtube_video_ids" type="array of string">
+  Optional: List of YouTube video IDs (11 characters each). Videos must be validated first using validate_video tool. Maximum 5 videos per campaign. Example: ['dQw4w9WgXcQ', 'jNQXAC9IVRw']. Videos are OPTIONAL for PMAX - campaigns can be created without them.
+</ParamField>
+
+<ParamField path="search_themes" type="array of string">
+  Optional: Search themes hint Google AI about what your customers search for. Max 50 per asset group. NOT keywords — no match types, no bids. Derive from keyword research, business profile, or user input. Example: ['AI ad management', 'automate google ads', 'MCP advertising tool']. Duplicates and blanks are filtered automatically. Pass [] (empty list) to explicitly skip search themes (e.g., remarketing-only campaigns). If omitted (null), themes are auto-derived from headlines.
+</ParamField>
+
+<ParamField path="audience_signals" type="object">
+  Optional: Audience signals tell Google AI who your ideal customers are. CRITICAL: Only use segment IDs returned by the search_audiences tool. NEVER fabricate, guess, or invent audience IDs. Wrong IDs will target completely unrelated audiences (e.g., 'Vehicles' instead of 'Jewelry') and waste the customer's ad budget. If search_audiences returns no results, skip audience signals entirely rather than guessing IDs. Keys: 'in_market_audience_ids' (List[int]), 'affinity_audience_ids' (List[int]), 'custom_audience_ids' (List[str] resource names), 'user_list_ids' (List[str] userList resource names for remarketing/customer match -- e.g. 'customers/123/userLists/456' from search_audiences), 'audience_name' (str). Example: \{'in_market_audience_ids': [80432, 80210], 'user_list_ids': ['customers/123/userLists/456'], 'audience_name': 'SaaS Buyers'\}
+</ParamField>
+
+<ParamField path="bidding_strategy" type="string">
+  Bidding strategy for the campaign. Options: 'MAXIMIZE_CONVERSIONS' - Get the most conversions within budget. 'MAXIMIZE_CONVERSION_VALUE' - Optimize for highest value conversions. If not specified, the system auto-selects based on account data. Recommended: MAXIMIZE_CONVERSIONS for most new campaigns.
+</ParamField>
+
+<ParamField path="target_roas" type="number">
+  Target ROAS (Return on Ad Spend) for MAXIMIZE_CONVERSION_VALUE bidding. Example: 3.0 means you want $3 revenue for every $1 spent. Only used when bidding_strategy='MAXIMIZE_CONVERSION_VALUE'.
+</ParamField>
+
+<ParamField path="asset_groups" type="array of object">
+  OPTIONAL: Multiple asset groups for a single PMax campaign. When provided, this OVERRIDES the flat headline/description/business_name/final_url fields. Each group is a dict with keys: group_name (required, unique), headlines (3-15), descriptions (2-4), long_headlines (1-5), business_name, final_url, existing_image_ids (optional), search_themes (optional), audience_signals (optional). Max 100 groups per campaign. All groups share the same campaign budget and bidding strategy. Example: [\{'group_name': 'SaaS Founders', 'headlines': ['AI Ad Manager', 'Skip Dashboards', 'Automate Ads'], 'descriptions': ['Manage ads via AI chat.', '100+ tools.'], 'long_headlines': ['AI Ad Management'], 'business_name': 'Adspirer', 'final_url': 'https://adspirer.com', 'search_themes': ['AI ads'], 'audience_signals': \{'in_market_audience_ids': [80432]\}\}]
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Create Performance Max Campaign for my account.
+```
+
+Your AI client will call the `create_pmax_campaign` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

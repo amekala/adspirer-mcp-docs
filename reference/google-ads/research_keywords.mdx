@@ -1,0 +1,77 @@
+---
+title: "research_keywords"
+sidebarTitle: "research_keywords"
+description: "Research high-intent keywords using Google Keyword Planner API."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Research high-intent keywords using Google Keyword Planner API.
+
+⚠️ IMPORTANT: This is a READ-ONLY tool. Safe to call multiple times.
+
+🎯 **What This Tool Does:**
+- Researches keywords via Google Keyword Planner API
+- Returns keywords with real CPC data, search volume, and competition metrics
+- Groups keywords by commercial intent (HIGH/MEDIUM/LOW based on dynamic CPC thresholds)
+- Selects top 15-20 keywords optimized for conversions
+- Provides budget recommendations based on actual keyword costs
+
+**When to Use:**
+- BEFORE creating a Google Search campaign
+- When you need data-driven keyword insights
+- To understand keyword costs and search volume
+- To get budget recommendations
+
+**Parameters:**
+- business_description (required): What the business sells/offers
+- website_url (optional): Business website for better keyword suggestions
+- target_location (optional): Geographic target (default: "United States")
+- seed_keywords (optional): 5-10 seed keywords (will auto-extract if not provided)
+
+## Parameters
+
+<ParamField path="business_description" type="string">
+  Description of what the business sells/does. Required if seed_keywords not provided. If omitted, inferred from website_url domain.
+</ParamField>
+
+<ParamField path="website_url" type="string">
+  Business website URL (helps generate more relevant keywords)
+</ParamField>
+
+<ParamField path="target_location" type="string" default="&quot;United States&quot;">
+  Geographic target for keyword research (e.g., 'New York, NY', 'Chicago, IL', 'United States')
+</ParamField>
+
+<ParamField path="seed_keywords" type="array of string">
+  Optional: Provide 5-10 seed keywords. If not provided, they will be extracted from business_description automatically.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Research Keywords for my account.
+```
+
+Your AI client will call the `research_keywords` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

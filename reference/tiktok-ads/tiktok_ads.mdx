@@ -1,0 +1,69 @@
+---
+title: "tiktok_ads"
+sidebarTitle: "tiktok_ads"
+description: "Access all TikTok Ads campaign management tools."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Access all TikTok Ads campaign management tools.
+
+**Use action="list_tools" first** to see available operations and their parameters.
+Then use action="execute" with the specific tool_name and arguments.
+
+**Available capabilities:**
+- **Asset Discovery**: Find existing TikTok images and videos to reuse
+- **Asset Validation**: Validate and prepare images/videos for TikTok ad specs
+- **Campaign Creation**: Create image-based and video-based TikTok ad campaigns
+
+**When to use this tool:**
+- "Create a new TikTok ad campaign"
+- "Show me my existing TikTok assets"
+- "Create a TikTok video campaign"
+- "Validate my images for TikTok ads"
+- "How are my TikTok campaigns performing?"
+
+**Raw data mode (performance tools only):**
+If the user asks for "raw data", "raw metrics", "just the numbers", "no recommendations", or "no commentary" — pass `raw_data: true` inside `arguments` when calling any performance tool (`get_tiktok_campaign_performance`, `get_tiktok_ad_performance`, `analyze_tiktok_wasted_spend`, `optimize_tiktok_budget`, `detect_tiktok_creative_fatigue`, `explain_tiktok_anomaly`, `get_tiktok_audience_insights`, `analyze_tiktok_geo_performance`). You receive a JSON code block of metrics only: spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS, hook rate, video completion rate, engagement rate by campaign/ad/date. Severity labels, suggested bids, suggested budgets, industry benchmarks, and optimization recommendations are stripped. Default is `false` (full formatted analysis).
+
+**Example — list tools:**
+action: "list_tools"
+
+## Parameters
+
+<ParamField path="action" type="string" required>
+  'list_tools': discover available TikTok Ads tools. 'execute': run a specific tool by name.
+</ParamField>
+
+<ParamField path="tool_name" type="string">
+  Name of the TikTok Ads tool to execute (required when action='execute').
+</ParamField>
+
+<ParamField path="arguments" type="object">
+  Arguments to pass to the tool (required when action='execute').
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+TikTok Ads for my account.
+```
+
+Your AI client will call the `tiktok_ads` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | TikTok Ads (Router) |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [TikTok Ads (Router) overview](/reference/tiktok-ads)
+- [All tools](/reference)

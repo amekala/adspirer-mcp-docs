@@ -1,0 +1,73 @@
+---
+title: "update_ad_descriptions"
+sidebarTitle: "update_ad_descriptions"
+description: "Update descriptions for a Responsive Search Ad (RSA)."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Update descriptions for a Responsive Search Ad (RSA).
+
+**Parameters:**
+- ad_id: The ad ID to update (REQUIRED - get from get_campaign_structure)
+- ad_group_id: The ad group ID (REQUIRED)
+- descriptions: List of 2-4 descriptions (REQUIRED)
+- customer_id: Optional
+
+**Description Rules:**
+- Max 90 characters per description
+- 2-4 descriptions required
+- Descriptions should expand on headlines
+- Include specific details and CTAs
+- Formula: [Value Prop]. [Specific Detail]. [CTA].
+
+**Execution time:** 2-4 seconds
+
+**WARNING:** Updated ads go through Google's review process.
+
+**Example:**
+User: "Make my ad descriptions more action-oriented"
+Agent:
+
+## Parameters
+
+<ParamField path="ad_id" type="string" required>
+  The ad ID to update. Get from get_campaign_structure.
+</ParamField>
+
+<ParamField path="ad_group_id" type="string" required>
+  The ad group ID the ad belongs to. Get from get_campaign_structure.
+</ParamField>
+
+<ParamField path="descriptions" type="array of string" required>
+  List of 2-4 descriptions. Each description max 90 characters. Descriptions should expand on headlines and include CTAs.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Update Ad Descriptions for my account.
+```
+
+Your AI client will call the `update_ad_descriptions` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

@@ -1,0 +1,56 @@
+---
+title: "remove_pmax_search_themes"
+sidebarTitle: "remove_pmax_search_themes"
+description: "Remove specific search themes from a Performance Max campaign."
+---
+
+<Badge color="yellow">Write</Badge> <Badge color="red">Destructive</Badge>
+
+Remove specific search themes from a Performance Max campaign.
+
+Matches themes by text (case-insensitive). Use get_pmax_search_themes first to see current themes.
+
+**Parameters:**
+- campaign_id: The PMax campaign ID
+- themes_to_remove: List of theme text strings to remove
+
+**Execution time:** 2-5 seconds
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The Google Ads campaign ID (numeric). Example: '21854471508'
+</ParamField>
+
+<ParamField path="themes_to_remove" type="array of string" required>
+  List of search theme texts to remove (case-insensitive match). Example: ['AI ad management', 'automate google ads']
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Remove PMax Search Themes for my account.
+```
+
+Your AI client will call the `remove_pmax_search_themes` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | Yes |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

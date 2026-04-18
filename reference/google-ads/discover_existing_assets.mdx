@@ -1,0 +1,69 @@
+---
+title: "discover_existing_assets"
+sidebarTitle: "discover_existing_assets"
+description: "🔍 Discover existing assets in the Google Ads account (images, sitelinks, callouts, structured snippets)."
+---
+
+<Badge color="green">Read-only</Badge>
+
+🔍 Discover existing assets in the Google Ads account (images, sitelinks, callouts, structured snippets).
+
+**Phase 0: Asset Discovery** - Read-only tool, safe to call anytime.
+
+🔴 **MANDATORY WORKFLOW - ALWAYS DO THIS FIRST:**
+
+BEFORE creating ANY Performance Max campaign, you MUST:
+1. Call this tool: discover_existing_assets(target_domain="&lt;user's domain&gt;")
+2. Show the user what was found (images, sitelinks)
+3. Ask: "Would you like to reuse these assets or upload new ones?"
+4. Based on answer:
+   - Reuse → Use existing_image_ids in create_pmax_campaign
+   - Upload new → Use validate_and_prepare_assets → asset_bundle_id
+   - Mix both → Use both parameters (hybrid mode)
+
+🚫 **NEVER create PMAX without discovering assets first** (unless user explicitly says "skip discovery, upload new")
+
+**What This Tool Does:**
+- Queries Google Ads Asset Library for existing validated assets
+- Uses SMART 2-TIER FILTERING to show only reliable assets
+- Filters out invalid/test data automatically
+- Returns assets that were successfully attached to previous campaigns
+
+## Parameters
+
+<ParamField path="target_domain" type="string">
+  Optional domain to filter sitelinks. **Extract the base domain from the campaign URL.** Examples: 'https://www.rooterhero.com/services' → 'rooterhero.com', 'sahaayak.life' → 'sahaayak.life'. Only sitelinks matching this domain will be returned. Critical: Google rejects wrong-domain sitelinks.
+</ParamField>
+
+<ParamField path="asset_types" type="array of enum (&quot;images&quot;, &quot;sitelinks&quot;, &quot;callouts&quot;, &quot;structured_snippets&quot;)" default="[&quot;images&quot;,&quot;sitelinks&quot;,&quot;callouts&quot;,&quot;structured_snippets&quot;]">
+  Asset types to discover. Default: all types.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Discover Existing Assets for my account.
+```
+
+Your AI client will call the `discover_existing_assets` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

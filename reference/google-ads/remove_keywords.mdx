@@ -1,0 +1,68 @@
+---
+title: "remove_keywords"
+sidebarTitle: "remove_keywords"
+description: "Remove keywords from an ad group."
+---
+
+<Badge color="yellow">Write</Badge> <Badge color="red">Destructive</Badge>
+
+Remove keywords from an ad group.
+
+**Parameters:**
+- ad_group_id: The ad group containing the keywords (REQUIRED)
+- keyword_ids: List of keyword IDs to remove (REQUIRED)
+- customer_id: Optional
+
+**Get keyword_ids from:**
+Use get_campaign_structure to see all keywords with their IDs.
+
+**WARNING: This is PERMANENT and IRREVERSIBLE.**
+Keywords removed cannot be recovered. Always confirm with the user first.
+
+**Execution time:** 2-4 seconds
+
+**Example:**
+User: "Remove the underperforming keywords"
+Agent:
+1. Uses get_campaign_structure to show keywords
+2. Confirms with user which ones to remove
+3. Uses remove_keywords with the keyword_ids
+
+## Parameters
+
+<ParamField path="ad_group_id" type="string" required>
+  The ad group ID the keywords belong to. Use get_campaign_structure to find this.
+</ParamField>
+
+<ParamField path="keyword_ids" type="array of string" required>
+  List of keyword IDs to remove. Get from get_campaign_structure.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Remove Keywords for my account.
+```
+
+Your AI client will call the `remove_keywords` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | Yes |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

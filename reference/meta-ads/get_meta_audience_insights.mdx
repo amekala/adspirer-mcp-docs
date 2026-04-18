@@ -1,0 +1,85 @@
+---
+title: "get_meta_audience_insights"
+sidebarTitle: "get_meta_audience_insights"
+description: "User asks about audience demographics, which placements perform best, device breakdown, or targeting optimization for Meta ads."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User asks about audience demographics, which placements perform best, device breakdown, or targeting optimization for Meta ads.
+
+This tool provides audience and placement analysis for Meta campaigns.
+
+Returns:
+- Age group performance (18-24, 25-34, 35-44, 45-54, 55-64, 65+)
+- Gender performance breakdown
+- Placement breakdown (Facebook Feed, Instagram Feed, Stories, Reels, Messenger)
+- Device breakdown (Mobile, Desktop, Tablet)
+- Best performing audience segments
+- Targeting recommendations
+
+When to use this tool:
+- "What age group performs best for my Meta ads?"
+- "Should I target men or women?"
+- "Which placements should I use?"
+- "Do my Instagram Stories ads perform well?"
+- "Mobile vs desktop performance on Facebook?"
+
+Parameters:
+- lookback_days: 7, 14, 30 (default), 60, or 90 days
+- start_date: Optional start date (YYYY-MM-DD). Overrides lookback_days when used with end_date.
+
+## Parameters
+
+<ParamField path="start_date" type="string">
+  Start date (YYYY-MM-DD). If provided with end_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="end_date" type="string">
+  End date (YYYY-MM-DD). If provided with start_date, overrides lookback_days for custom date range queries.
+</ParamField>
+
+<ParamField path="date_range" type="string">
+  Date range preset: 'last_7_days', 'last_14_days', 'last_30_days', 'last_60_days', 'last_90_days'. Overrides lookback_days. Ignored if start_date/end_date are provided.
+</ParamField>
+
+<ParamField path="raw_data" type="boolean" default="false">
+  If true, return ONLY raw metrics as a JSON code block (spend, clicks, impressions, conversions, CPA, CPC, CTR, CVR, ROAS by campaign/ad/date). Strips severity labels, suggested bids/budgets, industry benchmarks, and optimization recommendations. Use when you run your own attribution model or want to minimize token usage.
+</ParamField>
+
+<ParamField path="lookback_days" type="integer" default="30">
+  Number of days to analyze (7, 14, 30, 60, or 90 days). Default is 30 days.
+</ParamField>
+
+<ParamField path="breakdown_type" type="string" default="&quot;all&quot;">
+  Type of breakdown: 'age', 'gender', 'placement', 'device', or 'all' (default). Use 'all' for comprehensive audience analysis.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Meta Audience Insights for my account.
+```
+
+Your AI client will call the `get_meta_audience_insights` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

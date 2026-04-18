@@ -1,0 +1,69 @@
+---
+title: "linkedin_ads"
+sidebarTitle: "linkedin_ads"
+description: "Access all LinkedIn Ads campaign management tools."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Access all LinkedIn Ads campaign management tools.
+
+**Use action="list_tools" first** to see available operations and their parameters.
+Then use action="execute" with the specific tool_name and arguments.
+
+**Available capabilities:**
+- **Campaign Performance**: Analyze metrics, engagement, audience insights, wasted spend, anomaly detection
+- **Campaign Creation**: Image, video, carousel, text ad campaigns with asset discovery
+- **Campaign Management**: Update settings, pause/resume, clone, batch update, budget/schedule/targeting changes
+- **Creative Management**: Add/update/pause/resume/delete creatives (image, text, video, carousel)
+- **Multi-Campaign Composition**: Add campaigns to existing groups (different audiences), add creatives to campaigns (A/B testing)
+- **Targeting**: Search targeting options, research business for targeting, 19 targeting facets
+- **Conversions**: List, associate, manage conversion tracking
+- **Campaign Groups**: List and update campaign groups
+- **AI Features**: Generate ad creatives, explain objectives, research business targeting
+
+**When to use this tool:**
+- "How are my LinkedIn campaigns performing?"
+- "Create a new LinkedIn sponsored content campaign"
+- "Show me my LinkedIn ad engagement metrics"
+- "What targeting options are available on LinkedIn?"
+- "Pause my underperforming LinkedIn campaigns"
+
+## Parameters
+
+<ParamField path="action" type="string" required>
+  'list_tools': discover available LinkedIn Ads tools. 'execute': run a specific tool by name.
+</ParamField>
+
+<ParamField path="tool_name" type="string">
+  Name of the LinkedIn Ads tool to execute (required when action='execute').
+</ParamField>
+
+<ParamField path="arguments" type="object">
+  Arguments to pass to the tool (required when action='execute').
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+LinkedIn Ads for my account.
+```
+
+Your AI client will call the `linkedin_ads` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | LinkedIn Ads (Router) |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [LinkedIn Ads (Router) overview](/reference/linkedin-ads)
+- [All tools](/reference)

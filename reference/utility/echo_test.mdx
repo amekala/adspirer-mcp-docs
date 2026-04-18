@@ -1,0 +1,46 @@
+---
+title: "echo_test"
+sidebarTitle: "echo_test"
+description: "Echo back the input message."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Echo back the input message.
+
+Used for testing MCP connectivity and session management.
+
+## Parameters
+
+<ParamField path="message" type="string" required>
+  Message to echo back
+</ParamField>
+
+<ParamField path="session_id" type="string">
+  Optional session ID for testing
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Echo Test for my account.
+```
+
+Your AI client will call the `echo_test` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Utility |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | No |
+
+## Related
+
+- [Utility overview](/reference/utility)
+- [All tools](/reference)

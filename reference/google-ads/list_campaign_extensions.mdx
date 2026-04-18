@@ -1,0 +1,65 @@
+---
+title: "list_campaign_extensions"
+sidebarTitle: "list_campaign_extensions"
+description: "List all extensions (sitelinks, callouts, structured snippets) for a campaign."
+---
+
+<Badge color="green">Read-only</Badge>
+
+List all extensions (sitelinks, callouts, structured snippets) for a campaign.
+
+Returns a summary of all extension types configured on the campaign.
+
+**Parameters:**
+- campaign_id: The campaign ID (REQUIRED). Get from list_campaigns.
+- customer_id: Optional Google Ads customer ID
+
+**Returns:**
+- Sitelinks: Clickable links with text, URL, and descriptions
+- Callouts: Non-clickable text highlights
+- Structured Snippets: Header + values combinations
+
+**Execution time:** 1-2 seconds (read-only)
+
+**When to use:**
+- User asks "what extensions do I have?"
+- Before adding extensions, check what already exists
+- Auditing campaign setup
+
+**Example:**
+User: "Show me the extensions on my campaign"
+
+## Parameters
+
+<ParamField path="campaign_id" type="string" required>
+  The campaign ID to list extensions for. Get from list_campaigns.
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+List Campaign Extensions for my account.
+```
+
+Your AI client will call the `list_campaign_extensions` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

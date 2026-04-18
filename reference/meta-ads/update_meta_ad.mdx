@@ -1,0 +1,77 @@
+---
+title: "update_meta_ad"
+sidebarTitle: "update_meta_ad"
+description: "User wants to update an individual Meta ad — pause/resume it, rename it, or swap its creative."
+---
+
+<Badge color="yellow">Write</Badge>
+
+User wants to update an individual Meta ad — pause/resume it, rename it, or swap its creative.
+
+IMPORTANT: This tool modifies REAL ads in Meta Ads Manager. Changes take effect immediately.
+
+Returns:
+- Confirmation of updates applied
+- Summary of changes
+- Ads Manager URL for the ad
+
+When to use this tool:
+- "Pause this ad"
+- "Resume ad [ID]"
+- "Rename this ad"
+- "Swap the creative on this ad"
+- "Change the image on this ad" (via creative swap)
+- "Turn off the underperforming ad"
+
+Parameters:
+- ad_id: The Meta Ad ID to update (required)
+- status: ACTIVE, PAUSED, DELETED, ARCHIVED (optional)
+- name: New ad name (optional)
+- creative_id: New creative ID for creative swap (optional)
+
+## Parameters
+
+<ParamField path="ad_id" type="string" required>
+  The Meta Ad ID to update (required)
+</ParamField>
+
+<ParamField path="status" type="string">
+  New status: 'ACTIVE', 'PAUSED', 'DELETED', 'ARCHIVED'
+</ParamField>
+
+<ParamField path="name" type="string">
+  New ad name
+</ParamField>
+
+<ParamField path="creative_id" type="string">
+  New creative ID for creative swap. Use this to replace the ad's creative with an existing creative.
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Update Meta Ad for my account.
+```
+
+Your AI client will call the `update_meta_ad` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

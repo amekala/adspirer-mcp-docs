@@ -1,0 +1,39 @@
+---
+title: "Account Management"
+sidebarTitle: "Account Management"
+description: "Account Management tools exposed by the Adspirer MCP server. 4 tools total."
+icon: "user-gear"
+---
+
+The Adspirer MCP server exposes **4** Account Management tools to AI assistants via the Model Context Protocol. This page lists every tool with links to its dedicated reference.
+
+## Read-only tools
+
+| Tool | Description |
+|------|-------------|
+| [`get_connections_status`](/reference/account/get_connections_status) | View connected ad accounts and OAuth connections. |
+| [`get_usage_status`](/reference/account/get_usage_status) | Get your current usage status with interactive quota widget. |
+| [`list_connected_accounts`](/reference/account/list_connected_accounts) | List all connected ad accounts across platforms. |
+
+## Write tools
+
+| Tool | Description |
+|------|-------------|
+| [`switch_primary_account`](/reference/account/switch_primary_account) | Activate one or more ad accounts for a platform. |
+
+## All tools
+
+<CardGroup cols={2}>
+<Card title="get_connections_status" href="/reference/account/get_connections_status">
+  View connected ad accounts and OAuth connections.
+</Card>
+<Card title="get_usage_status" href="/reference/account/get_usage_status">
+  Get your current usage status with interactive quota widget.
+</Card>
+<Card title="list_connected_accounts" href="/reference/account/list_connected_accounts">
+  List all connected ad accounts across platforms.
+</Card>
+<Card title="switch_primary_account" href="/reference/account/switch_primary_account">
+  Activate one or more ad accounts for a platform.
+</Card>
+</CardGroup>

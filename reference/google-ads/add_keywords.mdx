@@ -1,0 +1,69 @@
+---
+title: "add_keywords"
+sidebarTitle: "add_keywords"
+description: "Add keywords to an existing ad group."
+---
+
+<Badge color="yellow">Write</Badge>
+
+Add keywords to an existing ad group.
+
+⚠️ **CRITICAL: Run `research_keywords` BEFORE using this tool!**
+
+**MANDATORY WORKFLOW:**
+1. Call `get_campaign_structure` to get ad_group_id and see existing keywords
+2. Call `research_keywords` with business context to get quality keyword suggestions
+3. Show keyword suggestions to user with CPC, search volume, intent level
+4. Get user approval on which keywords to add
+5. ONLY THEN call this tool with approved keywords
+
+**Why research first?**
+- Ensures keywords have real search volume
+- Shows CPC costs so user understands budget impact
+- Provides HIGH/MEDIUM/LOW intent classification
+- Prevents adding low-quality or irrelevant keywords
+
+**Requires:**
+- ad_group_id: Get from get_campaign_structure (REQUIRED)
+- keywords: List of keywords to add (from research_keywords results)
+
+**Each keyword needs:**
+
+## Parameters
+
+<ParamField path="ad_group_id" type="string" required>
+  The ad group ID to add keywords to. Use get_campaign_structure first to find ad_group_id.
+</ParamField>
+
+<ParamField path="keywords" type="array of object" required>
+  List of keywords to add. Each keyword: \{text, match_type (EXACT/PHRASE/BROAD), cpc_bid_micros (optional)\}
+</ParamField>
+
+<ParamField path="customer_id" type="string">
+  Google Ads customer ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Add Keywords for my account.
+```
+
+Your AI client will call the `add_keywords` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Google Ads |
+| **Read-only** | No |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Google Ads overview](/reference/google-ads)
+- [All tools](/reference)

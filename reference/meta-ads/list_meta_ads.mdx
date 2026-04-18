@@ -1,0 +1,77 @@
+---
+title: "list_meta_ads"
+sidebarTitle: "list_meta_ads"
+description: "User wants to see the individual ads within a specific Meta ad set, including their status and creative information."
+---
+
+<Badge color="green">Read-only</Badge>
+
+User wants to see the individual ads within a specific Meta ad set, including their status and creative information.
+
+This tool retrieves ads for a given ad set with their name, status, and creative ID.
+
+Returns:
+- Ad list with name, ID, status, creative ID
+- Next step guidance for editing ads
+
+When to use this tool:
+- "Show me the ads in ad set [ID]"
+- "What ads are running in this ad set?"
+- "List the individual ads"
+- "Which ads are active/paused?"
+- Before using `update_meta_ad` when user doesn't know the ad ID
+
+Parameters:
+- ad_set_id: Ad Set ID to list ads for (required for direct listing)
+- campaign_id: Campaign ID (will guide user to use ad_set_id)
+- status: Filter by status (optional)
+- limit: Max ads to return (default: 100)
+
+Execution time: 2-5 seconds
+
+## Parameters
+
+<ParamField path="ad_set_id" type="string">
+  Filter ads to a specific ad set ID
+</ParamField>
+
+<ParamField path="campaign_id" type="string">
+  Filter ads to a specific campaign ID
+</ParamField>
+
+<ParamField path="ad_account_id" type="string">
+  Meta Ad Account ID. Required for multi-account users. Get from list_connected_accounts.
+</ParamField>
+
+<ParamField path="status" type="string">
+  Filter by status: comma-separated values like 'ACTIVE,PAUSED'
+</ParamField>
+
+<ParamField path="limit" type="integer" default="100">
+  Maximum number of ads to return (default: 100)
+</ParamField>
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+List Meta Ads for my account.
+```
+
+Your AI client will call the `list_meta_ads` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Meta Ads |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | Yes |
+
+## Related
+
+- [Meta Ads overview](/reference/meta-ads)
+- [All tools](/reference)

@@ -1,0 +1,58 @@
+---
+title: "get_connections_status"
+sidebarTitle: "get_connections_status"
+description: "View connected ad accounts and OAuth connections."
+---
+
+<Badge color="green">Read-only</Badge>
+
+View connected ad accounts and OAuth connections.
+
+Shows all connected ad platforms (Google Ads, TikTok Ads, Meta Ads, LinkedIn Ads) with:
+- Connection status and account details
+- Primary account indicator
+- Option to switch primary account
+- Quick links to connect new platforms
+
+Use this tool when user asks about:
+- "how many accounts do I have" / "how many ad accounts"
+- "what accounts are connected" / "connected accounts"
+- "which account am I using" / "current account"
+- "show my connections" / "list my accounts"
+- "connection status" / "account status"
+- "what platforms do I have connected"
+- Account count, account list, or connection overview
+
+Do not use for:
+- Discovering campaigns, ads, or keywords (use discover_existing_assets)
+- Performance data or metrics (use performance tools)
+- Creating or managing campaigns
+
+## Parameters
+
+_This tool takes no parameters._
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Get Connections Status for my account.
+```
+
+Your AI client will call the `get_connections_status` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Account Management |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | No |
+
+## Related
+
+- [Account Management overview](/reference/account)
+- [All tools](/reference)

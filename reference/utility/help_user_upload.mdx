@@ -1,0 +1,58 @@
+---
+title: "help_user_upload"
+sidebarTitle: "help_user_upload"
+description: "Show user instructions for uploading images to postimages.org for Performance Max campaigns."
+---
+
+<Badge color="green">Read-only</Badge>
+
+Show user instructions for uploading images to postimages.org for Performance Max campaigns.
+
+⚠️ CALL THIS FIRST when user wants to create a PMax campaign!
+
+**YOUR ROLE**: Image Upload Guide
+
+**WHEN TO USE**:
+- User says "create PMax campaign" or similar
+- Before asking for image uploads
+- Anytime user needs help uploading images
+
+**WHAT THIS DOES**:
+- Returns clear, step-by-step instructions
+- Tells user to upload to postimages.org
+- Explains how to get Direct links (not share pages)
+- Shows example URL format
+
+**DO NOT**:
+- Ask user to upload via ChatGPT's paperclip (won't work with size limits!)
+- Request base64 data (too large!)
+- Skip this step (user needs clear guidance)
+
+## Parameters
+
+_This tool takes no parameters._
+
+## Example prompt
+
+Ask your AI assistant (Claude, ChatGPT, Cursor, etc.) something like:
+
+```
+Help User Upload Images for my account.
+```
+
+Your AI client will call the `help_user_upload` tool behind the scenes.
+
+## Tool metadata
+
+| Field | Value |
+|-------|-------|
+| **Platform** | Utility |
+| **Read-only** | Yes |
+| **Destructive** | No |
+| **Idempotent** | No |
+| **Calls external API** | No |
+
+## Related
+
+- [Utility overview](/reference/utility)
+- [All tools](/reference)
